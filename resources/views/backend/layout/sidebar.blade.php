@@ -39,7 +39,7 @@
                   </a>
                 </li>
                 <li class="menu-item {{ Route::is('product.*') ? 'active' : '' }}"">
-                  <a href="{{route('product')}}" class="menu-link">
+                  <a href="{{route('product.index')}}" class="menu-link">
                     <div>Product List</div>
                   </a>
                 </li>
