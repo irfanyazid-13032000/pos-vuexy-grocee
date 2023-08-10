@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -11,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('category.index-category',compact('categories'));
     }
 
     /**
@@ -19,7 +22,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $warehouses = Warehouse::all();
+        return view('category.create-category',compact('warehouses'));
     }
 
     /**
@@ -27,7 +31,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name_category' => 'required',
+            'warehouse_id' => 'required',
+        ]);
+
+       Category::create([
+        'name_category' => $request->name_category,
+        'warehouse_id' => $request->warehouse_id,
+       ]);
+
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil disimpan.');
+
     }
 
     /**
@@ -43,7 +58,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        $warehouses = Warehouse::all();
+        return view('category.edit-category',compact('category','warehouses'));
     }
 
     /**
@@ -51,7 +68,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Category::find($id)->update([
+            'name_category'=>$request->name_category,
+            'warehouse_id'=>$request->warehouse_id,
+        ]);
+
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil disimpan.');
     }
 
     /**
@@ -59,6 +81,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::find($id)->delete();
+
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

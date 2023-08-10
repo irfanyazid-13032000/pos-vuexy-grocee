@@ -1,14 +1,14 @@
 <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active open">
+            <li class="menu-item {{ Route::is('dashboard.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>Dashboards</div>
                 <div class="badge bg-primary rounded-pill ms-auto">3</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item active">
-                  <a href="index.html" class="menu-link">
+                <li class="menu-item {{ Route::is('dashboard.*') ? 'active' : '' }}">
+                  <a href="{{route('dashboard')}}" class="menu-link">
                     <div>Analytics</div>
                   </a>
                 </li>
@@ -26,20 +26,20 @@
             </li>
 
             <!-- product -->
-            <li class="menu-item">
+            <li class="menu-item {{ Route::is('category.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Product</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="layouts-collapsed-menu.html" class="menu-link">
+                <li class="menu-item {{ Route::is('category.*') ? 'active' : '' }}">
+                  <a href="{{route('category.index')}}" class="menu-link">
                     <div>Category</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="layouts-content-navbar.html" class="menu-link">
+                <li class="menu-item {{ Route::is('product.*') ? 'active' : '' }}"">
+                  <a href="{{route('product')}}" class="menu-link">
                     <div>Product List</div>
                   </a>
                 </li>

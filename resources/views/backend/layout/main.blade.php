@@ -50,6 +50,8 @@
     <!-- Page CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/pages/cards-advance.css" />
 
+    @stack('addon-style')
+
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -716,5 +718,7 @@
 
     <!-- Page JS -->
     <script src="../../assets/js/dashboards-analytics.js"></script>
+
+    @stack('addon-script')
   </body>
 </html>
