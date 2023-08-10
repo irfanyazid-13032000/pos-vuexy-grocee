@@ -90,9 +90,52 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+{
+
+    // dd($request->oldImage);
+    $product = Product::find($id);
+
+    if (!$product) {
+        // Handle jika produk tidak ditemukan
+        return response()->json(['message' => 'Product not found'], 404);
     }
+
+    if ($request->hasFile('product_image')) {
+        $originalFilename = $request->file('product_image')->getClientOriginalName();
+        $filename = pathinfo($originalFilename, PATHINFO_FILENAME);
+        $extension = $request->file('product_image')->getClientOriginalExtension();
+        $newFilename = $filename . '_' . time() . '.' . $extension;
+        $imagePath = $request->file('product_image')->storeAs('product_images', $newFilename, 'public');
+
+        Storage::disk('public')->delete('product_images/' . $request->oldImage);
+        
+        
+
+        // Update informasi produk termasuk nama gambar baru
+        $product->update([
+            'name_product' => $request->name_product,
+            'warehouse_id' => $request->warehouse_id,
+            'category_id' => $request->category_id,
+            'expired' => '',
+            'price' => $request->price,
+            'image' => $newFilename,
+        ]);
+    } else {
+        // Update informasi produk tanpa mengubah gambar
+        $product->update([
+            'name_product' => $request->name_product,
+            'warehouse_id' => $request->warehouse_id,
+            'category_id' => $request->category_id,
+            'expired' => '',
+            'price' => $request->price,
+            'image' => $request->oldImage
+        ]);
+    }
+
+    // Berikan respons yang sesuai
+    return redirect()->route('product.index');
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -51,6 +51,7 @@
                         <div class="mb-3">
                             <label for="product_image" class="form-label">Gambar Produk</label>
                             <input type="file" class="form-control" id="product_image" name="product_image">
+                            <img src="" id="img-view" width="50">
                             @error('product_image')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -64,3 +65,25 @@
             </div>
         </div>
 @endsection
+
+
+@push('addon-script')
+<script>
+    $('#product_image').change(function(){
+        previewImage(this)
+    })
+
+    function previewImage(input){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function (e) { // Menghapus tanda kurung ()
+                console.log(e.target.result)
+                $('#img-view').attr('src', e.target.result)
+            }
+            reader.readAsDataURL(input.files[0]) // Menggunakan readAsDataURL
+        }
+    }
+</script>
+
+@endpush

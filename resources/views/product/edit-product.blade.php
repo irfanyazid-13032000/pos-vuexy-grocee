@@ -4,8 +4,9 @@
             <div class="card mb-4">
                 <h5 class="card-header">Edit Data Produk</h5>
                 <div class="card-body">
-                    <form action="{{route('product.update',['id'=>$product->id])}}" method="POST" >
+                    <form action="{{route('product.update',['id'=>$product->id])}}" method="POST" enctype="multipart/form-data" >
                         @csrf
+                        <input type="hidden" name="oldImage" value="{{$product->image}}">
                         <div class="mb-3">
                             <label for="name_product" class="form-label">Nama Kategori</label>
                             <input type="text" class="form-control" id="name_product" name="name_product"
@@ -33,7 +34,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="warehouse_id" class="form-label">Kategori</label>
-                            <select class="form-select" id="warehouse_id" name="warehouse_id"
+                            <select class="form-select" id="category_id" name="category_id"
                                 value="{{ old('name_warehouse') }}" required>
                                 <option value="">pilih kategori</option>
                                 @foreach ($categories as $category)
@@ -48,6 +49,22 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Harga Produk</label>
+                            <input type="number" class="form-control" id="price" name="price"
+                                value="{{ $product->price }}" required>
+                            @error('price')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="product_image" class="form-label">Gambar Produk</label>
+                            <input type="file" class="form-control" id="product_image" name="product_image">
+                            <img src="{{asset('storage/product_images')}}/{{$product->image}}" id="img-view" width="50">
+                            @error('product_image')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
                             <a href="{{route('product.index')}}" class="btn btn-danger ms-3">Kembali</a>
@@ -57,3 +74,24 @@
             </div>
         </div>
 @endsection
+
+@push('addon-script')
+<script>
+    $('#product_image').change(function(){
+        previewImage(this)
+    })
+
+    function previewImage(input){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function (e) { // Menghapus tanda kurung ()
+                console.log(e.target.result)
+                $('#img-view').attr('src', e.target.result)
+            }
+            reader.readAsDataURL(input.files[0]) // Menggunakan readAsDataURL
+        }
+    }
+</script>
+
+@endpush
