@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('control-panel.dashboard');
-});
+})->name('dashboard');
 
 Route::get('/pos', function () {
     return view('pos.index');

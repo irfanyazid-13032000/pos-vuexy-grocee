@@ -135,6 +135,11 @@
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+
+                  <a class="nav-link" href="{{route('pos')}}">
+                    <i class="ti ti-shopping-cart rounded-circle ti-md"></i>
+                  </a>
                 <!-- Language -->
                 <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
