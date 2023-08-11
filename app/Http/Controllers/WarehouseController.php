@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
@@ -11,7 +12,8 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        //
+        $warehouses = Warehouse::all();
+        return view('warehouse.index-warehouse',compact('warehouses'));
     }
 
     /**
@@ -19,7 +21,7 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        //
+        return view('warehouse.create-warehouse');
     }
 
     /**
@@ -27,7 +29,11 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Warehouse::create([
+            'name_warehouse' => $request->name_warehouse
+        ]);
+
+        return redirect()->route('warehouse.index');
     }
 
     /**
@@ -43,7 +49,13 @@ class WarehouseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $warehouse = Warehouse::find($id);
+
+        // dd($warehouse);
+
+        return view('warehouse.edit-warehouse',compact('warehouse'));
+
     }
 
     /**
@@ -51,7 +63,11 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Warehouse::find($id)->update([
+            'name_warehouse' => $request->name_warehouse
+        ]);
+
+        return redirect()->route('warehouse.index');
     }
 
     /**
@@ -59,6 +75,8 @@ class WarehouseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Warehouse::find($id)->delete();
+
+        return redirect()->route('warehouse.index');
     }
 }

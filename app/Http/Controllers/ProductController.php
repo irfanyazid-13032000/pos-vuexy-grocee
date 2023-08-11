@@ -92,7 +92,6 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
 {
 
-    // dd($request->oldImage);
     $product = Product::find($id);
 
     if (!$product) {

@@ -13,7 +13,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::join('warehouses','categories.warehouse_id','=','warehouses.id')
+                        ->select('categories.*','warehouses.name_warehouse')
+                        ->get();
+
         return view('category.index-category',compact('categories'));
     }
 

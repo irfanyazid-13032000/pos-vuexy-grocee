@@ -26,7 +26,7 @@
             </li>
 
             <!-- product -->
-            <li class="menu-item {{ Route::is('category.*') ? 'active open' : '' }}">
+            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Product</div>
@@ -38,14 +38,14 @@
                     <div>Category</div>
                   </a>
                 </li>
-                <li class="menu-item {{ Route::is('product.*') ? 'active' : '' }}"">
+                <li class="menu-item {{ Route::is('product.*') ? 'active' : '' }}">
                   <a href="{{route('product.index')}}" class="menu-link">
                     <div>Product List</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
-                    <div>Add Product</div>
+                    <div>Barang</div>
                   </a>
                 </li>
                 <li class="menu-item">
@@ -66,6 +66,11 @@
                 <li class="menu-item">
                   <a href="layouts-fluid.html" class="menu-link">
                     <div>Add Adjustment</div>
+                  </a>
+                </li>
+                <li class="menu-item {{ Route::is('warehouse.*') ? 'active' : '' }} ">
+                  <a href="{{route('warehouse.index')}}" class="menu-link">
+                    <div>Warehouse</div>
                   </a>
                 </li>
                 
@@ -183,7 +188,7 @@
             </li>
 
             <!-- quotation -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Quotation</div>
@@ -202,10 +207,10 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- transfer -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Transfer</div>
@@ -229,10 +234,10 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- return -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Return</div>
@@ -251,10 +256,10 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- accounting -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Accounting</div>
@@ -288,10 +293,10 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- HRM -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>HRM</div>
@@ -325,7 +330,7 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- people -->
             <li class="menu-item">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,14 @@ Route::post('/product/store',[ProductController::class,'store'])->name('product.
 Route::get('/produk/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
 Route::post('/produk/{id}/update',[ProductController::class,'update'])->name('product.update');
 Route::get('/produk/{id}/delete',[ProductController::class,'destroy'])->name('product.delete');
+
+// warehouse
+Route::get('/warehouse',[WarehouseController::class,'index'])->name('warehouse.index');
+Route::get('/warehouse/create',[WarehouseController::class,'create'])->name('warehouse.create');
+Route::post('/warehouse/store',[WarehouseController::class,'store'])->name('warehouse.store');
+Route::get('/warehouse/{id}/edit',[WarehouseController::class,'edit'])->name('warehouse.edit');
+Route::post('/warehouse/{id}/update',[WarehouseController::class,'update'])->name('warehouse.update');
+Route::get('/warehouse/{id}/delete',[WarehouseController::class,'destroy'])->name('warehouse.delete');
+
 
 
