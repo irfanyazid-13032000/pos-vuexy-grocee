@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('capital_price', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_id');
+            $table->string('name_capital');
+            $table->string('price');
+            $table->string('warehouse_id');
+            $table->timestamps();
+        });
     }
 
     /**
