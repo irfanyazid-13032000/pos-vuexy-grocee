@@ -26,7 +26,7 @@
             </li>
 
             <!-- product -->
-            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') ? 'active open' : '' }}">
+            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Product</div>
@@ -43,9 +43,9 @@
                     <div>Product List</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
-                    <div>Barang</div>
+                <li class="menu-item {{ Route::is('item.*') ? 'active' : '' }}">
+                  <a href="{{route('item.index')}}" class="menu-link">
+                    <div>Item</div>
                   </a>
                 </li>
                 <li class="menu-item">
