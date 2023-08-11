@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Warehouse;
@@ -29,7 +30,8 @@ class ProductController extends Controller
     {
         $warehouses = Warehouse::all();
         $categories = Category::all();
-        return view('product.create-product',compact('warehouses','categories'));
+        $items = Item::all();
+        return view('product.create-product',compact('warehouses','categories','items'));
     }
 
     /**
@@ -43,6 +45,7 @@ class ProductController extends Controller
             'warehouse_id' => 'required',
             'category_id' => 'required',
             'price' => 'required',
+            'code_product' => 'required',
         ]);
         
         if ($request->hasFile('product_image')) {
@@ -62,6 +65,7 @@ class ProductController extends Controller
         'expired' => '',
         'price' => $request->price,
         'image' => $newFilename,
+        'code_product' => $request->code_product,
        ]);
 
         return redirect()->route('product.index')->with('success', 'produk berhasil disimpan.');

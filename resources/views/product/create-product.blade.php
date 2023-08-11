@@ -7,12 +7,22 @@
                     <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data" >
                         @csrf
                         <div class="mb-3">
+                            <label for="code_product" class="form-label">Code Product</label>
+                            <select class="form-select" id="code_product" name="code_product"
+                                value="{{ old('code_product') }}" onchange="lakukan(this)" required>
+                                <option value="">Choose Code Product</option>
+                                @foreach ($items as $item)
+                                <option value="{{ $item->code_item }}">{{$item->code_item}}</option>
+                                @endforeach
+                            </select>
+                            <div id="generatedTableContainer" class="mt-4"></div>
+                          
+                        </div>
+                        <div class="mb-3">
                             <label for="name_product" class="form-label">Nama Produk</label>
                             <input type="text" class="form-control" id="name_product" name="name_product"
-                                value="{{ old('name_product') }}" required>
-                            @error('name_product')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
+                                 readonly>
+                           
                         </div>
                         <div class="mb-3">
                             <label for="warehouse_id" class="form-label">warehouse</label>
@@ -60,6 +70,9 @@
                             <button class="btn btn-primary" type="submit">Simpan</button>
                             <a href="{{route('category.index')}}" class="btn btn-danger ms-3">Kembali</a>
                         </div>
+
+                        <div id="generatedTableContainer" class="mt-4"></div>
+
                     </form>
                 </div>
             </div>
@@ -84,6 +97,67 @@
             reader.readAsDataURL(input.files[0]) // Menggunakan readAsDataURL
         }
     }
+
+
+    function lakukan(selectedCode) {
+            $.ajax({
+                url: `{{route('ingredient.data',['code'=>$item->code_item])}}`,
+                method: "GET",
+                success: function (data) {
+                    generateTable(selectedCode, data.ingredients,data.total_price);
+                    document.getElementById("name_product").value = data.item.name_item;
+                },
+                error: function (error) {
+                    console.error("AJAX request failed:", error);
+                }
+            });
+        }
+
+        function formatNumberToCurrency(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function generateTable(selectedCode, data,total_price) {
+            console.log(data);
+            const tableContainer = document.getElementById("generatedTableContainer");
+            tableContainer.innerHTML = `
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Code Ingredient</th>
+                            <th>Name Ingredient</th>
+                            <th>Price / Unit</th>
+                            <th>Qty</th>
+                            <th>Unit</th>
+                            <th>Total Price/Ingredient</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map(item => `
+                            <tr>
+                                <td>${item.code_ingredient}</td>
+                                <td>${item.name_ingredient}</td>
+                                <td>${formatNumberToCurrency(item.price_per_unit)}</td>
+                                <td>${item.qty}</td>
+                                <td>${item.unit}</td>
+                                <td>${formatNumberToCurrency(item.total_price)}</td>
+                            </tr>
+                        `).join("")}
+                        <tr>
+                            <td colspan="5">total price</td>
+                            <td>${formatNumberToCurrency(total_price)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+
+
+
+
+
 </script>
+
+
 
 @endpush

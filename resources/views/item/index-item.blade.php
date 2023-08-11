@@ -21,6 +21,7 @@
                      <td>
                       <a href="{{route('item.edit',['id'=> $item->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('item.delete',['id'=> $item->id])}}" class="btn btn-danger">delete</a>
+                      <a href="{{route('ingredient.index',['code'=> $item->code_item])}}" class="btn btn-info">ingredients</a>
                      </td>
                   </tr>
                   @endforeach

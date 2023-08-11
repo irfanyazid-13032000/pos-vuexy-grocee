@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\IngredientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,15 @@ Route::post('/item/store',[ItemController::class,'store'])->name('item.store');
 Route::get('/item/{id}/edit',[ItemController::class,'edit'])->name('item.edit');
 Route::post('/item/{id}/update',[ItemController::class,'update'])->name('item.update');
 Route::get('/item/{id}/delete',[ItemController::class,'destroy'])->name('item.delete');
+
+// ingredient
+Route::get('/ingredient/{code}',[IngredientsController::class,'index'])->name('ingredient.index');
+Route::get('/ingredient/{code}/data',[IngredientsController::class,'ingredientsData'])->name('ingredient.data');
+Route::get('/ingredient/{code}/store',[IngredientsController::class,'store'])->name('ingredient.store');
+Route::get('/ingredient/{code}/{id}/edit',[IngredientsController::class,'edit'])->name('ingredient.edit');
+Route::get('/ingredient/{code}/{id}/update',[IngredientsController::class,'update'])->name('ingredient.update');
+Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destroy'])->name('ingredient.delete');
+
 
 
 
