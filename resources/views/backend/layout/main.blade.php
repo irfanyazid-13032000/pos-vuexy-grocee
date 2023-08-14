@@ -34,8 +34,8 @@
     <link rel="stylesheet" href="{{url('assets/vendor/fonts/flag-icons.css')}}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/core.css')}}" />
-    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/theme-default.css')}}" />
+    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/core.css')}}" class="{{ !request()->is('ingredient/*/edit/*') ? 'template-customizer-core-css' : '' }}" />
+    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/theme-default.css')}}" class="{{ !request()->is('ingredient/*/edit/*') ? 'template-customizer-theme-css' : '' }}"  />
     <link rel="stylesheet" href="{{url('assets/css/demo.css')}}" />
 
     <!-- Vendors CSS -->
@@ -323,7 +323,7 @@
                           <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                               <div class="avatar">
-                                <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                <img src="{{url('assets/img/avatars/1.png')}}" />
                               </div>
                             </div>
                             <div class="flex-grow-1">
@@ -540,7 +540,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                      <img src="{{url('assets/img/avatars/1.png')}}" alt class="h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
