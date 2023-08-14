@@ -59,6 +59,14 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="stock_product" class="form-label">Stock Product</label>
+                            <input type="number" class="form-control" id="stock_product" name="stock_product"
+                                value="{{ old('stock_product') }}" required>
+                            @error('stock_product')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="product_image" class="form-label">Gambar Produk</label>
                             <input type="file" class="form-control" id="product_image" name="product_image">
                             <img src="" id="img-view" width="50">

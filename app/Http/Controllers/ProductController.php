@@ -39,6 +39,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request;
         
         $validatedData = $request->validate([
             'name_product' => 'required',
@@ -46,6 +48,7 @@ class ProductController extends Controller
             'category_id' => 'required',
             'price' => 'required',
             'code_product' => 'required',
+            'stock_product' => 'required',
         ]);
         
         if ($request->hasFile('product_image')) {
@@ -66,6 +69,7 @@ class ProductController extends Controller
         'price' => $request->price,
         'image' => $newFilename,
         'code_product' => $request->code_product,
+        'stock_product' => $request->stock_product,
        ]);
 
         return redirect()->route('product.index')->with('success', 'produk berhasil disimpan.');
@@ -122,6 +126,7 @@ class ProductController extends Controller
             'expired' => '',
             'price' => $request->price,
             'image' => $newFilename,
+            'stock_product' => $request->stock_product,
         ]);
     } else {
         // Update informasi produk tanpa mengubah gambar
@@ -131,7 +136,8 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'expired' => '',
             'price' => $request->price,
-            'image' => $request->oldImage
+            'image' => $request->oldImage,
+            'stock_product' => $request->stock_product
         ]);
     }
 

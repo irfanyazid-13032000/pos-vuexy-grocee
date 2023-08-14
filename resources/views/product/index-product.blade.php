@@ -7,9 +7,11 @@
                 <thead>
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
+                        <th>Code</th>
                         <th>Nama Produk</th>
                         <th>Kategori</th>
                         <th>Harga</th>
+                        <th>Stock</th>
                         <th>Gambar</th>
                         <th>Action</th>
                     </tr>
@@ -18,9 +20,11 @@
                   @foreach ( $products as $product)
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
+                     <td>{{$product->code_product}}</td>
                      <td>{{$product->name_product}}</td>
                      <td>{{$product->name_category}}</td>
                      <td>Rp. {{number_format($product->price)}}</td>
+                     <td>{{$product->stock_product}}</td>
                      <td><img src="{{asset('storage/product_images')}}/{{$product->image}}" alt="" width="50"></td>
                      <td>
                       <a href="{{route('product.edit',['id'=> $product->id])}}" class="btn btn-primary">edit</a>
