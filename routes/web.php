@@ -9,6 +9,7 @@ use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\WarehouseStockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,13 @@ Route::get('/warehouse/{id}/edit',[WarehouseController::class,'edit'])->name('wa
 Route::post('/warehouse/{id}/update',[WarehouseController::class,'update'])->name('warehouse.update');
 Route::get('/warehouse/{id}/delete',[WarehouseController::class,'destroy'])->name('warehouse.delete');
 
+// warehouse stock
+Route::get('/warehouse-stock/{id_warehouse}',[WarehouseStockController::class,'index'])->name('warehouse.stock.index');
+Route::get('/warehouse-stock/{id_warehouse}/create',[WarehouseStockController::class,'create'])->name('warehouse.stock.create');
+Route::post('/warehouse-stock/{id_warehouse}/store',[WarehouseStockController::class,'store'])->name('warehouse.stock.store');
+Route::get('/warehouse-stock/{id_warehouse}/delete/{product_id}',[WarehouseStockController::class,'destroy'])->name('warehouse.stock.delete');
+
+
 // item
 Route::get('/item',[ItemController::class,'index'])->name('item.index');
 Route::get('/item/create',[ItemController::class,'create'])->name('item.create');
@@ -65,7 +73,7 @@ Route::get('/item/{id}/delete',[ItemController::class,'destroy'])->name('item.de
 Route::get('/ingredient/{code}',[IngredientsController::class,'index'])->name('ingredient.index');
 Route::get('/ingredient/{code}/data',[IngredientsController::class,'ingredientsData'])->name('ingredient.data');
 Route::get('/ingredient/{code}/store',[IngredientsController::class,'store'])->name('ingredient.store');
-Route::get('/ingredient/{code}/{id}/edit',[IngredientsController::class,'edit'])->name('ingredient.edit');
+Route::get('/ingredient/{code}/edit/{id}',[IngredientsController::class,'edit'])->name('ingredient.edit');
 Route::get('/ingredient/{code}/{id}/update',[IngredientsController::class,'update'])->name('ingredient.update');
 Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destroy'])->name('ingredient.delete');
 
