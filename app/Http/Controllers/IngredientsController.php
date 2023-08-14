@@ -74,8 +74,10 @@ class IngredientsController extends Controller
 
         $ingredient = Ingredient::where('ingredients.id',$id)
                             ->join('items','items.code_item','=','ingredients.code_item')
+                            ->select('ingredients.*','items.code_item')
                             ->get()
                             ->first();
+
 
 
         return view('ingredient.edit-ingredient',compact('ingredient'));
@@ -86,7 +88,17 @@ class IngredientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Ingredient::find($id)->update([
+            'name_ingredient' => $request->name_ingredient,
+            'code_ingredient' => $request->code_ingredient,
+            'qty' => $request->qty,
+            'unit' => $request->unit,
+            'price_per_unit' => $request->price_per_unit,
+            'total_price' => $request->total_price,
+        ]);
+
+        return redirect()->route('ingredient.index',['code'=>$request->code_item]);
+
     }
 
     /**

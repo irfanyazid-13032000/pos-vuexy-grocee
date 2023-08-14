@@ -4,8 +4,9 @@
             <div class="card mb-4">
                 <h5 class="card-header">Edit Data Ingredient {{ $ingredient->name_item }} </h5>
                 <div class="card-body">
-                    <form action="" method="POST" >
+                    <form action="{{route('ingredient.update',['id'=>$ingredient->id])}}" method="POST" >
                         @csrf
+                        <input type="hidden" name="code_item" value="{{$ingredient->code_item}}">
                         <div class="mb-3">
                             <label for="name_ingredient" class="form-label">Name Ingredient</label>
                             <input type="text" class="form-control" id="name_ingredient" name="name_ingredient"
@@ -15,10 +16,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="code_item" class="form-label">Code Item</label>
-                            <input type="text" class="form-control" id="code_item" name="code_item"
-                                value="{{$ingredient->code_item}}" required>
-                            @error('code_item')
+                            <label for="code_ingredient" class="form-label">Code Ingredient</label>
+                            <input type="text" class="form-control" id="code_ingredient" name="code_ingredient"
+                                value="{{$ingredient->code_ingredient}}" required>
+                            @error('code_ingredient')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>

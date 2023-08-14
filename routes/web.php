@@ -74,7 +74,7 @@ Route::get('/ingredient/{code}',[IngredientsController::class,'index'])->name('i
 Route::get('/ingredient/{code}/data',[IngredientsController::class,'ingredientsData'])->name('ingredient.data');
 Route::get('/ingredient/{code}/store',[IngredientsController::class,'store'])->name('ingredient.store');
 Route::get('/ingredient/{code}/edit/{id}',[IngredientsController::class,'edit'])->name('ingredient.edit');
-Route::get('/ingredient/{code}/{id}/update',[IngredientsController::class,'update'])->name('ingredient.update');
+Route::post('/ingredient/{id}/update',[IngredientsController::class,'update'])->name('ingredient.update');
 Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destroy'])->name('ingredient.delete');
 
 
