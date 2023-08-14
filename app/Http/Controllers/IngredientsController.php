@@ -70,11 +70,15 @@ class IngredientsController extends Controller
      */
     public function edit(string $code,$id)
     {
-        // return $id;
-        // $ingredient = Ingredient::findOrFail($id);
-        // $code_item = $code;
 
-        return view('ingredient.edit-ingredient');
+
+        $ingredient = Ingredient::where('ingredients.id',$id)
+                            ->join('items','items.code_item','=','ingredients.code_item')
+                            ->get()
+                            ->first();
+
+
+        return view('ingredient.edit-ingredient',compact('ingredient'));
     }
 
     /**
