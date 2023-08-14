@@ -59,23 +59,13 @@ class CartController extends Controller
     }
 
 
-    public function checkout()
+    public function checkout(Request $request)
     {
-        $carts = Cart::all();
-
-        foreach ($carts as $key => $cart) {
-            Receipt::create([
-                'receipt_no' => '34234wr32',
-                'product_id'=> $cart->product_id,
-                'price' => $cart->price,
-                'qty' => $cart->qty,
-                'total_price' => $cart->total_price
-            ]);
-        }
-
-        Cart::truncate();
-
-        return 'hore sudah berhasil checkout';
+        $carts = Cart::join('products','carts.product_id','=','products.id')
+                        ->select('carts.*','products.name_product','products.image')
+                        ->get();
+        $total_cart_price = Cart::all()->sum('total_price');
+        return view('pos.checkout',compact('carts','total_cart_price'));
     }
 
     /**

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             // insert from receipt
-            $table->integer('receipt_no');
-            $table->integer('customer_id');
+            $table->string('receipt_no');
+            $table->string('customer_name');
             $table->integer('total_price');
             $table->timestamps();
         }); 

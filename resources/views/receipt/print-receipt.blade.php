@@ -36,14 +36,12 @@
             color: #FFF;
             width: 100%;
         }
-        td,
-        th,
-        tr,
-        table {
-            border-collapse: collapse;
-        }
         tr {border-bottom: 1px dotted #ddd;}
-        td,th {padding: 7px 0;width: 50%;}
+        td,th {padding: 7px 0;}
+
+        th, td {
+        text-align: center; /* Mengatur isi sel berada di tengah */
+    }
 
         table {width: 100%;}
         tfoot tr th:first-child {text-align: left;}
@@ -96,53 +94,39 @@
                 <br>no telepon: 089232420
             </p>
         </div>
-        <p>Tanggal: 12 januari 2023<br>
-            no referensi: CDEKJH<br>
-            Customer: rudi
+        <p>Tanggal: {{$tanggalFormatted}}<br>
+            no referensi: {{$receipt_first->receipt_no}}<br>
+            Customer: {{ $receipt_first->customer_name }}
         </p>
-        <table class="table-data">
-            <tbody>
-              
-              <tr>
-                  <td colspan="2" style="text-align:left">air mineral</td>
-                  <td style="text-align:right">10000</td>
-              </tr>
 
 
-              <tr>
-                    <th colspan="2" style="text-align:left">total</th>
-                    <th style="text-align:right">asdasd</th>
-              </tr>
-               
-            
-               
-               
-              
-                
-                
-                <tr>
-                    <th colspan="2" style="text-align:left">Total semua</th>
-                    <th style="text-align:right">70000</th>
-                </tr>
-                <tr>
-                    <th class="centered" colspan="3">Kata: <span>IDR to USD</span> <span>dua juta</span></th>
-                </tr>
-            </tbody>
-            <!-- </tfoot> -->
-        </table>
         <table>
-            <tbody>
-                <tr style="background-color:#ddd;">
-                    <td style="padding: 5px;width:30%">paid by: </td>
-                    <td style="padding: 5px;width:40%">amount : 20000</td>
-                    <td style="padding: 5px;width:30%">change : 2000</td>
-                </tr>                
-                <tr><td class="centered" colspan="3">Thank you for shopping with us. Please come again</td></tr>
+            <thead>
                 <tr>
-                    <td class="centered" colspan="3"> asds </td>
+                    <th>no</th>
+                    <th>product name</th>
+                    <th>price</th>
+                    <th>qty</th>
+                    <th>total price / product</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($receipts as $receipt)
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$receipt->name_product}}</td>
+                    <td>Rp. {{number_format($receipt->price)}}</td>
+                    <td>{{$receipt->qty}}</td>
+                    <td>Rp. {{number_format($receipt->total_price)}}</td>
+                </tr>
+                @endforeach
+                <tr style="background-color:aquamarine">
+                    <td colspan="4" style="text-align:left">total price</td>
+                    <td>Rp. {{number_format($total_price_receipt)}}</td>
                 </tr>
             </tbody>
         </table>
+       
        
     </div>
 </div>

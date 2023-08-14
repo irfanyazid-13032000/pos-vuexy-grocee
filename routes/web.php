@@ -73,12 +73,13 @@ Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destr
 // cart
 Route::get('/insert-cart/{id}',[CartController::class,'insert'])->name('cart.insert');
 Route::get('/remove-cart/{id}',[CartController::class,'remove'])->name('cart.remove');
-Route::get('/checkout-cart',[CartController::class,'checkout'])->name('cart.checkout');
+Route::post('/checkout-cart',[CartController::class,'checkout'])->name('cart.checkout');
 
 
 // receipt
-Route::get('/receipt/{receipt_no}',[ReceiptController::class,'print'])->name('receipt.print');
-Route::post('/submit-pos',[ReceiptController::class,'submit'])->name('submit.form.cart');
+Route::get('/receipt-print/{receipt_no}',[ReceiptController::class,'print'])->name('receipt.print');
+Route::post('/receipt-create',[ReceiptController::class,'create'])->name('create.receipt');
+
 
 
 

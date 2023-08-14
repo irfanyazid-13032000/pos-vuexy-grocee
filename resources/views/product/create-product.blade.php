@@ -100,10 +100,15 @@
 
 
     function lakukan(selectedCode) {
+        let urlRoute = `{{ route('ingredient.data', ['code' => ':code']) }}`
+        let url = urlRoute.replace(':code',selectedCode.value)
+        if (selectedCode.value !== '') {
             $.ajax({
-                url: `{{route('ingredient.data',['code'=>$item->code_item])}}`,
+                url: url,
                 method: "GET",
                 success: function (data) {
+                    // console.log(data)
+                    // return
                     generateTable(selectedCode, data.ingredients,data.total_price);
                     document.getElementById("name_product").value = data.item.name_item;
                 },
@@ -111,6 +116,10 @@
                     console.error("AJAX request failed:", error);
                 }
             });
+        }else{
+            const tableContainer = document.getElementById("generatedTableContainer");
+            tableContainer.innerHTML = ''
+        }
         }
 
         function formatNumberToCurrency(number) {
@@ -118,8 +127,10 @@
         }
 
         function generateTable(selectedCode, data,total_price) {
-            console.log(data);
+            // console.log(data);
+            // return
             const tableContainer = document.getElementById("generatedTableContainer");
+            tableContainer.innerHTML = ''
             tableContainer.innerHTML = `
                 <table class="table table-bordered">
                     <thead>

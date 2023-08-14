@@ -29,6 +29,7 @@ class IngredientsController extends Controller
 
     public function ingredientsData($code)
     {
+        // return $code;
         $data = [
             'item' => Item::where('code_item',$code)->first(),
             'ingredients' => Ingredient::where('code_item',$code)->get(),

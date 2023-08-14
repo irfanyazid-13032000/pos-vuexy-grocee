@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Sales;
 use App\Models\Receipt;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -17,40 +20,52 @@ class ReceiptController extends Controller
 
     public function print($receipt_no)
     {
-        $receipt = Receipt::where('receipt_no',$receipt_no)->get();
+        $receipts = Receipt::join('products','products.id','=','receipts.product_id')
+                    ->where('receipts.receipt_no',$receipt_no)
+                    ->select('receipts.*','products.name_product')
+                    ->get();
+        $receipt_first = $receipts->first();
+        $total_price_receipt = $receipts->sum('total_price');
 
-        return view('receipt.print-receipt');
+        $tanggal = Carbon::parse($receipt_first->created_at);
+        $tanggalFormatted = $tanggal->isoFormat('D MMMM YYYY');
+
+        return view('receipt.print-receipt',compact('receipts','receipt_first','total_price_receipt','tanggalFormatted'));
     }
 
-    public function submit(Request $request)
-    {
-        $carts = $request->cart;
-        $customer = $request->customer;
-
-        // return $carts;
-
-        foreach ($carts as $key => $value) {
-            Receipt::create([
-                'receipt_no' => '34234wr32',
-                'product_id'=> $key->product_id,
-                'price' => $key->price,
-                'qty' => $key->qty,
-                'total_price' => $key->total_price,
-                'customer' => $customer
-            ]);
-        }
-
-        return 'hore bisa input customer';
-
-    }
+   
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+
+    
+    public function create(Request $request)
     {
-        //
+        $receipt_no = Str::random(10);
+
+    
+        foreach ($request->cart as $value) {
+            Receipt::create([
+                'customer_name' => $request->customer_name,
+                'payment_method' => $request->payment_method,
+                'total_price' => $value['total_price'], // Access array values using square brackets []
+                'qty' => $value['qty'], // Access array values using square brackets []
+                'price' => $value['price'], // Access array values using square brackets []
+                'product_id' => $value['product_id'], // Access array values using square brackets []
+                'receipt_no' => $receipt_no,
+            ]);
+        }
+
+        Sales::create([
+            'receipt_no' => $receipt_no,
+            'customer_name' => $request->customer_name,
+            'total_cart_price'=>$request->total_cart_price
+        ]);
+    
+        return redirect()->route('receipt.print',['receipt_no'=>$receipt_no]);
     }
+    
 
     /**
      * Store a newly created resource in storage.

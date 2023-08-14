@@ -824,7 +824,7 @@
             </div>
             <div class="minicart__product">
                 
-                <form action="{{route('submit.form.cart')}}" method="post">
+                <form action="{{route('cart.checkout')}}" method="post">
                 @foreach ($carts as $index=> $cart)
                 @csrf
 
@@ -869,13 +869,9 @@
                     <span><b>Rp. {{number_format($total_price_cart)}}</b></span>
                 </div>
             </div>
-            <div class="minicart__conditions text-center">
-                <label for="">customer name</label>
-                <input type="text" name="customer">
-            </div>
+            
             <div class="minicart__button d-flex justify-content-center">
-                <a class="btn minicart__button--link" href="{{route('cart.checkout')}}">Checkout</a>
-                <button type="submit">submit</button>
+                <button class="btn minicart__button--link" type="submit">Submit</button>
             </form>
             </div>
         </div>
