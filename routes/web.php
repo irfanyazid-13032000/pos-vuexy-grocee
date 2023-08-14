@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\IngredientsController;
@@ -23,7 +25,7 @@ Route::get('/', function () {
     return view('control-panel.dashboard');
 })->name('dashboard');
 
-Route::get('/pos',[PosController::class,'index'])->name('pos');
+Route::get('/pos',[PosController::class,'index'])->name('pos.index');
 
 
 // category
@@ -67,6 +69,16 @@ Route::get('/ingredient/{code}/{id}/edit',[IngredientsController::class,'edit'])
 Route::get('/ingredient/{code}/{id}/update',[IngredientsController::class,'update'])->name('ingredient.update');
 Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destroy'])->name('ingredient.delete');
 
+
+// cart
+Route::get('/insert-cart/{id}',[CartController::class,'insert'])->name('cart.insert');
+Route::get('/remove-cart/{id}',[CartController::class,'remove'])->name('cart.remove');
+Route::get('/checkout-cart',[CartController::class,'checkout'])->name('cart.checkout');
+
+
+// receipt
+Route::get('/receipt/{receipt_no}',[ReceiptController::class,'print'])->name('receipt.print');
+Route::post('/submit-pos',[ReceiptController::class,'submit'])->name('submit.form.cart');
 
 
 

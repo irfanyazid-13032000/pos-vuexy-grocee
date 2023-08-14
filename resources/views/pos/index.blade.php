@@ -223,17 +223,10 @@
                                           </g>
                                         </g>
                                     </svg>  
-                                    <span class="items__count">3</span> 
+                                    <span class="items__count">{{count($carts)}}</span> 
                                 </a>
                             </li>
-                            <li class="header__account--items d-none d-lg-block">
-                                <a class="header__account--btn" href="wishlist.html">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.541" height="15.557" viewBox="0 0 18.541 15.557">
-                                        <path  d="M71.775,135.51a5.153,5.153,0,0,1,1.267-1.524,4.986,4.986,0,0,1,6.584.358,4.728,4.728,0,0,1,1.174,4.914,10.458,10.458,0,0,1-2.132,3.808,22.591,22.591,0,0,1-5.4,4.558c-.445.282-.9.549-1.356.812a.306.306,0,0,1-.254.013,25.491,25.491,0,0,1-6.279-4.8,11.648,11.648,0,0,1-2.52-4.009,4.957,4.957,0,0,1,.028-3.787,4.629,4.629,0,0,1,3.744-2.863,4.782,4.782,0,0,1,5.086,2.447c.013.019.025.034.057.076Z" transform="translate(-62.498 -132.915)" fill="currentColor"/>
-                                    </svg>
-                                    <span class="items__count">3</span> 
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                     <div class="header__account header__sticky--block">
@@ -244,14 +237,7 @@
                                     <span class="visually-hidden">Search</span>  
                                 </a>
                             </li>
-                            <li class="header__account--items d-none d-lg-block">
-                                <a class="header__account--btn" href="wishlist.html">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.541" height="15.557" viewBox="0 0 18.541 15.557">
-                                        <path  d="M71.775,135.51a5.153,5.153,0,0,1,1.267-1.524,4.986,4.986,0,0,1,6.584.358,4.728,4.728,0,0,1,1.174,4.914,10.458,10.458,0,0,1-2.132,3.808,22.591,22.591,0,0,1-5.4,4.558c-.445.282-.9.549-1.356.812a.306.306,0,0,1-.254.013,25.491,25.491,0,0,1-6.279-4.8,11.648,11.648,0,0,1-2.52-4.009,4.957,4.957,0,0,1,.028-3.787,4.629,4.629,0,0,1,3.744-2.863,4.782,4.782,0,0,1,5.086,2.447c.013.019.025.034.057.076Z" transform="translate(-62.498 -132.915)" fill="currentColor"/>
-                                    </svg>
-                                    <span class="items__count">3</span> 
-                                </a>
-                            </li>
+                            
                             <li class="header__account--items d-none d-lg-block">
                                 <a class="header__account--btn" href="my-account.html">
                                     <svg xmlns="http://www.w3.org/2000/svg"  width="20.51" height="19.443" viewBox="0 0 512 512"><path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
@@ -269,7 +255,7 @@
                                           </g>
                                         </g>
                                       </svg> 
-                                    <span class="items__count">3</span> 
+                                    <span class="items__count">{{count($carts)}}</span> 
                                 </a>
                             </li>
                         </ul>
@@ -837,72 +823,60 @@
                 <p class="minicart__header--desc">The organic foods products are limited</p>
             </div>
             <div class="minicart__product">
-                <div class="minicart__product--items d-flex">
+                
+                <form action="{{route('submit.form.cart')}}" method="post">
+                @foreach ($carts as $index=> $cart)
+                @csrf
+
+                    <input type="hidden" name="cart[{{ $index }}][product_id]" value="{{ $cart->product_id }}">
+                    <input type="hidden" name="cart[{{ $index }}][price]" value="{{ $cart->price }}">
+                    <input type="hidden" name="cart[{{ $index }}][qty]" value="{{ $cart->qty }}">
+                    <input type="hidden" name="cart[{{ $index }}][total_price]" value="{{ $cart->total_price }}">
+                    
+                    <div class="minicart__product--items d-flex">
                     <div class="minicart__thumb">
-                        <a href="product-details.html"><img src="{{url('assets/grocee')}}/img/product/product1.png" alt="prduct-img"></a>
+                        <a href="product-details.html"><img src="{{asset('storage/product_images')}}/{{$cart->image}}" alt="product-img"></a>
                     </div>
                     <div class="minicart__text">
-                        <h4 class="minicart__subtitle"><a href="product-details.html">The is Garden Vegetable.</a></h4>
-                        <span class="color__variant"><b>Color:</b> Beige</span>
+                        <h4 class="minicart__subtitle"><a href="product-details.html">{{$cart->name_product}}</a></h4>
                         <div class="minicart__price">
-                            <span class="current__price">$125.00</span>
-                            <span class="old__price">$140.00</span>
+                            <span class="current__price">Rp. {{number_format($cart->price)}}</span>
                         </div>
                         <div class="minicart__text--footer d-flex align-items-center">
                             <div class="quantity__box minicart__quantity">
                                 <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
                                 <label>
-                                    <input type="number" class="quantity__number" value="1" data-counter />
+                                    <input type="number" class="quantity__number" value="{{$cart->qty}}" />
                                 </label>
                                 <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
                             </div>
-                            <button class="minicart__product--remove" type="button">Remove</button>
+                            <a class="minicart__product--remove" href="{{route('cart.remove',['id'=>$cart->id])}}" type="button">Remove</a>
                         </div>
+                        <h4 class="minicart__subtitle">total price</h4>
+                        <span class="current__price">Rp. {{number_format($cart->total_price)}}</span>
                     </div>
                 </div>
-                @for ($i = 0; $i < 10; $i++)
-                <div class="minicart__product--items d-flex">
-                    <div class="minicart__thumb">
-                        <a href="product-details.html"><img src="{{url('assets/grocee')}}/img/product/product2.png" alt="prduct-img"></a>
-                    </div>
-                    <div class="minicart__text">
-                        <h4 class="minicart__subtitle"><a href="product-details.html">Fresh Tomatoe is organic.</a></h4>
-                        <span class="color__variant"><b>Color:</b> Green</span>
-                        <div class="minicart__price">
-                            <span class="current__price">$115.00</span>
-                            <span class="old__price">$130.00</span>
-                        </div>
-                        <div class="minicart__text--footer d-flex align-items-center">
-                            <div class="quantity__box minicart__quantity">
-                                <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                                <label>
-                                    <input type="number" class="quantity__number" value="1" data-counter />
-                                </label>
-                                <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
-                            </div>
-                            <button class="minicart__product--remove" type="button">Remove</button>
-                        </div>
-                    </div>
-                </div>
-                @endfor
+                @endforeach
+                
+           
+                
+
+
             </div>
             <div class="minicart__amount">
                 <div class="minicart__amount_list d-flex justify-content-between">
-                    <span>Sub Total:</span>
-                    <span><b>$240.00</b></span>
-                </div>
-                <div class="minicart__amount_list d-flex justify-content-between">
-                    <span>Total:</span>
-                    <span><b>$240.00</b></span>
+                    <span>Total Price:</span>
+                    <span><b>Rp. {{number_format($total_price_cart)}}</b></span>
                 </div>
             </div>
             <div class="minicart__conditions text-center">
-                <input class="minicart__conditions--input" id="accept" type="checkbox">
-                <label class="minicart__conditions--label" for="accept">I agree with the <a class="minicart__conditions--link" href="privacy-policy.html">Privacy Policy</a></label>
+                <label for="">customer name</label>
+                <input type="text" name="customer">
             </div>
             <div class="minicart__button d-flex justify-content-center">
-                <a class="btn minicart__button--link" href="cart.html">View cart</a>
-                <a class="btn minicart__button--link" href="checkout.html">Checkout</a>
+                <a class="btn minicart__button--link" href="{{route('cart.checkout')}}">Checkout</a>
+                <button type="submit">submit</button>
+            </form>
             </div>
         </div>
         <!-- End offCanvas minicart -->
@@ -954,11 +928,10 @@
                                 
                                 @foreach ($products as $product)
                                     
-                                
                                 <div class="col mb-28">
                                     <div class="product__items product__items2">
                                         <div class="product__items--thumbnail">
-                                            <a class="product__items--link" href="product-details.html">
+                                            <a class="product__items--link" href="{{route('cart.insert',['id'=>$product->id])}}">
                                                 <img class="product__items--img product__primary--img" src="{{asset('storage/product_images')}}/{{$product->image}}" alt="product-img">
                                             </a>
                                         </div>

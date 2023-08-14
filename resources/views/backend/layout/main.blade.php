@@ -140,7 +140,7 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
 
 
-                  <a class="nav-link" href="{{route('pos')}}">
+                  <a class="nav-link" href="{{route('pos.index')}}">
                     <i class="ti ti-shopping-cart rounded-circle ti-md"></i>
                   </a>
                 <!-- Language -->

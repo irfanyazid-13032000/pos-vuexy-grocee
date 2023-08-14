@@ -121,7 +121,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="{{route('pos')}}" class="menu-link">
+                  <a href="{{route('pos.index')}}" class="menu-link">
                     <div>POS</div>
                   </a>
                 </li>

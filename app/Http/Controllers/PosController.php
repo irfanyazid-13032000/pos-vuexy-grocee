@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Warehouse;
@@ -17,8 +18,15 @@ class PosController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $warehouses = Warehouse::all();
+        $carts = Cart::join('products','products.id','=','carts.product_id')
+                            ->select('carts.*','products.name_product','products.image')
+                            ->get();
 
-        return view('pos.index',compact('products','categories','warehouses'));
+        $total_price_cart = Cart::all()->sum('total_price');
+
+        // return $carts;
+
+        return view('pos.index',compact('products','categories','warehouses','carts','total_price_cart'));
     }
 
     /**

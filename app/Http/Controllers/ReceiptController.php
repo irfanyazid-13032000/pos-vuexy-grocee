@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Receipt;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -12,6 +13,35 @@ class ReceiptController extends Controller
     public function index()
     {
         //
+    }
+
+    public function print($receipt_no)
+    {
+        $receipt = Receipt::where('receipt_no',$receipt_no)->get();
+
+        return view('receipt.print-receipt');
+    }
+
+    public function submit(Request $request)
+    {
+        $carts = $request->cart;
+        $customer = $request->customer;
+
+        // return $carts;
+
+        foreach ($carts as $key => $value) {
+            Receipt::create([
+                'receipt_no' => '34234wr32',
+                'product_id'=> $key->product_id,
+                'price' => $key->price,
+                'qty' => $key->qty,
+                'total_price' => $key->total_price,
+                'customer' => $customer
+            ]);
+        }
+
+        return 'hore bisa input customer';
+
     }
 
     /**
