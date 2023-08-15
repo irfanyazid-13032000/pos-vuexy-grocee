@@ -22,7 +22,7 @@ class PosController extends Controller
                             ->select('carts.*','products.name_product','products.image')
                             ->get();
 
-        $total_price_cart = Cart::all()->sum('total_price');
+        $total_price_cart = $carts->sum('total_price');
 
         // return $carts;
 

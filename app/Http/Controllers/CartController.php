@@ -68,6 +68,32 @@ class CartController extends Controller
         return view('pos.checkout',compact('carts','total_cart_price'));
     }
 
+    public function increase($id)
+    {
+        $cart = Cart::find($id);
+
+        $cart->update([
+            'qty' => $cart->qty+1,
+            'total_price' => ($cart->qty+1) * $cart->price
+        ]);
+
+
+        return redirect()->route('pos.index');
+    }
+
+    public function decrease($id)
+    {
+        $cart = Cart::find($id);
+
+        $cart->update([
+            'qty' => $cart->qty-1,
+            'total_price' => ($cart->qty-1) * $cart->price
+        ]);
+
+        return redirect()->route('pos.index');
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      */

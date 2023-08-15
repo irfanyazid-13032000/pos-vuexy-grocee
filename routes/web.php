@@ -84,6 +84,8 @@ Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destr
 Route::get('/insert-cart/{id}',[CartController::class,'insert'])->name('cart.insert');
 Route::get('/remove-cart/{id}',[CartController::class,'remove'])->name('cart.remove');
 Route::post('/checkout-cart',[CartController::class,'checkout'])->name('cart.checkout');
+Route::get('/increase-qty-cart/{id}',[CartController::class,'increase'])->name('increase.cart');
+Route::get('/decrease-qty-cart/{id}',[CartController::class,'decrease'])->name('decrease.cart');
 
 
 // receipt

@@ -844,11 +844,11 @@
                         </div>
                         <div class="minicart__text--footer d-flex align-items-center">
                             <div class="quantity__box minicart__quantity">
-                                <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
+                                <a href="{{route('decrease.cart',['id'=>$cart->id])}}" type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</a>
                                 <label>
                                     <input type="number" class="quantity__number" value="{{$cart->qty}}" />
                                 </label>
-                                <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
+                                <a  href="{{route('increase.cart',['id'=>$cart->id])}}" type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</a>
                             </div>
                             <a class="minicart__product--remove" href="{{route('cart.remove',['id'=>$cart->id])}}" type="button">Remove</a>
                         </div>
