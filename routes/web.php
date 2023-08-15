@@ -61,6 +61,7 @@ Route::post('/warehouse-stock/{id_warehouse}/store',[WarehouseStockController::c
 Route::get('/warehouse-stock/{id_warehouse}/delete/{stock_id}',[WarehouseStockController::class,'destroy'])->name('warehouse.stock.delete');
 Route::get('/warehouse-stock/{id_warehouse}/edit/{stock_id}',[WarehouseStockController::class,'edit'])->name('warehouse.stock.edit');
 Route::post('/warehouse-stock/{id_warehouse}/update/{stock_id}',[WarehouseStockController::class,'update'])->name('warehouse.stock.update');
+Route::get('/warehouse-stock/{code}/data',[WarehouseStockController::class,'warehouseData'])->name('stock.warehouse.data');
 
 
 // item
@@ -74,7 +75,8 @@ Route::get('/item/{id}/delete',[ItemController::class,'destroy'])->name('item.de
 // ingredient
 Route::get('/ingredient/{code}',[IngredientsController::class,'index'])->name('ingredient.index');
 Route::get('/ingredient/{code}/data',[IngredientsController::class,'ingredientsData'])->name('ingredient.data');
-Route::get('/ingredient/{code}/store',[IngredientsController::class,'store'])->name('ingredient.store');
+Route::get('/ingredient/{code}/create',[IngredientsController::class,'create'])->name('ingredient.create');
+Route::post('/ingredient/{code}/store',[IngredientsController::class,'store'])->name('ingredient.store');
 Route::get('/ingredient/{code}/edit/{id}',[IngredientsController::class,'edit'])->name('ingredient.edit');
 Route::post('/ingredient/{id}/update',[IngredientsController::class,'update'])->name('ingredient.update');
 Route::get('/ingredient/{code}/{id}/delete',[IngredientsController::class,'destroy'])->name('ingredient.delete');

@@ -10,7 +10,7 @@
                         <div class="mb-3">
                             <label for="name_ingredient" class="form-label">Name Ingredient</label>
                             <input type="text" class="form-control" id="name_ingredient" name="name_ingredient"
-                                value="{{$ingredient->name_ingredient}}" required>
+                                value="{{$ingredient->name_ingredient}}" readonly>
                             @error('name_ingredient')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -18,7 +18,7 @@
                         <div class="mb-3">
                             <label for="code_ingredient" class="form-label">Code Ingredient</label>
                             <input type="text" class="form-control" id="code_ingredient" name="code_ingredient"
-                                value="{{$ingredient->code_ingredient}}" required>
+                                value="{{$ingredient->code_ingredient}}" readonly>
                             @error('code_ingredient')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -34,7 +34,7 @@
                         <div class="mb-3">
                             <label for="unit" class="form-label">Unit</label>
                             <input type="text" class="form-control" id="unit" name="unit"
-                                value="{{$ingredient->unit}}" required>
+                                value="{{$ingredient->unit}}" readonly>
                             @error('unit')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -42,7 +42,7 @@
                         <div class="mb-3">
                             <label for="price_per_unit" class="form-label">Price/Unit</label>
                             <input type="text" class="form-control" id="price_per_unit" name="price_per_unit"
-                                value="{{$ingredient->price_per_unit}}" required>
+                                value="{{$ingredient->price_per_unit}}" readonly>
                             @error('price_per_unit')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -50,7 +50,7 @@
 
                         <div class="mb-3">
                             <label for="total_price" class="form-label">total price</label>
-                            <input type="text" class="form-control" id="total_price" name="total_price">
+                            <input type="text" class="form-control" id="total_price" name="total_price" readonly>
                             @error('total_price')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror

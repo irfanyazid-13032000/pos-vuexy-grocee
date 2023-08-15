@@ -74,6 +74,13 @@ class WarehouseStockController extends Controller
         return view('stock-warehouse.edit-stock-warehouse',compact('warehouse_stock','id','stock_id'));
     }
 
+
+    public function warehouseData($code)
+    {
+        $warehouse_stock = DB::table('warehouse_stock')->where('code_ingredient',$code)->get()->first();
+        return $warehouse_stock;
+    }
+
     /**
      * Update the specified resource in storage.
      */

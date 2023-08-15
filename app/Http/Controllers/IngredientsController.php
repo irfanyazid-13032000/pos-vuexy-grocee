@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IngredientsController extends Controller
 {
@@ -22,9 +23,10 @@ class IngredientsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($code)
     {
-        //
+        $ingredients = DB::table('warehouse_stock')->get();
+        return view('ingredient.create-ingredient',compact('ingredients','code'));
     }
 
     public function ingredientsData($code)
@@ -44,15 +46,35 @@ class IngredientsController extends Controller
      */
     public function store(Request $request,$code)
     {
-        Ingredient::create([
-            'code_item' => $code,
-            'code_ingredient' => $request->code_ingredient,
-            'name_ingredient' => $request->name_ingredient,
-            'qty' => $request->qty,
-            'unit' => $request->unit,
-            'price_per_unit' => $request->price_per_unit,
-            'total_price' => $request->price_per_unit * $request->qty,
+        $updateQtyIngredient = Ingredient::where('code_ingredient',$request->code_ingredient)->get()->first();
+
+
+        $stock_warehouse =  DB::table('warehouse_stock')->where('code_ingredient',$request->code_ingredient)->get()->first();
+        DB::table('warehouse_stock')->where('code_ingredient',$request->code_ingredient)
+            ->update([
+            'stock' => $stock_warehouse->stock - $request->qty
         ]);
+
+        if ($updateQtyIngredient) {
+            Ingredient::where('code_ingredient',$request->code_ingredient)
+                                ->get()
+                                ->first()
+                                ->update([
+                                    'qty' => $request->qty + $updateQtyIngredient->qty
+                                ]);
+        }else{
+            Ingredient::create([
+                'code_item' => $code,
+                'code_ingredient' => $request->code_ingredient,
+                'name_ingredient' => $request->name_ingredient,
+                'qty' => $request->qty,
+                'unit' => $request->unit,
+                'price_per_unit' => $request->price_per_unit,
+                'total_price' => $request->price_per_unit * $request->qty,
+            ]);
+        }
+
+
 
         return redirect()->route('ingredient.index',['code'=> $code]);
     }

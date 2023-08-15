@@ -49,13 +49,15 @@
                 </tbody>
             </table>
 
-            <button
+            <!-- <button
               type="button"
               class="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target="#addDataIngredient">
                 Add
-            </button>
+            </button> -->
+
+            <a href="{{route('ingredient.create',['code'=>$code_item])}}" class="btn btn-success">Add</a>
         </div>
     </div>
 
