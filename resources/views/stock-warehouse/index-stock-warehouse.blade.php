@@ -7,8 +7,11 @@
                 <thead>
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
-                        <th>Product</th>
+                        <th>Code Ingredient</th>
+                        <th>Name Ingredient</th>
                         <th>Stock</th>
+                        <th>Unit</th>
+                        <th>Price per Unit</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -16,11 +19,14 @@
                   @foreach ($stocks_warehouse as $stock)
                   <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$stock->name_product}}</td>
+                    <td>{{$stock->code_ingredient}}</td>
+                    <td>{{$stock->name_ingredient}}</td>
                     <td>{{$stock->stock}}</td>
+                    <td>{{$stock->unit}}</td>
+                    <td>Rp. {{number_format($stock->price_per_unit)}}</td>
                     <td>
-                     <a href="{{route('warehouse.stock.edit',['id_warehouse'=>$id_warehouse,'product_id'=>$stock->product_id])}}" class="btn btn-primary">edit</a>
-                     <a href="{{route('warehouse.stock.delete',['id_warehouse'=>$id_warehouse,'product_id'=>$stock->product_id])}}" class="btn btn-danger">delete</a>
+                     <a href="{{route('warehouse.stock.edit',['id_warehouse'=>$stock->warehouse_id,'stock_id'=>$stock->id])}}" class="btn btn-primary">edit</a>
+                     <a href="{{route('warehouse.stock.delete',['id_warehouse'=>$stock->warehouse_id,'stock_id'=>$stock->id])}}" class="btn btn-danger">delete</a>
                     </td>
                   </tr>
                     @endforeach

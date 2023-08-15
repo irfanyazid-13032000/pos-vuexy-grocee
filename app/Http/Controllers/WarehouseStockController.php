@@ -14,15 +14,15 @@ class WarehouseStockController extends Controller
     public function index($id_warehouse)
     {
         $stocks_warehouse = DB::table('warehouse_stock')
-                            ->join('warehouses','warehouses.id','=','warehouse_stock.warehouse_id')
-                            ->join('products','products.id','=','warehouse_stock.product_id')
-                            ->where('warehouse_stock.warehouse_id',$id_warehouse)
-                            ->get();
+                                    ->join('warehouses','warehouse_stock.warehouse_id','=','warehouses.id')
+                                    ->select('warehouse_stock.*','warehouses.name_warehouse')
+                                    ->get();
 
+        // return $stocks_warehouse;
         $first_data_stock_warehouse = $stocks_warehouse->first();
 
 
-        return view('stock-warehouse.index-stock-warehouse',compact('stocks_warehouse','first_data_stock_warehouse','id_warehouse'));
+        return view('stock-warehouse.index-stock-warehouse',compact('stocks_warehouse','id_warehouse','first_data_stock_warehouse'));
 
 
     }
@@ -32,8 +32,8 @@ class WarehouseStockController extends Controller
      */
     public function create($id_warehouse)
     {
-        $products = Product::all();
-        return view('stock-warehouse.create-stock-warehouse',compact('products','id_warehouse'));
+        // $products = Product::all();
+        return view('stock-warehouse.create-stock-warehouse',compact('id_warehouse'));
     }
 
     /**
@@ -43,26 +43,15 @@ class WarehouseStockController extends Controller
     {
 
         // return $request;
-        $updateStock = DB::table('warehouse_stock')
-                            ->where('warehouse_id',$id_warehouse)
-                            ->where('product_id',$request->id_product)
-                            ->get()
-                            ->first();
-        // return $updateStock;
-        if (!$updateStock) {
-            DB::table('warehouse_stock')->insert([
-                'warehouse_id' => $id_warehouse,
-                'product_id' => $request->id_product,
-                'stock' => $request->stock,
-            ]);
-        }else{
-            DB::table('warehouse_stock')
-            ->where('warehouse_id',$id_warehouse)
-            ->where('product_id', $request->id_product)
-            ->update([
-                'stock' => $updateStock->stock + $request->stock,
-            ]);
-        }
+       
+        DB::table('warehouse_stock')->insert([
+            'code_ingredient' => $request->code_ingredient,
+            'warehouse_id' => $id_warehouse,
+            'name_ingredient' => $request->name_ingredient,
+            'stock' => $request->stock,
+            'unit' => $request->unit,
+            'price_per_unit' => $request->price_per_unit,
+        ]);
 
         return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id_warehouse]);
     }
@@ -78,35 +67,38 @@ class WarehouseStockController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id,$id_product)
+    public function edit(string $id,$stock_id)
     {
-        $warehouse_stock = DB::table('warehouse_stock')->where('warehouse_stock.id',$id)
-                            ->join('products','products.id','=','warehouse_stock.product_id')
-                            ->select('warehouse_stock.*','products.name_product')
-                            ->get()->first();
-
-        return view('stock-warehouse.edit-stock-warehouse',compact('warehouse_stock','id','id_product'));
+        $warehouse_stock = DB::table('warehouse_stock')->where('warehouse_stock.id',$stock_id)->get()->first();
+        // return $warehouse_stock;
+        return view('stock-warehouse.edit-stock-warehouse',compact('warehouse_stock','id','stock_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id_warehouse, string $stock_id)
     {
-        DB::table('warehouse_stock')->where('id',$id)->update([
-            'stock' => $request->stock 
+        // return $stock_id;
+
+        DB::table('warehouse_stock')->where('id',$stock_id)->update([
+            'code_ingredient' => $request->code_ingredient,
+            'name_ingredient' => $request->name_ingredient,
+            'stock' => $request->stock,
+            'unit' => $request->unit,
+            'price_per_unit' => $request->price_per_unit,
         ]);
 
-        return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id]);
+        return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id_warehouse]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id_warehouse, $product_id)
+    public function destroy(string $id_warehouse, $stock_id)
     {
         DB::table('warehouse_stock')
-        ->where('product_id',$product_id)
+        ->where('id',$stock_id)
         ->where('warehouse_id',$id_warehouse)
         ->delete();
 

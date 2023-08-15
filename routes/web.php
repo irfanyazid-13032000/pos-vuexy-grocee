@@ -58,9 +58,9 @@ Route::get('/warehouse/{id}/delete',[WarehouseController::class,'destroy'])->nam
 Route::get('/warehouse-stock/{id_warehouse}',[WarehouseStockController::class,'index'])->name('warehouse.stock.index');
 Route::get('/warehouse-stock/{id_warehouse}/create',[WarehouseStockController::class,'create'])->name('warehouse.stock.create');
 Route::post('/warehouse-stock/{id_warehouse}/store',[WarehouseStockController::class,'store'])->name('warehouse.stock.store');
-Route::get('/warehouse-stock/{id_warehouse}/delete/{product_id}',[WarehouseStockController::class,'destroy'])->name('warehouse.stock.delete');
-Route::get('/warehouse-stock/{id_warehouse}/edit/{product_id}',[WarehouseStockController::class,'edit'])->name('warehouse.stock.edit');
-Route::post('/warehouse-stock/{id_warehouse}/update/{product_id}',[WarehouseStockController::class,'update'])->name('warehouse.stock.update');
+Route::get('/warehouse-stock/{id_warehouse}/delete/{stock_id}',[WarehouseStockController::class,'destroy'])->name('warehouse.stock.delete');
+Route::get('/warehouse-stock/{id_warehouse}/edit/{stock_id}',[WarehouseStockController::class,'edit'])->name('warehouse.stock.edit');
+Route::post('/warehouse-stock/{id_warehouse}/update/{stock_id}',[WarehouseStockController::class,'update'])->name('warehouse.stock.update');
 
 
 // item
