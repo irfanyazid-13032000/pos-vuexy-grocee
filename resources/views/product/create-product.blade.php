@@ -4,7 +4,7 @@
             <div class="card mb-4">
                 <h5 class="card-header">Tambah Data Produk</h5>
                 <div class="card-body">
-                    <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data" >
+                    <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data" id="product_store" >
                         @csrf
                         <div class="mb-3">
                             <label for="code_product" class="form-label">Code Product</label>
@@ -19,7 +19,7 @@
                           
                         </div>
                         <div class="mb-3">
-                            <label for="name_product" class="form-label">Nama Produk</label>
+                            <label for="name_product" class="form-label">Product Name</label>
                             <input type="text" class="form-control" id="name_product" name="name_product"
                                  readonly>
                            
@@ -38,7 +38,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="category_id" class="form-label">kategori</label>
+                            <label for="category_id" class="form-label">category</label>
                             <select class="form-select" id="category_id" name="category_id"
                                 value="{{ old('name_warehouse') }}" required>
                                 <option value="">pilih kategori</option>
@@ -51,7 +51,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="price" class="form-label">Harga Produk</label>
+                            <label for="price" class="form-label">Sale Price</label>
                             <input type="number" class="form-control" id="price" name="price"
                                 value="{{ old('price') }}" required>
                             @error('price')
@@ -119,6 +119,8 @@
                     // return
                     generateTable(selectedCode, data.ingredients,data.total_price);
                     document.getElementById("name_product").value = data.item.name_item;
+                    validasiUang(data.total_price)
+                    
                 },
                 error: function (error) {
                     console.error("AJAX request failed:", error);
@@ -156,19 +158,44 @@
                             <tr>
                                 <td>${item.code_ingredient}</td>
                                 <td>${item.name_ingredient}</td>
-                                <td>${formatNumberToCurrency(item.price_per_unit)}</td>
+                                <td>Rp. ${formatNumberToCurrency(item.price_per_unit)}</td>
                                 <td>${item.qty}</td>
                                 <td>${item.unit}</td>
-                                <td>${formatNumberToCurrency(item.total_price)}</td>
+                                <td>Rp. ${formatNumberToCurrency(item.total_price)}</td>
                             </tr>
                         `).join("")}
                         <tr>
-                            <td colspan="5">total price</td>
-                            <td>${formatNumberToCurrency(total_price)}</td>
+                            <td colspan="5">Capital Price</td>
+                            <td>Rp. ${formatNumberToCurrency(total_price)}</td>
                         </tr>
                     </tbody>
                 </table>
             `;
+        }
+
+
+
+
+
+
+
+        function validasiUang(capitalPrice) {
+            document.getElementById("product_store").addEventListener("submit", function(event) {
+            
+            // sale price harus lebih besar dari capital price
+            // harga jual harus lebih besar dari harga modal
+
+            if ($('#price').val()<=capitalPrice) {
+                
+                
+                event.preventDefault();
+                
+                
+                alert('harga jual tidak boleh lebih kecil dari harga modal');
+                
+            }
+    
+            })
         }
 
 
