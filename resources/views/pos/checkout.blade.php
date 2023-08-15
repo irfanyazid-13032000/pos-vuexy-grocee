@@ -84,47 +84,15 @@
                                         <span>Show order summary</span>
                                         <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="currentColor"><path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z"></path></svg>
                                     </span>
-                                    <span class="order__summary--final__price">$227.70</span>
+                                    <span class="order__summary--final__price">Rp. {{number_format($total_cart_price)}}</span>
                                 </span>
                             </summary>
                             <div class="order__summary--section">
                                 <div class="cart__table checkout__product--table">
                                     <table class="summary__table">
                                         <tbody class="summary__table--body">
-                                            <tr class=" summary__table--items">
-                                                <td class=" summary__table--list">
-                                                    <div class="product__image two  d-flex align-items-center">
-                                                        <div class="product__thumbnail border-radius-5">
-                                                            <a href="product-details.html"><img class="border-radius-5" src="{{asset('assets/grocee')}}/img/product/small-product7.png" alt="cart-product"></a>
-                                                            <span class="product__thumbnail--quantity">1</span>
-                                                        </div>
-                                                        <div class="product__description">
-                                                            <h3 class="product__description--name h4"><a href="product-details.html">juju</a></h3>
-                                                            <span class="product__description--variant">COLOR: Blue</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class=" summary__table--list">
-                                                    <span class="cart__price">£65.00</span>
-                                                </td>
-                                            </tr>
-                                            <tr class="summary__table--items">
-                                                <td class=" summary__table--list">
-                                                    <div class="cart__product d-flex align-items-center">
-                                                        <div class="product__thumbnail border-radius-5">
-                                                            <a href="product-details.html"><img class="border-radius-5" src="{{asset('assets/grocee')}}/img/product/small-product2.png" alt="cart-product"></a>
-                                                            <span class="product__thumbnail--quantity">1</span>
-                                                        </div>
-                                                        <div class="product__description">
-                                                            <h3 class="product__description--name h4"><a href="product-details.html">Vegetable-healthy</a></h3>
-                                                            <span class="product__description--variant">COLOR: Green</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class=" summary__table--list">
-                                                    <span class="cart__price">£82.00</span>
-                                                </td>
-                                            </tr>
+                                           
+                                            @foreach ($carts as $cart )
                                             <tr class=" summary__table--items">
                                                 <td class=" summary__table--list">
                                                     <div class="cart__product d-flex align-items-center">
@@ -133,67 +101,38 @@
                                                             <span class="product__thumbnail--quantity">1</span>
                                                         </div>
                                                         <div class="product__description">
-                                                            <h3 class="product__description--name h4"><a href="product-details.html">Raw-onions-surface</a></h3>
+                                                            <h3 class="product__description--name h4"><a href="product-details.html">{{$cart->name_product}}</a></h3>
                                                             <span class="product__description--variant">COLOR: White</span>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class=" summary__table--list">
-                                                    <span class="cart__price">£78.00</span>
+                                                    <span class="cart__price">Rp. {{number_format($cart->price)}}</span>
                                                 </td>
                                             </tr>
+                                                
+                                            @endforeach
+
+
                                         </tbody>
                                     </table> 
                                 </div>
                                 <div class="checkout__discount--code">
-                                    <form class="d-flex" action="#">
-                                        <label>
-                                            <input class="checkout__discount--code__input--field border-radius-5" placeholder="Gift card or discount code"  type="text">
-                                        </label>
-                                        <button class="checkout__discount--code__btn btn border-radius-5" type="submit">Apply</button>
-                                    </form>
+                                    
                                 </div>
                                 <div class="checkout__total">
                                     <table class="checkout__total--table">
-                                        <tbody class="checkout__total--body">
-                                            <tr class="checkout__total--items">
-                                                <td class="checkout__total--title text-left">Subtotal </td>
-                                                <td class="checkout__total--amount text-right">$860.00</td>
-                                            </tr>
-                                            <tr class="checkout__total--items">
-                                                <td class="checkout__total--title text-left">Shipping</td>
-                                                <td class="checkout__total--calculated__text text-right">Calculated at next step</td>
-                                            </tr>
-                                        </tbody>
                                         <tfoot class="checkout__total--footer">
                                             <tr class="checkout__total--footer__items">
                                                 <td class="checkout__total--footer__title checkout__total--footer__list text-left">Total </td>
-                                                <td class="checkout__total--footer__amount checkout__total--footer__list text-right">$860.00</td>
+                                                <td class="checkout__total--footer__amount checkout__total--footer__list text-right">Rp. {{number_format($total_cart_price)}}</td>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </details>
-                        <nav>
-                            <ol class="breadcrumb checkout__breadcrumb d-flex">
-                                <li class="breadcrumb__item breadcrumb__item--completed d-flex align-items-center">
-                                    <a class="breadcrumb__link" href="cart.html">Cart</a>
-                                    <svg class="readcrumb__chevron-icon" xmlns="http://www.w3.org/2000/svg" width="17.007" height="16.831" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"></path></svg>
-                                </li>
-                                <li class="breadcrumb__item breadcrumb__item--current d-flex align-items-center">
-                                    <a class="breadcrumb__link" href="cart.html">Information</a>
-                                    <svg class="readcrumb__chevron-icon" xmlns="http://www.w3.org/2000/svg" width="17.007" height="16.831" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"></path></svg>
-                                </li>
-                                <li class="breadcrumb__item breadcrumb__item--blank d-flex align-items-center">
-                                    <a class="breadcrumb__link" href="cart.html">Shipping</a>
-                                    <svg class="readcrumb__chevron-icon" xmlns="http://www.w3.org/2000/svg" width="17.007" height="16.831" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"></path></svg>
-                                </li>
-                                    <li class="breadcrumb__item breadcrumb__item--blank">
-                                    <span class="breadcrumb__text current">Payment</span>
-                                </li>
-                            </ol>
-                            </nav>
+                        
                     </header>
                     <main class="main__content_wrapper">
                         <form action="{{route('create.receipt')}}" method="POST">
@@ -216,10 +155,20 @@
                                                     <label>
                                                         <input class="checkout__input--field border-radius-5" placeholder="Name Customer"  type="text" name="customer_name">
                                                     </label>
-                                                    <button class="checkout__input--field__button" aria-label="search button" type="button">
-                                                        
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15.51" height="15.443" viewBox="0 0 512 512"><path d="M336 208v-95a80 80 0 00-160 0v95" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><rect x="96" y="208" width="320" height="272" rx="48" ry="48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
-                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-12">
+                                                <div class="checkout__input--list position__relative">
+                                                    <label>
+                                                        <input class="checkout__input--field border-radius-5" placeholder="Email Customer"  type="email" name="email_customer">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-12">
+                                                <div class="checkout__input--list position__relative">
+                                                    <label>
+                                                        <input class="checkout__input--field border-radius-5" placeholder="WhatsApp Number"  type="text" name="no_wa">
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="col-12 mb-12">

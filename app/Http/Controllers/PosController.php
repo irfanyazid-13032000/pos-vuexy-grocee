@@ -16,7 +16,7 @@ class PosController extends Controller
     public function index()
     {
         $products = Product::all();
-        $categories = Category::all();
+        $categories = Category::with('products')->get();
         $warehouses = Warehouse::all();
         $carts = Cart::join('products','products.id','=','carts.product_id')
                             ->select('carts.*','products.name_product','products.image')

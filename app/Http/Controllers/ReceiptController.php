@@ -42,6 +42,7 @@ class ReceiptController extends Controller
     
     public function create(Request $request)
     {
+        // return $request;
         $receipt_no = Str::random(10);
 
     
@@ -54,13 +55,17 @@ class ReceiptController extends Controller
                 'price' => $value['price'], // Access array values using square brackets []
                 'product_id' => $value['product_id'], // Access array values using square brackets []
                 'receipt_no' => $receipt_no,
+                'email_customer' => $request->email_customer,
+                'no_wa' => $request->no_wa,
             ]);
         }
 
         Sales::create([
             'receipt_no' => $receipt_no,
             'customer_name' => $request->customer_name,
-            'total_cart_price'=>$request->total_cart_price
+            'total_cart_price'=>$request->total_cart_price,
+            'no_wa'=>$request->no_wa,
+            'email_customer'=>$request->email_customer
         ]);
     
         return redirect()->route('receipt.print',['receipt_no'=>$receipt_no]);

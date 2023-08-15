@@ -79,7 +79,7 @@
     <div class="hidden-print">
         <table>
             <tr>
-                <td><a href="" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back</a> </td>
+                <td><a href="{{route('pos.index')}}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back</a> </td>
                 <td><button onclick="window.print();" class="btn btn-primary"><i class="dripicons-print"></i> Print</button></td>
             </tr>
         </table>
