@@ -19,7 +19,7 @@
                     <td>{{$stock->name_product}}</td>
                     <td>{{$stock->stock}}</td>
                     <td>
-                     <a href="" class="btn btn-primary">edit</a>
+                     <a href="{{route('warehouse.stock.edit',['id_warehouse'=>$id_warehouse,'product_id'=>$stock->product_id])}}" class="btn btn-primary">edit</a>
                      <a href="{{route('warehouse.stock.delete',['id_warehouse'=>$id_warehouse,'product_id'=>$stock->product_id])}}" class="btn btn-danger">delete</a>
                     </td>
                   </tr>

@@ -34,8 +34,8 @@
     <link rel="stylesheet" href="{{url('assets/vendor/fonts/flag-icons.css')}}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/core.css')}}" class="{{ !request()->is('ingredient/*/edit/*') ? 'template-customizer-core-css' : '' }}" />
-    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/theme-default.css')}}" class="{{ !request()->is('ingredient/*/edit/*') ? 'template-customizer-theme-css' : '' }}"  />
+    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/core.css')}}" class="{{ !request()->is('ingredient/*/edit/*') && !request()->is('warehouse-stock/*/edit/*') ? 'template-customizer-core-css' : '' }}" />
+    <link rel="stylesheet" href="{{url('assets/vendor/css/rtl/theme-default.css')}}" class="{{ !request()->is('ingredient/*/edit/*') && !request()->is('warehouse-stock/*/edit/*') ? 'template-customizer-theme-css' : '' }}"  />
     <link rel="stylesheet" href="{{url('assets/css/demo.css')}}" />
 
     <!-- Vendors CSS -->

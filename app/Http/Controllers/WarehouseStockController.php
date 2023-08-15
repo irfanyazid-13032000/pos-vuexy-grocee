@@ -21,7 +21,6 @@ class WarehouseStockController extends Controller
 
         $first_data_stock_warehouse = $stocks_warehouse->first();
 
-        // return $stocks_warehouse;
 
         return view('stock-warehouse.index-stock-warehouse',compact('stocks_warehouse','first_data_stock_warehouse','id_warehouse'));
 
@@ -79,9 +78,14 @@ class WarehouseStockController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id,$id_product)
     {
-        return view('stock-warehouse.edit-stock-warehouse');
+        $warehouse_stock = DB::table('warehouse_stock')->where('warehouse_stock.id',$id)
+                            ->join('products','products.id','=','warehouse_stock.product_id')
+                            ->select('warehouse_stock.*','products.name_product')
+                            ->get()->first();
+
+        return view('stock-warehouse.edit-stock-warehouse',compact('warehouse_stock','id','id_product'));
     }
 
     /**
@@ -89,7 +93,11 @@ class WarehouseStockController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table('warehouse_stock')->where('id',$id)->update([
+            'stock' => $request->stock 
+        ]);
+
+        return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id]);
     }
 
     /**
