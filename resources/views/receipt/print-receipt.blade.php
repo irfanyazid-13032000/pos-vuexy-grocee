@@ -127,7 +127,19 @@
                 </tr>
                 @endforeach
                 <tr style="background-color:aquamarine">
-                    <td colspan="4" style="text-align:left">Total Purchase</td>
+                    <td colspan="4" style="text-align:left">Purchase</td>
+                    <td>Rp. {{number_format($total_price_receipt)}}</td>
+                </tr>
+                <tr style="background-color:#FFD9B7">
+                    <td colspan="4" style="text-align:left">Biaya Layanan</td>
+                    <td>Rp. 0</td>
+                </tr>
+                <tr style="background-color:#FCBAAD">
+                    <td colspan="4" style="text-align:left">PPN</td>
+                    <td>Rp. 0</td>
+                </tr>
+                <tr style="background-color:#FFE17B">
+                    <td colspan="4" style="text-align:left">Grand Total</td>
                     <td>Rp. {{number_format($total_price_receipt)}}</td>
                 </tr>
                 <tr style="background-color:#D5FFD0">
@@ -143,6 +155,7 @@
         
         
         <p>terimakasih telah berbelanja di tempat kami</p>
+        <p>Struk ini adalah bukti pembayaran yang sah</p>
     </div>
 </div>
 
