@@ -62,6 +62,16 @@ class PosController extends Controller
         return response()->json($html);
     }
 
+
+    public function products()
+    {
+        $products = Product::all();
+
+        $html = view('pos.products',compact('products'))->render();
+
+        return response()->json($html);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

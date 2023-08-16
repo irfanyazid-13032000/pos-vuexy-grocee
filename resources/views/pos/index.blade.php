@@ -255,7 +255,7 @@
                                           </g>
                                         </g>
                                       </svg> 
-                                    <span class="items__count">{{count($carts)}}</span> 
+                                      <div id="count-carts-scroll"></div>
                                 </a>
                             </li>
                         </ul>
@@ -879,32 +879,9 @@
                 <div class="tab_content">
                     <div id="product_all" class="tab_pane active show">
                         <div class="product__section--inner product__section--style3__inner">
-                            <div class="row row-cols-lg-4 row-cols-md-3 row-cols-2 mb--n28">
-                                
-                                @foreach ($products as $product)
-                                    
-                                <div class="col mb-28">
-                                    <div class="product__items product__items2">
-                                        <div class="product__items--thumbnail">
-                                            <a class="product__items--link" href="{{route('cart.insert',['id'=>$product->id])}}">
-                                                <img class="product__items--img product__primary--img" src="{{asset('storage/product_images')}}/{{$product->image}}" alt="product-img">
-                                            </a>
-                                        </div>
-                                        <div class="product__items--content product__items2--content text-center">
-                                            <a class="add__to--cart__btn" href="cart.html">+ Add to cart</a>
-                                            <h3 class="product__items--content__title h4"><a href="product-details.html">{{$product->name_product}}</a></h3>
-                                            <div class="product__items--price">
-                                                <span class="current__price">Rp. {{number_format($product->price)}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                @endforeach
+                            <div id="products"></div>
                                 
-                                
-                                
-                            </div>
                         </div>
                     </div>
                     <div id="product_fresh" class="tab_pane">
@@ -912,8 +889,7 @@
                             <div class="row row-cols-lg-4 row-cols-md-3 row-cols-2 mb--n28">
                                 
                                          
-                                @foreach ($categories as $category)
-                                @foreach ($category->products as $product)
+                                @foreach ($products as $product)
                                 <div class="col mb-28">
                                     <div class="product__items product__items2">
                                         <div class="product__items--thumbnail">
@@ -934,7 +910,6 @@
                                     </div>
                                 </div>
                                     
-                                @endforeach
                                 @endforeach
 
 
@@ -3887,6 +3862,7 @@ function countCarts()
         success: function(response) {
             $('#count-carts').html(response);
             $('#items_count_mobile').html(response);
+            $('#count-carts-scroll').html(response);
             // console.log(response);
         },
         error: function(xhr, status, error) {
@@ -3896,6 +3872,45 @@ function countCarts()
     })
 }
 
+
+function products()
+{
+    $.ajax({
+        url: '{{ route("pos.products")}}',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#products').html(response);
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+function insertCart(params)
+{
+    $.ajax({
+        url: '{{ route("cart.insert", ["id" => ":cartId"]) }}'.replace(':cartId', params),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // $('#products').html(response);
+            countCarts()
+            totalAmount()
+            keranjang()
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+products()
 countCarts()
 totalAmount()
 

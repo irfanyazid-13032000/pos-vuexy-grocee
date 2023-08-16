@@ -47,7 +47,7 @@ class CartController extends Controller
         }
 
 
-        return redirect()->route('pos.index');
+        return response()->json('berhasil');
     }
 
 
