@@ -10,18 +10,26 @@
                         </div>
                         <div class="minicart__text--footer d-flex align-items-center">
                             <div class="quantity__box minicart__quantity">
-                                <a href="{{route('decrease.cart',['id'=>$cart->id])}}" type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</a>
+                                <span onclick="decrease({{$cart->id}})" type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</span>
                                 <label>
                                     <input type="number" class="quantity__number" value="{{$cart->qty}}" />
                                 </label>
-                                <a  href="{{route('increase.cart',['id'=>$cart->id])}}" type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</a>
+                                <span onclick="increase({{$cart->id}})" type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</span>
                             </div>
                             <!-- <a class="minicart__product--remove" href="{/{route('cart.remove',['id'=>$cart->id])}}" type="button">Remove</a> -->
                             <span class="minicart__product--remove" onclick="remove({{$cart->id}})">remove</span>
+
+                            
                         </div>
                         <h4 class="minicart__subtitle">total price</h4>
                         <span class="current__price">Rp. {{number_format($cart->total_price)}}</span>
                     </div>
                 </div>
+
+                @if ($cart->qty <= 0)
+                <script>
+                  remove({{$cart->id}})
+                </script>
+                @endif
     
 @endforeach

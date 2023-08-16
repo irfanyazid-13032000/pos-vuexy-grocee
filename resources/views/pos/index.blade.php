@@ -223,7 +223,7 @@
                                           </g>
                                         </g>
                                     </svg>  
-                                    <span class="items__count">{{count($carts)}}</span> 
+                                   <div id="count-carts"></div>
                                 </a>
                             </li>
                             
@@ -786,7 +786,8 @@
                             </svg> 
                         </span>
                         <span class="offcanvas__stikcy--toolbar__label">Cart</span>
-                        <span class="items__count">{{count($carts)}}</span> 
+                        <div id="items_count_mobile"></div>
+                        <!-- <span class="items__count">80</span>  -->
                     </a>
                 </li>
                 
@@ -825,12 +826,10 @@
 
 
             </div>
-            <div class="minicart__amount">
-                <div class="minicart__amount_list d-flex justify-content-between">
-                    <span>Total Price:</span>
-                    <span><b>Rp. {{number_format($total_price_cart)}}</b></span>
-                </div>
-            </div>
+
+            <div id="total_amount"></div>
+
+           
             
             <div class="minicart__button d-flex justify-content-center">
                 <button class="btn minicart__button--link" type="submit">Submit</button>
@@ -3755,7 +3754,7 @@
                                             <label>
                                                 <input type="number" class="quantity__number quickview__value--number" value="1" data-counter />
                                             </label>
-                                            <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
+                                            <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">tambah</button>
                                         </div>
                                         <button class="btn quickview__cart--btn" type="submit">Add To Cart</button>  
                                     </div>
@@ -3797,6 +3796,8 @@
         dataType: 'json',
         success: function(response) {
            keranjang()
+           totalAmount()
+           countCarts()
         },
         error: function(xhr, status, error) {
             // Handle error response here
@@ -3806,6 +3807,43 @@
     }
 
 
+    function increase(params) {
+
+         $.ajax({
+        url: '{{ route("increase.cart", ["id" => ":cartId"]) }}'.replace(':cartId', params),
+        type: 'GET',
+        dataType: 'json',
+        success: function() {
+           keranjang()
+           totalAmount()
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    });
+
+}
+
+
+function decrease(params){
+    $.ajax({
+        url: '{{ route("decrease.cart", ["id" => ":cartId"]) }}'.replace(':cartId', params),
+        type: 'GET',
+        dataType: 'json',
+        success: function() {
+           keranjang()
+           totalAmount()
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    });
+}
+
+
+    // untuk load keranjang
     function keranjang() {
         $.ajax({
         url: '{{ route("pos.cart")}}',
@@ -3821,6 +3859,45 @@
         }
     })
 }
+
+// untuk load totalAmount
+    function totalAmount() {
+        $.ajax({
+        url: '{{ route("pos.total.amount")}}',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#total_amount').html(response);
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+
+function countCarts()
+{
+    $.ajax({
+        url: '{{ route("pos.items.count")}}',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#count-carts').html(response);
+            $('#items_count_mobile').html(response);
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+countCarts()
+totalAmount()
 
 keranjang()
 

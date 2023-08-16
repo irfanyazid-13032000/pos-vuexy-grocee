@@ -28,6 +28,8 @@ Route::get('/', function () {
 
 Route::get('/pos',[PosController::class,'index'])->name('pos.index');
 Route::get('/pos/cart',[PosController::class,'cart'])->name('pos.cart');
+Route::get('/pos/total-amount',[PosController::class,'totalAmount'])->name('pos.total.amount');
+Route::get('/pos/items-count',[PosController::class,'itemsCount'])->name('pos.items.count');
 
 
 // category

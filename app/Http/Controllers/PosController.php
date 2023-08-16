@@ -40,6 +40,28 @@ class PosController extends Controller
         return response()->json($html);
     }
 
+
+    public function totalAmount()
+    {
+        $carts = Cart::all();
+        $total_price_cart = $carts->sum('total_price');
+        
+        $html = view('pos.total-amount',compact('total_price_cart'))->render();
+
+        return response()->json($html);
+    }
+
+    public function itemsCount()
+    {
+        $carts = Cart::join('products','products.id','=','carts.product_id')
+                            ->select('carts.*','products.name_product','products.image')
+                            ->get();
+        
+        $html = "<span class='items__count'>".count($carts)."</span>";
+
+        return response()->json($html);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

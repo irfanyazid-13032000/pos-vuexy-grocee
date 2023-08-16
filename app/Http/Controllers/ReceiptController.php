@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\Sales;
 use App\Models\Receipt;
 use Illuminate\Support\Str;
@@ -67,6 +68,9 @@ class ReceiptController extends Controller
             'no_wa'=>$request->no_wa,
             'email_customer'=>$request->email_customer
         ]);
+
+        Cart::truncate();
+
     
         return redirect()->route('receipt.print',['receipt_no'=>$receipt_no]);
     }
