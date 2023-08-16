@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,15 +15,13 @@ class WarehouseStockController extends Controller
     public function index($id_warehouse)
     {
         $stocks_warehouse = DB::table('warehouse_stock')
-                                    ->join('warehouses','warehouse_stock.warehouse_id','=','warehouses.id')
-                                    ->select('warehouse_stock.*','warehouses.name_warehouse')
+                                    // ->join('warehouses','warehouse_stock.warehouse_id','=','warehouses.id')
+                                    ->where('warehouse_stock.warehouse_id',$id_warehouse)
+                                    // ->select('warehouse_stock.*','warehouses.name_warehouse')
                                     ->get();
+        $warehouse = Warehouse::where('id',$id_warehouse)->get()->first();
 
-        // return $stocks_warehouse;
-        $first_data_stock_warehouse = $stocks_warehouse->first();
-
-
-        return view('stock-warehouse.index-stock-warehouse',compact('stocks_warehouse','id_warehouse','first_data_stock_warehouse'));
+        return view('stock-warehouse.index-stock-warehouse',compact('stocks_warehouse','id_warehouse','warehouse'));
 
 
     }
