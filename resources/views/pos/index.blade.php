@@ -816,29 +816,8 @@
                     <input type="hidden" name="cart[{{ $index }}][qty]" value="{{ $cart->qty }}">
                     <input type="hidden" name="cart[{{ $index }}][total_price]" value="{{ $cart->total_price }}">
                     
-                    <div class="minicart__product--items d-flex">
-                    <div class="minicart__thumb">
-                        <a href="product-details.html"><img src="{{asset('storage/product_images')}}/{{$cart->image}}" alt="product-img"></a>
-                    </div>
-                    <div class="minicart__text">
-                        <h4 class="minicart__subtitle"><a href="product-details.html">{{$cart->name_product}}</a></h4>
-                        <div class="minicart__price">
-                            <span class="current__price">Rp. {{number_format($cart->price)}}</span>
-                        </div>
-                        <div class="minicart__text--footer d-flex align-items-center">
-                            <div class="quantity__box minicart__quantity">
-                                <a href="{{route('decrease.cart',['id'=>$cart->id])}}" type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</a>
-                                <label>
-                                    <input type="number" class="quantity__number" value="{{$cart->qty}}" />
-                                </label>
-                                <a  href="{{route('increase.cart',['id'=>$cart->id])}}" type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</a>
-                            </div>
-                            <a class="minicart__product--remove" href="{{route('cart.remove',['id'=>$cart->id])}}" type="button">Remove</a>
-                        </div>
-                        <h4 class="minicart__subtitle">total price</h4>
-                        <span class="current__price">Rp. {{number_format($cart->total_price)}}</span>
-                    </div>
-                </div>
+                    <div id="product-cart"></div>
+                    
                 @endforeach
                 
            
@@ -3805,9 +3784,47 @@
    <script src="{{url('assets/grocee')}}/js/vendor/bootstrap.min.js" defer="defer"></script>
    <script src="{{url('assets/grocee')}}/js/plugins/swiper-bundle.min.js"></script>
    <script src="{{url('assets/grocee')}}/js/plugins/glightbox.min.js"></script>
+   <script src="{{url('assets/vendor/libs/jquery/jquery.js')}}"></script>
 
   <!-- Customscript js -->
   <script src="{{url('assets/grocee')}}/js/script.js"></script>
+  
+  <script>
+    function remove(params) {
+        $.ajax({
+        url: '{{ route("cart.remove", ["id" => ":cartId"]) }}'.replace(':cartId', params),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+           keranjang()
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    });
+    }
+
+
+    function keranjang() {
+        $.ajax({
+        url: '{{ route("pos.cart")}}',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#product-cart').html(response);
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+keranjang()
+
+   </script>
   
 </body>
 </html>

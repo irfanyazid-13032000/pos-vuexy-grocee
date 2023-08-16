@@ -27,6 +27,7 @@ Route::get('/', function () {
 })->name('dashboard');
 
 Route::get('/pos',[PosController::class,'index'])->name('pos.index');
+Route::get('/pos/cart',[PosController::class,'cart'])->name('pos.cart');
 
 
 // category

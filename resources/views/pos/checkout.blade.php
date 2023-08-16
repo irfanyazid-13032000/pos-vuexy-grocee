@@ -257,6 +257,8 @@
    <!-- Customscript js -->
    <script src="{{asset('assets/grocee')}}/js/script.js"></script>
 
+   
+
   
 </body>
 </html>

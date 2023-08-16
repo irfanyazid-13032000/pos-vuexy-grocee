@@ -55,7 +55,8 @@ class CartController extends Controller
     {
         Cart::find($id)->delete();
 
-        return redirect()->route('pos.index');
+
+        return redirect()->route('pos.cart');
     }
 
 

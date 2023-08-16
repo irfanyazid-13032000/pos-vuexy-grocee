@@ -29,6 +29,17 @@ class PosController extends Controller
         return view('pos.index',compact('products','categories','warehouses','carts','total_price_cart'));
     }
 
+    public function cart()
+    {
+        $carts = Cart::join('products','products.id','=','carts.product_id')
+                            ->select('carts.*','products.name_product','products.image')
+                            ->get();
+
+        $html = view('pos.cart',compact('carts'))->render();
+
+        return response()->json($html);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
