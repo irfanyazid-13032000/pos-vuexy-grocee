@@ -58,6 +58,8 @@ class ReceiptController extends Controller
                 'receipt_no' => $receipt_no,
                 'email_customer' => $request->email_customer,
                 'no_wa' => $request->no_wa,
+                'customer_money' => $request->customer_money,
+                'change_cashier' => $request->change_cashier,
             ]);
         }
 

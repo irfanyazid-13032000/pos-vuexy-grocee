@@ -96,6 +96,20 @@ class PosController extends Controller
         return response()->json($html);
     }
 
+    public function struk(Request $request)
+    {
+        $carts = Cart::join('products','carts.product_id','=','products.id')
+                        ->select('carts.*','products.name_product','products.image')
+                        ->get();
+        $total_cart_price = Cart::all()->sum('total_price');
+
+        $uang_customer = $request->uang_customer;
+
+        $html =  view('pos.struk',compact('carts','total_cart_price','uang_customer'))->render();
+
+        return response()->json($html);
+    }
+
 
 
     /**

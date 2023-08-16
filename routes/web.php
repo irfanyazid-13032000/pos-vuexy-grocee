@@ -33,6 +33,7 @@ Route::get('/pos/items-count',[PosController::class,'itemsCount'])->name('pos.it
 Route::get('/pos/products',[PosController::class,'products'])->name('pos.products');
 Route::get('/pos/products-by-category/{category_id}',[PosController::class,'productsByCategory'])->name('pos.products.by.category');
 Route::get('/pos/category',[PosController::class,'category'])->name('pos.category');
+Route::post('/pos/struk',[PosController::class,'struk'])->name('pos.struk');
 
 
 // category

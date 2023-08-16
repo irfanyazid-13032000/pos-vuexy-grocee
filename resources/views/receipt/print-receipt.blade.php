@@ -52,24 +52,29 @@
         }
         small{font-size:11px;}
 
-        @media print {
-            * {
-                font-size:12px;
-                line-height: 20px;
-            }
-            td,th {padding: 5px 0;}
-            .hidden-print {
-                display: none !important;
-            }
-            @page { margin: 1.5cm 0.5cm 0.5cm; }
-            @page:first { margin-top: 0.5cm; }
-            tbody::after {
-                content: ''; display: block;
-                page-break-after: always;
-                page-break-inside: avoid;
-                page-break-before: avoid;        
-            }
+        
+
+    @media print {
+        * {
+            font-size: 12px; /* Ukuran font yang sesuai untuk cetak */
+            line-height: 18px; /* Jarak antara baris yang sesuai untuk cetak */
         }
+        body {
+            max-width: 100%; /* Pastikan konten tidak melebihi lebar halaman saat mencetak */
+            margin: 0; /* Hapus margin yang tidak perlu saat mencetak */
+            padding: 0; /* Hapus padding yang tidak perlu saat mencetak */
+        }
+        .hidden-print {
+            display: none; /* Sembunyikan elemen yang tidak perlu saat mencetak */
+        }
+        table {
+            border-collapse: collapse; /* Gabungkan batas sel tabel untuk mencetak yang lebih rapi */
+        }
+        th, td {
+            padding: 5px; /* Kurangi padding untuk sel tabel agar tidak memakan banyak ruang */
+        }
+    }
+
     </style>
   </head>
 <body>
@@ -93,6 +98,7 @@
             <p>Address: Jl. sesama
                 <br>no telepon: 089232420
             </p>
+            <p>PT Tokopedia</p>
         </div>
         <p>Tanggal: {{$tanggalFormatted}}<br>
             no referensi: {{$receipt_first->receipt_no}}<br>
@@ -107,7 +113,7 @@
                     <th>product name</th>
                     <th>price</th>
                     <th>qty</th>
-                    <th>total price / product</th>
+                    <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -121,13 +127,22 @@
                 </tr>
                 @endforeach
                 <tr style="background-color:aquamarine">
-                    <td colspan="4" style="text-align:left">total price</td>
+                    <td colspan="4" style="text-align:left">Total Purchase</td>
                     <td>Rp. {{number_format($total_price_receipt)}}</td>
+                </tr>
+                <tr style="background-color:#D5FFD0">
+                    <td colspan="4" style="text-align:left">Customer Money</td>
+                    <td>Rp. {{number_format($receipt_first->customer_money)}}</td>
+                </tr>
+                <tr style="background-color:#F0B86E">
+                    <td colspan="4" style="text-align:left">Change Cashier</td>
+                    <td>Rp. {{number_format($receipt_first->change_cashier)}}</td>
                 </tr>
             </tbody>
         </table>
-       
-       
+        
+        
+        <p>terimakasih telah berbelanja di tempat kami</p>
     </div>
 </div>
 

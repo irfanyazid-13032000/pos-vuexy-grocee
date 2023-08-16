@@ -6,6 +6,7 @@
   <title>Grocee - Checkout</title>
   <meta name="description" content="Morden Bootstrap HTML5 Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/grocee')}}/img/favicon.ico">
     
    <!-- ======= All CSS Plugins here ======== -->
@@ -172,6 +173,13 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 mb-12">
+                                                <div class="checkout__input--list position__relative">
+                                                    <label>
+                                                        <input class="checkout__input--field border-radius-5" placeholder="uang customer" onkeyup="struk(this.value)" type="number" name="customer_money">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-12">
                                             <div class="checkout__input--list checkout__input--select select">
                                                     <label class="checkout__select--label">Payment</label>
                                                     <select class="checkout__input--select__field border-radius-5" id="country" name="payment_method">
@@ -220,7 +228,9 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                <input type="hidden" name="total_cart_price" value="{{$total_cart_price}}">
+                                <input type="hidden" name="total_cart_price" value="{{$total_cart_price}}" id="total_cart_price">
+                                <input type="hidden" value="" name="customer_money" id="customer_money">
+                                <input type="hidden" value="" name="change_cashier" id="change_cashier">
 
                               </form>
                               
@@ -229,15 +239,7 @@
                     </div>
                     
                     <div class="checkout__total">
-                        <table class="checkout__total--table mb-5">
-                            
-                            <tfoot class="checkout__total--footer">
-                                <tr class="checkout__total--footer__items">
-                                    <td class="checkout__total--footer__title checkout__total--footer__list text-left">Total : </td>
-                                    <td class="checkout__total--footer__amount checkout__total--footer__list text-right">Rp. {{number_format($total_cart_price)}}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div id="struk"></div>
                     </div>
                 </aside>
             </div>
@@ -253,9 +255,42 @@
    <script src="{{asset('assets/grocee')}}/js/vendor/bootstrap.min.js" defer="defer"></script>
    <script src="{{asset('assets/grocee')}}/js/plugins/swiper-bundle.min.js"></script>
    <script src="{{asset('assets/grocee')}}/js/plugins/glightbox.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
    <!-- Customscript js -->
    <script src="{{asset('assets/grocee')}}/js/script.js"></script>
+
+   <script>
+
+    function struk(params = 0) {
+        var csrfToken = $('meta[name="csrf-token"]').attr('content'); // Ambil token CSRF dari meta tag
+        $.ajax({
+                type: 'POST',
+                url: '{{ route("pos.struk") }}', // Ganti dengan URL yang sesuai
+                data: { 
+                    _token: csrfToken,
+                    uang_customer: params, 
+                },
+                success: function(response) {
+                    // console.log(response)
+                    // Berhasil menerima tanggapan dari server
+                    $('#struk').html(response); // Anda bisa menampilkan respons di dalam elemen dengan ID 'response'
+                    $('#customer_money').val(params); // Anda bisa menampilkan respons di dalam elemen dengan ID 'response'
+                    $('#change_cashier').val(params - $('#total_cart_price').val()); // Anda bisa menampilkan respons di dalam elemen dengan ID 'response'
+
+
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Menampilkan error jika ada masalah dengan permintaan AJAX
+                }
+            });
+    }
+
+    struk()
+
+   </script>
+
+   
 
    
 
