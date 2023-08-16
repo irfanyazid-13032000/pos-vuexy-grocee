@@ -31,6 +31,8 @@ Route::get('/pos/cart',[PosController::class,'cart'])->name('pos.cart');
 Route::get('/pos/total-amount',[PosController::class,'totalAmount'])->name('pos.total.amount');
 Route::get('/pos/items-count',[PosController::class,'itemsCount'])->name('pos.items.count');
 Route::get('/pos/products',[PosController::class,'products'])->name('pos.products');
+Route::get('/pos/products-by-category/{category_id}',[PosController::class,'productsByCategory'])->name('pos.products.by.category');
+Route::get('/pos/category',[PosController::class,'category'])->name('pos.category');
 
 
 // category

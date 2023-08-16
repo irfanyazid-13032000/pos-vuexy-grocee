@@ -72,6 +72,32 @@ class PosController extends Controller
         return response()->json($html);
     }
 
+    public function productsByCategory($category_id)
+    {
+        // 0 adalah ketika kategori nya all
+        if ($category_id == 0) {
+            $products = Product::all();
+        }else{
+            $products = Product::where('category_id',$category_id)->get();
+        }
+        // return $products;
+
+        $html = view('pos.products',compact('products'))->render();
+
+        return response()->json($html);
+    }
+
+    public function category()
+    {
+        $categories = Category::all();
+
+        $html =  view('pos.categories',compact('categories'))->render();
+
+        return response()->json($html);
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      */

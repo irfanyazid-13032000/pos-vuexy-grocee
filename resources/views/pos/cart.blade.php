@@ -1,4 +1,12 @@
-@foreach ($carts as $cart)
+<form action="{{route('cart.checkout')}}" method="post">
+                @foreach ($carts as $index=> $cart)
+                @csrf
+
+                    <input type="hidden" name="cart[{{ $index }}][product_id]" value="{{ $cart->product_id }}">
+                    <input type="hidden" name="cart[{{ $index }}][price]" value="{{ $cart->price }}">
+                    <input type="hidden" name="cart[{{ $index }}][qty]" value="{{ $cart->qty }}">
+                    <input type="hidden" name="cart[{{ $index }}][total_price]" value="{{ $cart->total_price }}">
+
 <div class="minicart__product--items d-flex">
                     <div class="minicart__thumb">
                         <a href="product-details.html"><img src="{{asset('storage/product_images')}}/{{$cart->image}}" alt="product-img"></a>
@@ -32,4 +40,20 @@
                 </script>
                 @endif
     
+
+
 @endforeach
+                
+           
+                
+
+
+</div>
+    
+<div id="total_amount"></div>
+    
+               
+                
+    <div class="minicart__button d-flex justify-content-center">
+      <button class="btn minicart__button--link" type="submit">Submit</button>
+  </form>

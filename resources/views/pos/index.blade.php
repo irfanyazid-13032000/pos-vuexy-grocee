@@ -83,7 +83,7 @@
                     <div class="header__search--widget d-none d-lg-block header__sticky--none">
                         <form class="d-flex header__search--form" action="#">
                             <div class="header__select--categories select">
-                                <select class="header__select--inner">
+                                <select class="header__select--inner" id="select_warehouse">
                                     <option selected value="1">Warehouse</option>
                                     @foreach ($warehouses as $warehouse)
                                     <option value="{{ $warehouse->id }}">{{$warehouse->name_warehouse}}</option>
@@ -808,32 +808,11 @@
             </div>
             <div class="minicart__product">
                 
-                <form action="{{route('cart.checkout')}}" method="post">
-                @foreach ($carts as $index=> $cart)
-                @csrf
-
-                    <input type="hidden" name="cart[{{ $index }}][product_id]" value="{{ $cart->product_id }}">
-                    <input type="hidden" name="cart[{{ $index }}][price]" value="{{ $cart->price }}">
-                    <input type="hidden" name="cart[{{ $index }}][qty]" value="{{ $cart->qty }}">
-                    <input type="hidden" name="cart[{{ $index }}][total_price]" value="{{ $cart->total_price }}">
+               
                     
                     <div id="product-cart"></div>
                     
-                @endforeach
-                
-           
-                
-
-
-            </div>
-
-            <div id="total_amount"></div>
-
-           
-            
-            <div class="minicart__button d-flex justify-content-center">
-                <button class="btn minicart__button--link" type="submit">Submit</button>
-            </form>
+              
             </div>
         </div>
         <!-- End offCanvas minicart -->
@@ -869,12 +848,7 @@
                     <div class="section__heading3">
                         <h2 class="section__heading3--maintitle">Category</h2>
                     </div>
-                    <ul class="product__tab--one product__tab--btn d-flex justify-content-center mb-35">
-                        <li class="product__tab--btn__list active" data-toggle="tab" data-target="#product_all">All</li>
-                        @foreach ($categories as $category)
-                        <li class="product__tab--btn__list" data-toggle="tab" data-target="#product_fresh">{{$category->name_category}}</li>
-                        @endforeach
-                    </ul>
+                    <div id="categories"></div>
                 </div>
                 <div class="tab_content">
                     <div id="product_all" class="tab_pane active show">
@@ -884,39 +858,7 @@
                                 
                         </div>
                     </div>
-                    <div id="product_fresh" class="tab_pane">
-                        <div class="product__section--inner product__section--style3__inner">
-                            <div class="row row-cols-lg-4 row-cols-md-3 row-cols-2 mb--n28">
-                                
-                                         
-                                @foreach ($products as $product)
-                                <div class="col mb-28">
-                                    <div class="product__items product__items2">
-                                        <div class="product__items--thumbnail">
-                                            <a class="product__items--link" href="product-details.html">
-                                                <img class="product__items--img product__primary--img" src="{{url('assets/grocee')}}/img/product/product5.png" alt="product-img">
-                                                <img class="product__items--img product__secondary--img" src="{{url('assets/grocee')}}/img/product/product6.png" alt="product-img">
-                                            </a>
-                                           
-                                        </div>
-                                        <div class="product__items--content product__items2--content text-center">
-                                            <a class="add__to--cart__btn" href="cart.html">+ Add to cart</a>
-                                            <h3 class="product__items--content__title h4"><a href="product-details.html">{{$product->name_product}}</a></h3>
-                                            <div class="product__items--price">
-                                                <span class="current__price">$38.00</span>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                    
-                                @endforeach
-
-
-
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div id="product_fruits" class="tab_pane">
                         <div class="product__section--inner product__section--style3__inner">
                             <div class="row row-cols-lg-4 row-cols-md-3 row-cols-2 mb--n28">
@@ -3820,13 +3762,14 @@ function decrease(params){
 
     // untuk load keranjang
     function keranjang() {
+        // $('#product-cart').html('')
         $.ajax({
         url: '{{ route("pos.cart")}}',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
             $('#product-cart').html(response);
-            // console.log(response);
+            console.log(response);
         },
         error: function(xhr, status, error) {
             // Handle error response here
@@ -3890,17 +3833,14 @@ function products()
     })
 }
 
-function insertCart(params)
+function categories()
 {
     $.ajax({
-        url: '{{ route("cart.insert", ["id" => ":cartId"]) }}'.replace(':cartId', params),
+        url: '{{ route("pos.category")}}',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            // $('#products').html(response);
-            countCarts()
-            totalAmount()
-            keranjang()
+            $('#categories').html(response);
             // console.log(response);
         },
         error: function(xhr, status, error) {
@@ -3910,6 +3850,57 @@ function insertCart(params)
     })
 }
 
+function insertCart(params)
+{
+    $.ajax({
+        url: '{{ route("cart.insert", ["id" => ":cartId"]) }}'.replace(':cartId', params),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // $('#products').html(response);
+            // products()
+            countCarts()
+            keranjang()
+            totalAmount()
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+
+function changeCategory(params)
+{
+    $.ajax({
+        url: '{{ route("pos.products.by.category",["category_id" => ":category_id"])}}'.replace(':category_id', params),
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#products').html(response);
+            // console.log(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response here
+            console.error(error);
+        }
+    })
+}
+
+
+
+
+
+$('#select_warehouse').on('change',function (params) {
+   let warehouse_id = $('#select_warehouse').val()
+   console.log(warehouse_id);
+})
+
+
+
+categories()
 products()
 countCarts()
 totalAmount()
