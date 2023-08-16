@@ -46,6 +46,15 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="total_price" class="form-label">total price</label>
+                            <input type="text" class="form-control" id="total_price" name="total_price"
+                                value="{{$warehouse_stock->total_price}}">
+                            @error('total_price')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
                        
                         
                         
@@ -59,3 +68,34 @@
             </div>
         </div>
 @endsection
+
+
+@push('addon-script')
+<script>
+    $('#stock').on('keyup',function (params) {
+        let stockValue = $('#stock').val()
+        let price_per_unit = $('#price_per_unit').val()
+        
+        $('#total_price').val(stockValue * price_per_unit)
+
+    })
+
+
+    $('#price_per_unit').on('keyup',function (params) {
+        let stockValue = $('#stock').val()
+        let price_per_unit = $('#price_per_unit').val()
+        
+        $('#total_price').val(stockValue * price_per_unit)
+
+    })
+
+    window.onload = function (params) {
+        let stockValue = $('#stock').val()
+        let price_per_unit = $('#price_per_unit').val()
+        
+        $('#total_price').val(stockValue * price_per_unit)
+    }
+    
+</script>
+
+@endpush

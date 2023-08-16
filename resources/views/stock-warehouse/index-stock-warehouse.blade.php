@@ -12,6 +12,7 @@
                         <th>Stock</th>
                         <th>Unit</th>
                         <th>Price per Unit</th>
+                        <th>Total Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                     <td>{{$stock->stock}}</td>
                     <td>{{$stock->unit}}</td>
                     <td>Rp. {{number_format($stock->price_per_unit)}}</td>
+                    <td>Rp. {{number_format($stock->total_price)}}</td>
                     <td>
                      <a href="{{route('warehouse.stock.edit',['id_warehouse'=>$stock->warehouse_id,'stock_id'=>$stock->id])}}" class="btn btn-primary">edit</a>
                      <a href="{{route('warehouse.stock.delete',['id_warehouse'=>$stock->warehouse_id,'stock_id'=>$stock->id])}}" class="btn btn-danger">delete</a>

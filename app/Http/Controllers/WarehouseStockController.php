@@ -50,6 +50,7 @@ class WarehouseStockController extends Controller
             'stock' => $request->stock,
             'unit' => $request->unit,
             'price_per_unit' => $request->price_per_unit,
+            'total_price' => $request->total_price,
         ]);
 
         return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id_warehouse]);
@@ -93,6 +94,7 @@ class WarehouseStockController extends Controller
             'stock' => $request->stock,
             'unit' => $request->unit,
             'price_per_unit' => $request->price_per_unit,
+            'total_price' => $request->total_price,
         ]);
 
         return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id_warehouse]);
