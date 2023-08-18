@@ -29,11 +29,22 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         Warehouse::create([
             'name_warehouse' => $request->name_warehouse
         ]);
 
         return redirect()->route('warehouse.index');
+    }
+
+    public function makananPokok($i)
+    {
+        // return view('warehouse.makanan-pokok',compact('i'));
+
+        $html = view('warehouse.makanan-pokok',compact('i'))->render();
+
+        return response()->json($html);
+
     }
 
     /**

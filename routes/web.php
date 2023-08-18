@@ -61,6 +61,8 @@ Route::get('/warehouse/{id}/edit',[WarehouseController::class,'edit'])->name('wa
 Route::post('/warehouse/{id}/update',[WarehouseController::class,'update'])->name('warehouse.update');
 Route::get('/warehouse/{id}/delete',[WarehouseController::class,'destroy'])->name('warehouse.delete');
 
+Route::get('/warehouse/makanan-pokok/{i}',[WarehouseController::class,'makananPokok'])->name('warehouse.makanan.pokok');
+
 // warehouse stock
 Route::get('/warehouse-stock/{id_warehouse}',[WarehouseStockController::class,'index'])->name('warehouse.stock.index');
 Route::get('/warehouse-stock/{id_warehouse}/create',[WarehouseStockController::class,'create'])->name('warehouse.stock.create');

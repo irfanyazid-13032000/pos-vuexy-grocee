@@ -14,6 +14,15 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <!-- <div id="select-container">
+                            <div class="input-group">
+                                <select name="select_option[]" class="form-control">
+                                </select>
+                                <button type="button" class="btn btn-danger remove-select">Hapus</button>
+                                <button type="button" class="btn btn-success add-select">Tambah</button>
+                            </div>
+                        </div> -->
                        
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -24,3 +33,33 @@
             </div>
         </div>
 @endsection
+
+@push('addon-script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var selectIndex = 1;
+
+
+
+        $(".add-select").click(function() {
+            var routeUrl = "{{ route('warehouse.makanan.pokok', ':index') }}";
+            routeUrl = routeUrl.replace(':index', selectIndex);
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(html) {
+                    $("#select-container").append(html);
+                    selectIndex++;
+                }
+            });
+        });
+        });
+
+        $(document).on("click", ".remove-select", function() {
+            $(this).closest(".input-group").remove();
+        });
+
+</script>
+@endpush
