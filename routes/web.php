@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\RawController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
@@ -103,6 +104,11 @@ Route::get('/decrease-qty-cart/{id}',[CartController::class,'decrease'])->name('
 Route::get('/receipt-print/{receipt_no}',[ReceiptController::class,'print'])->name('receipt.print');
 Route::post('/receipt-create',[ReceiptController::class,'create'])->name('create.receipt');
 
+
+
+Route::get('/raw',[RawController::class,'index'])->name('raw.index');
+Route::get('/raw/{id}/{warehouse_id}/edit',[RawController::class,'edit'])->name('raw.edit');
+Route::post('/raw-datatable',[RawController::class,'rawDatatable'])->name('raw.datatable');
 
 
 

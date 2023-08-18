@@ -78,6 +78,23 @@
             </li>
 
 
+             <!-- product -->
+             <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>inventory</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item {{ Route::is('category.*') ? 'active' : '' }}">
+                  <a href="{{route('raw.index')}}" class="menu-link">
+                    <div>mentah</div>
+                  </a>
+                </li>
+                </ul>
+
+            </li>
+
             <!-- purchase -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
