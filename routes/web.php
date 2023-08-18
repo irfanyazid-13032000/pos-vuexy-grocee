@@ -70,6 +70,14 @@ Route::get('/warehouse-stock/{id_warehouse}/create',[WarehouseStockController::c
 Route::post('/warehouse-stock/{id_warehouse}/store',[WarehouseStockController::class,'store'])->name('warehouse.stock.store');
 Route::get('/warehouse-stock/{id_warehouse}/delete/{stock_id}',[WarehouseStockController::class,'destroy'])->name('warehouse.stock.delete');
 Route::get('/warehouse-stock/{id_warehouse}/edit/{stock_id}',[WarehouseStockController::class,'edit'])->name('warehouse.stock.edit');
+
+
+Route::get('/warehouse-stock/{id_warehouse}/raw/',[WarehouseStockController::class,'raw'])->name('warehouse.stock.raw');
+Route::get('/warehouse-stock/{id_warehouse}/raw-datatable/',[WarehouseStockController::class,'rawDatatable'])->name('warehouse.stock.raw.datatable');
+Route::get('/warehouse-stock/{id_warehouse}/raw-create/',[WarehouseStockController::class,'rawCreate'])->name('warehouse.stock.raw.create');
+Route::post('/warehouse-stock/{id_warehouse}/raw-store/',[WarehouseStockController::class,'rawStore'])->name('warehouse.stock.raw.store');
+Route::get('/warehouse-stock/{id_warehouse}/{kode_bahan}/raw-edit/',[WarehouseStockController::class,'rawEdit'])->name('warehouse.stock.raw.edit');
+
 Route::post('/warehouse-stock/{id_warehouse}/update/{stock_id}',[WarehouseStockController::class,'update'])->name('warehouse.stock.update');
 Route::get('/warehouse-stock/{code}/data',[WarehouseStockController::class,'warehouseData'])->name('stock.warehouse.data');
 
@@ -109,6 +117,7 @@ Route::post('/receipt-create',[ReceiptController::class,'create'])->name('create
 Route::get('/raw',[RawController::class,'index'])->name('raw.index');
 Route::get('/raw/{id}/{warehouse_id}/edit',[RawController::class,'edit'])->name('raw.edit');
 Route::post('/raw-datatable',[RawController::class,'rawDatatable'])->name('raw.datatable');
+
 
 
 

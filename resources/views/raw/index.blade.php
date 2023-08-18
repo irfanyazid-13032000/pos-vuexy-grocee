@@ -1,7 +1,7 @@
 @extends('backend.layout.main')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Raw</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Raw Food</h4>
 <div class="card">
   <div class="table-responsive text-nowrap p-4">
     <label for="warehouse">warehouse</label>
