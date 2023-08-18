@@ -14,7 +14,8 @@ class WarehouseStockController extends Controller
      */
     public function index($id_warehouse)
     {
-        return view('stock-warehouse.index-stock-warehouse',compact('id_warehouse'));
+        $warehouse = Warehouse::find($id_warehouse);
+        return view('stock-warehouse.index-stock-warehouse',compact('id_warehouse','warehouse'));
     }
 
     public function raw($id_warehouse)
