@@ -42,7 +42,7 @@ class WarehouseStockController extends Controller
         // ini data mofidikasi
         $raw_foods = $raw_foods->map(function ($item, $index) use ($id_warehouse) {
             $item->DT_RowIndex = $index + 1;
-            $item->action = '<a href="'.route('warehouse.stock.raw.edit',['id_warehouse'=>$id_warehouse,'kode_bahan'=>$item->kode_bahan]).'" class="btn btn-primary">edit</a> <a href="" class="btn btn-danger">delete</a>';
+            $item->action = '<a href="'.route('warehouse.stock.raw.edit',['id_warehouse'=>$id_warehouse,'kode_bahan'=>$item->kode_bahan]).'" class="btn btn-primary">edit</a> <a href="'.route('warehouse.stock.raw.delete',['id_warehouse'=>$id_warehouse,'kode_bahan'=>$item->kode_bahan]).'" class="btn btn-danger">delete</a>';
             $item->price = 'Rp. ' . number_format($item->price);
             $item->total_price = 'Rp. ' . number_format($item->total_price);
             return $item;
@@ -74,6 +74,18 @@ class WarehouseStockController extends Controller
                         'qty' => $request->qty,
                         'total_price' => $request->total_price,
         ]);
+
+        return redirect()->route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse]);
+
+    
+    }
+
+    public function rawDelete($id_warehouse, $kode_bahan)
+    {
+        DB::table('raw')
+                    ->where('warehouse_id',$id_warehouse)
+                    ->where('kode_bahan',$kode_bahan)
+                    ->delete();
 
         return redirect()->route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse]);
 
@@ -129,7 +141,7 @@ class WarehouseStockController extends Controller
             'warehouse_id' => $id_warehouse,
         ]);
 
-
+        return redirect()->route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse]);
 
     }
 
@@ -151,7 +163,7 @@ class WarehouseStockController extends Controller
             'total_price' => $request->total_price,
         ]);
 
-        return redirect()->route('warehouse.stock.index',['id_warehouse'=>$id_warehouse]);
+         return redirect()->route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse]);
     }
 
     /**

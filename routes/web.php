@@ -78,6 +78,7 @@ Route::get('/warehouse-stock/{id_warehouse}/raw-create/',[WarehouseStockControll
 Route::post('/warehouse-stock/{id_warehouse}/raw-store/',[WarehouseStockController::class,'rawStore'])->name('warehouse.stock.raw.store');
 Route::get('/warehouse-stock/{id_warehouse}/{kode_bahan}/raw-edit/',[WarehouseStockController::class,'rawEdit'])->name('warehouse.stock.raw.edit');
 Route::post('/warehouse-stock/{id_warehouse}/{kode_bahan}/raw-update/',[WarehouseStockController::class,'rawUpdate'])->name('warehouse.stock.raw.update');
+Route::get('/warehouse-stock/{id_warehouse}/{kode_bahan}/raw-delete/',[WarehouseStockController::class,'rawDelete'])->name('warehouse.stock.raw.delete');
 
 Route::post('/warehouse-stock/{id_warehouse}/update/{stock_id}',[WarehouseStockController::class,'update'])->name('warehouse.stock.update');
 Route::get('/warehouse-stock/{code}/data',[WarehouseStockController::class,'warehouseData'])->name('stock.warehouse.data');
