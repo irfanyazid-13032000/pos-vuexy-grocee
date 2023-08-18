@@ -93,7 +93,7 @@ class WarehouseStockController extends Controller
         if ($existingRecord) {
             // Kode_bahan dan warehouse_id sudah ada kombinasi yang sama
             // Lakukan tindakan yang sesuai, misalnya kirim pesan error
-            return redirect()->back()->with('error', 'Kombinasi kode_bahan dan warehouse_id sudah ada.');
+            return redirect()->back()->with('duplikat', 'kode bahan yg di input sudah ada pada warehouse ini.');
         }
 
         DB::table('raw')->insert([

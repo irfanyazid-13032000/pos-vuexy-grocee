@@ -14,9 +14,12 @@
                               <option value="{{$bahan_baku->kode_bahan}}"> {{$bahan_baku->kode_bahan}} - {{$bahan_baku->nama_bahan}}</option>
                               @endforeach
                             </select>
-                            @error('kode_bahan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
+
+                            @if(session('duplikat'))
+                                <div class="alert alert-danger">
+                                    {{ session('duplikat') }}
+                                </div>
+                            @endif
                         </div>
 
                         <div class="mb-3">
