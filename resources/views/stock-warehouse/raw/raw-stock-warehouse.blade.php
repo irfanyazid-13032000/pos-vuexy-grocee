@@ -19,9 +19,22 @@
                   
                 </tbody>
             </table>
+            
             <a href="{{route('warehouse.stock.raw.create',['id_warehouse'=>$warehouse->id])}}" class="btn btn-success">add</a>
+          </div>
         </div>
-    </div>
+        <div class="card">
+          <div class="table-responsive text-nowrap p-4">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <td width="64%">total value warehouse</td>
+                  <td>Rp. {{number_format($raw_foods->sum('total_price'))}}</td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
 @endsection
 
 @push('addon-script')

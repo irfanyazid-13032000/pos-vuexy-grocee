@@ -29,7 +29,7 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        // return $request;
         Warehouse::create([
             'name_warehouse' => $request->name_warehouse
         ]);

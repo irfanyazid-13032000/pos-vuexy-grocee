@@ -15,6 +15,7 @@ class WarehouseStockController extends Controller
     public function index($id_warehouse)
     {
         $warehouse = Warehouse::find($id_warehouse);
+        // return $warehouse;
         return view('stock-warehouse.index-stock-warehouse',compact('id_warehouse','warehouse'));
     }
 
@@ -26,7 +27,6 @@ class WarehouseStockController extends Controller
                         ->where('warehouse_id',$id_warehouse)
                         ->select('raw.*','bahan_baku.nama_bahan')
                         ->get();
-        // return $raw_foods;
         return view('stock-warehouse.raw.raw-stock-warehouse',compact('warehouse','raw_foods'));
     }
 
