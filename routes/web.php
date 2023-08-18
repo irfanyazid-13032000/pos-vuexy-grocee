@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\WarehouseStockController;
@@ -124,3 +125,10 @@ Route::post('/raw-datatable',[RawController::class,'rawDatatable'])->name('raw.d
 
 
 
+Route::get('/bahan-baku',[BahanBakuController::class,'index'])->name('bahan.baku.index');
+Route::get('/bahan-baku/create',[BahanBakuController::class,'create'])->name('bahan.baku.create');
+Route::post('/bahan-baku/store',[BahanBakuController::class,'store'])->name('bahan.baku.store');
+Route::get('/bahan-baku-datatable',[BahanBakuController::class,'bahanBakuDatatable'])->name('bahan.baku.datatable');
+Route::get('/bahan-baku/{id}/edit',[BahanBakuController::class,'edit'])->name('bahan.baku.edit');
+Route::post('/bahan-baku/{id}/update',[BahanBakuController::class,'update'])->name('bahan.baku.update');
+Route::get('/bahan-baku/{id}/delete',[BahanBakuController::class,'destroy'])->name('bahan.baku.delete');

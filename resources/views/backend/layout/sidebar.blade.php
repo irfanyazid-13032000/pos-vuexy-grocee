@@ -79,18 +79,27 @@
 
 
              <!-- product -->
-             <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
+             <li class="menu-item {{ Route::is('raw.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>inventory</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('category.*') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('raw.*') ? 'active' : '' }}">
                   <a href="{{route('raw.index')}}" class="menu-link">
-                    <div>mentah</div>
+                    <div>Raw</div>
                   </a>
                 </li>
+
+
+                <li class="menu-item {{ Route::is('material.*') ? 'active' : '' }}">
+                  <a href="{{route('bahan.baku.index')}}" class="menu-link">
+                    <div>Material</div>
+                  </a>
+                </li>
+
+
                 </ul>
 
             </li>
