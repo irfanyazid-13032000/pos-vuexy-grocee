@@ -52,7 +52,32 @@ class WarehouseStockController extends Controller
 
     public function rawEdit($id_warehouse,$kode_bahan)
     {
-        // return $id_warehouse;
+        $raw_food = DB::table('raw')
+                    ->join('bahan_baku','raw.kode_bahan','=','bahan_baku.kode_bahan')
+                    ->where('raw.kode_bahan',$kode_bahan)
+                    ->where('raw.warehouse_id',$id_warehouse)
+                    ->get()
+                    ->first();
+        $warehouse = Warehouse::find($id_warehouse);
+        // return $raw_food;
+        // return [$id_warehouse,$kode_bahan];
+        return view('stock-warehouse.raw.raw-edit-stock-warehouse',compact('raw_food','warehouse'));
+    }
+
+    public function rawUpdate(Request $request, $id_warehouse, $kode_bahan)
+    {
+        DB::table('raw')
+                    ->where('warehouse_id',$id_warehouse)
+                    ->where('kode_bahan',$kode_bahan)
+                    ->update([
+                        'price' => $request->price,
+                        'qty' => $request->qty,
+                        'total_price' => $request->total_price,
+        ]);
+
+        return redirect()->route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse]);
+
+    
     }
 
     /**
