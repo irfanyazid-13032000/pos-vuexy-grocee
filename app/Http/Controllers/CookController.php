@@ -38,18 +38,37 @@ class CookController extends Controller
 
     public function rawToSemiStore(Request $request)
     {
+        // return $request;
         $raws = $request->raw;
         $qtys = $request->qty;
 
+        // untuk pengecekan apakah data yang dientri ada di warehouse
         for ($i=0; $i < count($raws); $i++) { 
-            $bahan = DB::table('raw')->where('kode_bahan',$raws['mentah'.$i])->get()->first();
-            DB::table('raw')->where('kode_bahan',$raws['mentah'.$i])->update([
-                'qty'=> $bahan->qty - $qtys['mentah'.$i]
-            ]);
+            $bahan = DB::table('raw')->where('kode_bahan',$raws['mentah'.$i])
+                                     ->where('warehouse_id',$request->warehouse_id)
+                                     ->get()->first();
+            if (!$bahan) {
+            $error = "Data tidak ditemukan untuk kode_bahan: " . $raws['mentah' . $i];
+            return response()->json(['error' => $error], 404);
         }
 
-        // return $qtys;
     }
+    
+    // untuk update data pada table qty
+    for ($i=0; $i < count($raws); $i++) { 
+        $bahan = DB::table('raw')->where('kode_bahan',$raws['mentah'.$i])
+                                     ->where('warehouse_id',$request->warehouse_id)
+                                     ->get()->first();
+        
+        
+            DB::table('raw')->where('kode_bahan',$raws['mentah'.$i])
+                            ->where('warehouse_id',$request->warehouse_id)
+                            ->update([
+                'qty'=> $bahan->qty - $qtys['mentah'.$i]
+            ]);
+    }
+
+}
 
     public function selectRaw($i)
     {
