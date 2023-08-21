@@ -88,9 +88,42 @@ class WarehouseStockController extends Controller
                     ->delete();
 
         return redirect()->route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse]);
-
     
     }
+
+    public function halfCooked($id_warehouse)
+    {
+        $warehouse = Warehouse::find($id_warehouse);
+        $half_cooked_foods = DB::table('half_cooked')
+                        ->join('bahan_baku','half_cooked.kode_bahan','bahan_baku.kode_bahan')
+                        ->where('warehouse_id',$id_warehouse)
+                        ->select('half_cooked.*','bahan_baku.nama_bahan')
+                        ->get();
+        // return $half_cooked_foods;
+        return view('stock-warehouse.half-cooked.half-cooked-stock-warehouse',compact('warehouse','half_cooked_foods'));
+    }
+
+    public function halfCookedDatatable($id_warehouse)
+    {
+        // ini data hasil query
+        $half_cooked_foods = DB::table('half_cooked')
+                    ->join('bahan_baku','half_cooked.kode_bahan','bahan_baku.kode_bahan')
+                    ->where('warehouse_id',$id_warehouse)
+                    ->select('half_cooked.*','bahan_baku.nama_bahan','bahan_baku.unit')
+                    ->get();
+
+        // ini data mofidikasi
+        $half_cooked_foods = $half_cooked_foods->map(function ($item, $index) use ($id_warehouse) {
+            $item->DT_RowIndex = $index + 1;
+            $item->action = '<a href="'.route('warehouse.stock.raw.edit',['id_warehouse'=>$id_warehouse,'kode_bahan'=>$item->kode_bahan]).'" class="btn btn-primary">edit</a> <a href="'.route('warehouse.stock.raw.delete',['id_warehouse'=>$id_warehouse,'kode_bahan'=>$item->kode_bahan]).'" class="btn btn-danger">delete</a>';
+            $item->price = 'Rp. ' . number_format($item->price);
+            $item->total_price = 'Rp. ' . number_format($item->total_price);
+            return $item;
+        });
+    return datatables()->of($half_cooked_foods)->toJson();
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

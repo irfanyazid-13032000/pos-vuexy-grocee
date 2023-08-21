@@ -39,7 +39,7 @@
 <h4 class="fw-bold py-3 mb-4">Data Warehouse <span class="btn btn-danger">{{$warehouse->name_warehouse}}</span></h4>
 <div class="button-container">
   <a href="{{route('warehouse.stock.raw',['id_warehouse'=>$id_warehouse])}}" class="square-button button-1">Raw Food</a>
-  <a href="" class="square-button button-2">Half Cooked Food</a>
+  <a href="{{route('warehouse.stock.half.cooked',['id_warehouse'=>$id_warehouse])}}" class="square-button button-2">Half Cooked Food</a>
   <a href="" class="square-button button-3">Full Cooked Food</a>
 </div>
 @endsection
