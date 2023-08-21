@@ -146,4 +146,5 @@ Route::get('/cook-process/raw-to-semi',[CookController::class,'rawToSemi'])->nam
 Route::post('/cook-process/raw-to-semi/store',[CookController::class,'rawToSemiStore'])->name('cook.process.raw.to.semi.store');
 
 Route::get('/cook/select-option/raw/{i}',[CookController::class,'selectRaw'])->name('cook.select.raw');
+Route::get('/cook/select-option/half-cooked/{i}',[CookController::class,'selectHalfCooked'])->name('cook.select.half.cooked');
  

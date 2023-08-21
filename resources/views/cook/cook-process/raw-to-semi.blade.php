@@ -8,7 +8,7 @@
                         @csrf
 
                         
-                        <div id="select-container">
+                        <div id="select-raw-container">
                           <label for="raw" class="form-label">raw</label>
                             <div class="input-group">
                                 <select name="raw[mentah0]" class="form-control" id="mentah">
@@ -17,9 +17,26 @@
                                   <option value="{{$food->kode_bahan}}">{{$food->kode_bahan}} - {{$food->nama_bahan}}</option>
                                   @endforeach
                                 </select>
-                                <input type="number" name="qty[mentah0]" class="form-control" id="qtyMentah" placeholder="qty">
+                                <input type="number" name="qtyMentah[mentah0]" class="form-control" id="qtyMentah" placeholder="qty">
                                 <button type="button" class="btn btn-danger remove-select">Hapus</button>
-                                <button type="button" class="btn btn-success add-select">Tambah</button>
+                                <button type="button" class="btn btn-success add-select-raw">Tambah</button>
+                              </div>
+                        </div>
+
+                        <hr>
+
+                        <div id="select-container">
+                          <label for="raw" class="form-label">half cooked</label>
+                            <div class="input-group">
+                                <select name="halfCooked[setengah_matang0]" class="form-control" id="setengah_matang">
+                                  <option value="">pilih</option>
+                                  @foreach ($half_cooked_foods as $half_cooked)
+                                  <option value="{{$half_cooked->kode_bahan}}">{{$half_cooked->kode_bahan}} - {{$half_cooked->nama_bahan}}</option>
+                                  @endforeach
+                                </select>
+                                <input type="number" name="qtySetengahMatang[setengah_matang0]" class="form-control" id="qtySetengahMatang" placeholder="qty">
+                                <button type="button" class="btn btn-danger remove-select">Hapus</button>
+                                <button type="button" class="btn btn-success add-select-half-cooked">Tambah</button>
                               </div>
                         </div>
                         
@@ -53,13 +70,40 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>         
 <script>
     $(document).ready(function() {
-        let selectIndex = 1;
+        let selectIndexRaw = 1;
+        let selectIndexHalfCooked = 1;
 
 
 
-        $(".add-select").click(function() {
+        $(".add-select-raw").click(function() {
             var routeUrl = "{{ route('cook.select.raw', ':index') }}";
-            routeUrl = routeUrl.replace(':index', selectIndex);
+            routeUrl = routeUrl.replace(':index', selectIndexRaw);
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(html) {
+                    $("#select-raw-container").append(html);
+
+                    // Generate a unique ID for the new select element
+                var newSelectId = 'mentah_' + selectIndexRaw;
+                
+                // Add the new ID to the select element
+                $('#mentah' + selectIndexRaw).attr('id', newSelectId);
+                
+                // Initialize Select2 for the newly added select element
+                $('#' + newSelectId).select2({});
+
+
+                selectIndexRaw++;
+                }
+            });
+        });
+
+
+        $(".add-select-half-cooked").click(function() {
+            var routeUrl = "{{ route('cook.select.half.cooked', ':index') }}";
+            routeUrl = routeUrl.replace(':index', selectIndexHalfCooked);
 
             $.ajax({
                 url: routeUrl,
@@ -68,19 +112,23 @@
                     $("#select-container").append(html);
 
                     // Generate a unique ID for the new select element
-                var newSelectId = 'mentah_' + selectIndex;
+                var newSelectId = 'mentah_' + selectIndexHalfCooked;
                 
                 // Add the new ID to the select element
-                $('#mentah' + selectIndex).attr('id', newSelectId);
+                $('#mentah' + selectIndexHalfCooked).attr('id', newSelectId);
                 
                 // Initialize Select2 for the newly added select element
                 $('#' + newSelectId).select2({});
 
 
-                    selectIndex++;
+                    selectIndexHalfCooked++;
                 }
             });
         });
+
+
+
+
         });
 
         $(document).on("click", ".remove-select", function() {
@@ -88,6 +136,7 @@
         });
 
         $('#mentah').select2({})
+        $('#setengah_matang').select2({})
 
 </script>
 @endpush
