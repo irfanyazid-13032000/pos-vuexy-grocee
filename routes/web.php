@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\RawController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CookController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
@@ -136,3 +137,13 @@ Route::get('/bahan-baku-datatable',[BahanBakuController::class,'bahanBakuDatatab
 Route::get('/bahan-baku/{id}/edit',[BahanBakuController::class,'edit'])->name('bahan.baku.edit');
 Route::post('/bahan-baku/{id}/update',[BahanBakuController::class,'update'])->name('bahan.baku.update');
 Route::get('/bahan-baku/{id}/delete',[BahanBakuController::class,'destroy'])->name('bahan.baku.delete');
+
+
+
+Route::get('/cook-record',[CookController::class,'cookRecord'])->name('cook.record');
+Route::get('/cook-process',[CookController::class,'cookProcess'])->name('cook.process');
+Route::get('/cook-process/raw-to-semi',[CookController::class,'rawToSemi'])->name('cook.process.raw.to.semi');
+Route::post('/cook-process/raw-to-semi/store',[CookController::class,'rawToSemiStore'])->name('cook.process.raw.to.semi.store');
+
+Route::get('/cook/select-option/raw/{i}',[CookController::class,'selectRaw'])->name('cook.select.raw');
+ 

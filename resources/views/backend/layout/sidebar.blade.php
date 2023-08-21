@@ -78,8 +78,8 @@
             </li>
 
 
-             <!-- product -->
-             <li class="menu-item {{ Route::is('raw.*') || Route::is('bahan.baku.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
+             <!-- inventory -->
+             <li class="menu-item {{ Route::is('raw.*') || Route::is('bahan.baku.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>inventory</div>
@@ -96,6 +96,33 @@
                 <li class="menu-item {{ Route::is('bahan.baku.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.baku.index')}}" class="menu-link">
                     <div>Material</div>
+                  </a>
+                </li>
+
+
+                </ul>
+
+            </li>
+
+             <!-- Cook -->
+             <li class="menu-item {{ Route::is('cook.*') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>Cook</div>
+              </a>
+
+              <ul class="menu-sub">
+
+
+                <li class="menu-item {{ Route::is('cook.record.*') ? 'active' : '' }}">
+                  <a href="{{route('cook.record')}}" class="menu-link">
+                    <div>all cook record</div>
+                  </a>
+                </li>
+
+                <li class="menu-item {{ Route::is('bahan.baku.*') ? 'active' : '' }}">
+                  <a href="{{route('cook.process')}}" class="menu-link">
+                    <div>cook process</div>
                   </a>
                 </li>
 

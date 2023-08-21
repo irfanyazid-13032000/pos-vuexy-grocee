@@ -1,5 +1,5 @@
                 <div class="input-group">
-                    <select name="select_option[mentah{{$i}}]" class="form-control" id="mentah{{$i}}">
+                    <select name="raw[mentah{{$i}}]" class="form-control" id="mentah{{$i}}">
                         <option value="nasi">nasi</option>
                         <option value="jagung">jagung</option>
                         <option value="roti">roti</option>
