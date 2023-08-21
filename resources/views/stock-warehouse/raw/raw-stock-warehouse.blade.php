@@ -11,6 +11,7 @@
                         <th>Kode Bahan</th>
                         <th>price</th>
                         <th>qty</th>
+                        <th>Unit</th>
                         <th>total price</th>
                         <th>Action</th>
                     </tr>
@@ -53,6 +54,7 @@ $(document).ready(function() {
             { data: 'kode_bahan', name: 'kode_bahan' },
             { data: 'price', name: 'price' },
             { data: 'qty', name: 'qty' },
+            { data: 'unit', name: 'unit' },
             { data: 'total_price', name: 'total_price' },
             { data: 'action', name: 'action', orderable: false, searchable: false },
         ],

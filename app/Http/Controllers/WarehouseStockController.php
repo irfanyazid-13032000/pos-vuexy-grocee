@@ -36,7 +36,7 @@ class WarehouseStockController extends Controller
         $raw_foods = DB::table('raw')
                     ->join('bahan_baku','raw.kode_bahan','bahan_baku.kode_bahan')
                     ->where('warehouse_id',$id_warehouse)
-                    ->select('raw.*','bahan_baku.nama_bahan')
+                    ->select('raw.*','bahan_baku.nama_bahan','bahan_baku.unit')
                     ->get();
 
         // ini data mofidikasi
@@ -104,7 +104,7 @@ class WarehouseStockController extends Controller
     public function rawCreate($id_warehouse)
     {
         $warehouse = Warehouse::find($id_warehouse);
-        $bahan_bakus = DB::table('bahan_baku')->get();
+        $bahan_bakus = DB::table('bahan_baku')->where('status','mentah')->get();
         // return $bahan_bakus;
 
         return view('stock-warehouse.raw.raw-create-stock-warehouse',compact('warehouse','bahan_bakus'));
