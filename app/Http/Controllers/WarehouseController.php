@@ -39,7 +39,6 @@ class WarehouseController extends Controller
 
     public function makananPokok($i)
     {
-        // return view('warehouse.makanan-pokok',compact('i'));
 
         $html = view('warehouse.makanan-pokok',compact('i'))->render();
 

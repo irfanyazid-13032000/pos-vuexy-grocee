@@ -9,6 +9,7 @@
                         <th>No</th>
                         <th>kode bahan</th>
                         <th>Name Bahan</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -39,6 +40,7 @@
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                 { data: 'kode_bahan', name: 'kode_bahan' },
                 { data: 'nama_bahan', name: 'nama_bahan' },
+                { data: 'status', name: 'status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });

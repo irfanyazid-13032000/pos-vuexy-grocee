@@ -15,14 +15,17 @@
                             @enderror
                         </div>
 
-                        <!-- <div id="select-container">
+                        <div id="select-container">
                             <div class="input-group">
-                                <select name="select_option[]" class="form-control">
+                                <select name="select_option[]" class="form-control" id="makanan_pokok">
+                                    <option value="dfg">nasi</option>
+                                    <option value="dfg">kentang</option>
+                                    <option value="dfg">tepung goreng</option>
                                 </select>
                                 <button type="button" class="btn btn-danger remove-select">Hapus</button>
                                 <button type="button" class="btn btn-success add-select">Tambah</button>
                             </div>
-                        </div> -->
+                        </div>
                        
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -36,9 +39,11 @@
 
 @push('addon-script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>         
 <script>
     $(document).ready(function() {
-        var selectIndex = 1;
+        let selectIndex = 0;
 
 
 
@@ -51,6 +56,17 @@
                 method: 'GET',
                 success: function(html) {
                     $("#select-container").append(html);
+
+                    // Generate a unique ID for the new select element
+                var newSelectId = 'mentah_' + selectIndex;
+                
+                // Add the new ID to the select element
+                $('#mentah' + selectIndex).attr('id', newSelectId);
+                
+                // Initialize Select2 for the newly added select element
+                $('#' + newSelectId).select2({});
+
+
                     selectIndex++;
                 }
             });
@@ -60,6 +76,8 @@
         $(document).on("click", ".remove-select", function() {
             $(this).closest(".input-group").remove();
         });
+
+        $('#makanan_pokok').select2({})
 
 </script>
 @endpush
