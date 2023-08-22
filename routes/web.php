@@ -6,6 +6,7 @@ use App\Http\Controllers\RawController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CookController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OutletController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
@@ -149,6 +150,12 @@ Route::post('/cook-process/raw-to-semi/store',[CookController::class,'rawToSemiS
 Route::get('/cook/select-option/raw/{i}/{warehouse_id}',[CookController::class,'selectRaw'])->name('cook.select.raw');
 Route::get('/cook/select-container/raw/{warehouse_id}',[CookController::class,'selectRawContainer'])->name('cook.select.container.raw');
 Route::get('/cook/select-option/half-cooked/{i}',[CookController::class,'selectHalfCooked'])->name('cook.select.half.cooked');
-
 Route::get('/cook/data-raw/{code}/{warehouse_id}',[CookController::class,'dataRaw'])->name('cook.data.raw');
  
+
+
+Route::get('/outlet',[OutletController::class,'index'])->name('outlet');
+Route::get('/outlet/create',[OutletController::class,'create'])->name('outlet.create');
+Route::post('/outlet/store',[OutletController::class,'store'])->name('outlet.store');
+Route::get('/outlet/edit/{id}',[OutletController::class,'edit'])->name('outlet.edit');
+Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('outlet.update');
