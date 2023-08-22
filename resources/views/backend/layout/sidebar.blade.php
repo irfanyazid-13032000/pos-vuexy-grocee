@@ -130,7 +130,7 @@
                 </ul>
 
             </li>
-             <!-- Cook -->
+             <!-- Outlet -->
              <li class="menu-item {{ Route::is('outlet.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
@@ -143,6 +143,27 @@
                 <li class="menu-item {{ Route::is('outlet.*') ? 'active' : '' }}">
                   <a href="{{route('outlet')}}" class="menu-link">
                     <div>Data Outlet</div>
+                  </a>
+                </li>
+
+                </ul>
+
+            </li>
+
+
+             <!-- Vendor -->
+             <li class="menu-item {{ Route::is('vendor.*') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>Vendor</div>
+              </a>
+
+              <ul class="menu-sub">
+
+
+                <li class="menu-item {{ Route::is('vendor.*') ? 'active' : '' }}">
+                  <a href="{{route('vendor')}}" class="menu-link">
+                    <div>Data Vendor</div>
                   </a>
                 </li>
 

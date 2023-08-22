@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CookController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
@@ -159,3 +160,6 @@ Route::get('/outlet/create',[OutletController::class,'create'])->name('outlet.cr
 Route::post('/outlet/store',[OutletController::class,'store'])->name('outlet.store');
 Route::get('/outlet/edit/{id}',[OutletController::class,'edit'])->name('outlet.edit');
 Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('outlet.update');
+
+
+Route::get('/fendor',[VendorController::class,'index'])->name('vendor');
