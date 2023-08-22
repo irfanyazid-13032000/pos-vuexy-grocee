@@ -26,22 +26,7 @@
                         <input type="text" name="chef" id="chef" class="form-control" required>
                         
                         <div id="raw-select">
-                          <div id="select-raw-container">
-                            <label for="raw" class="form-label">raw</label>
-                              <div class="input-group">
-                                  <select name="raw[mentah0]" class="form-control" id="mentah">
-                                    <option value="">pilih</option>
-                                    @foreach ($raw_foods as $food)
-                                    <option value="{{$food->kode_bahan}}">{{$food->kode_bahan}} - {{$food->nama_bahan}}</option>
-                                    @endforeach
-                                  </select>
-                                  <input type="number" name="qtyMentah[mentah0]" class="form-control" id="qtyMentah0" placeholder="qty">
-                                  <input type="number" name="priceMentah[mentah0]" class="form-control" id="priceMentah0" placeholder="price">
-                                  <input type="number" name="totalpriceMentah[mentah0]" class="form-control" id="totalpriceMentah0" placeholder="total price">
-                                  <button type="button" class="btn btn-danger remove-select">Hapus</button>
-                                  <button type="button" class="btn btn-success add-select-raw">Tambah</button>
-                                </div>
-                          </div>
+                         
                         </div>
 
                         <hr>
@@ -81,63 +66,14 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>         
 <script>
     $(document).ready(function() {
-        let selectIndexRaw = 1;
-        let selectIndexHalfCooked = 1;
+       
 
 
 
-        // ketika menambah inputan select raw
-        $(".add-select-raw").click(function() {
-            var routeUrl = "{{ route('cook.select.raw', ':index') }}";
-            routeUrl = routeUrl.replace(':index', selectIndexRaw);
-
-            $.ajax({
-                url: routeUrl,
-                method: 'GET',
-                success: function(html) {
-                    $("#select-raw-container").append(html);
-
-                    // Generate a unique ID for the new select element
-                var newSelectId = 'mentah_' + selectIndexRaw;
-                
-                // Add the new ID to the select element
-                $('#mentah' + selectIndexRaw).attr('id', newSelectId);
-                
-                // Initialize Select2 for the newly added select element
-                $('#' + newSelectId).select2({});
-
-                // ketika select mentah di pilih
-                $('#' + newSelectId).on('change',function (params) {
-                  $('#totalpriceMentah'+(selectIndexRaw-1)).val(0)
-                  $('#qtyMentah'+(selectIndexRaw-1)).val(0)
-
-
-                  let code_raw = $('#' + newSelectId).val()
-                  let warehouse_id = $('#warehouse_id').val()
-                  var routeUrl = "{{ route('cook.data.raw', [':code',':warehouse_id']) }}";
-                      routeUrl = routeUrl.replace(':code', code_raw);
-                      routeUrl = routeUrl.replace(':warehouse_id', warehouse_id);
-                      $.ajax({
-                                url: routeUrl,
-                                method: 'GET',
-                                success: function(res) {
-                                  $('#priceMentah'+(selectIndexRaw-1)).val(res.price)
-                                  $('#qtyMentah'+(selectIndexRaw-1)).on('keyup',function (params) {
-                                      //  alert('fgd')
-                                      $('#totalpriceMentah'+(selectIndexRaw-1)).val( $('#qtyMentah'+(selectIndexRaw-1)).val() * res.price )
-                                })
-                                }
-            });
-        })
-
-        
-
-               
-                selectIndexRaw++;
-                }
-            });
-        });
-
+        // ketika menambah inputan select half cooked
+         let selectIndexRaw = 1;
+         let selectIndexHalfCooked = 1;
+      
 
         $(".add-select-half-cooked").click(function() {
             var routeUrl = "{{ route('cook.select.half.cooked', ':index') }}";
@@ -179,27 +115,10 @@
         $('#mentah').select2({})
 
 
-        // ketika mentah onchange, req ke backend, lalu isi inputan data harga dengan data hasil req
-        $('#mentah').on('change',function (params) {
-          let code_raw = $('#mentah').val()
-          let warehouse_id = $('#warehouse_id').val()
-          var routeUrl = "{{ route('cook.data.raw', [':code',':warehouse_id']) }}";
-              routeUrl = routeUrl.replace(':code', code_raw);
-              routeUrl = routeUrl.replace(':warehouse_id', warehouse_id);
-          $.ajax({
-                url: routeUrl,
-                method: 'GET',
-                success: function(res) {
-                   $('#priceMentah0').val(res.price)
-                }
-            });
-        })
+        
+       
         
         
-        // ketika qty keyup, maka data total price adalah qty keyup value di kali dengan harga per item mentah
-        $('#qtyMentah0').on('keyup',function (params) {
-          $('#totalpriceMentah0').val($('#priceMentah0').val() * $('#qtyMentah0').val())
-        })
         
         
         // setengah matang select 2
@@ -207,20 +126,120 @@
 
 
         // warehouse_id change
-        $('#warehouse_id').on('change',function (params) {
-          $('#raw-select').html('')
+        $('#warehouse_id').on('change',function () {
+            let warehouse_id = $('#warehouse_id').val()
+            loadRawSelectContainer(warehouse_id)
+            addInputanRaw(warehouse_id)
         })
 
+        function loadRawSelectContainer(warehouse_id = 1) {
+            var routeUrl = "{{ route('cook.select.container.raw',':warehouse_id') }}";
+              routeUrl = routeUrl.replace(':warehouse_id', warehouse_id);
+          $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                    $('#raw-select').html(res)
+                    $('#mentah').select2({})
+
+                    mentahOnChange()
+
+                    keyupQty()
+
+                    addInputanRaw()
+
+                }
+            });
+        }
+
+        loadRawSelectContainer()
 
 
 
+        function addInputanRaw(warehouse_id = 1) {
+                // klik add inputan select baru
+
+        let selectIndexRaw = 1;
+        let selectIndexHalfCooked = 1;
+
+        $(".add-select-raw").click(function() {
+            var routeUrl = "{{ route('cook.select.raw', [':index',':warehouse_id']) }}";
+            routeUrl = routeUrl.replace(':index', selectIndexRaw);
+            routeUrl = routeUrl.replace(':warehouse_id', $('#warehouse_id').val());
+            console.log(routeUrl)
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(html) {
+                    $("#select-raw-container").append(html);
+
+                    // Generate a unique ID for the new select element
+                var newSelectId = 'mentah_' + selectIndexRaw;
+                
+                // Add the new ID to the select element
+                $('#mentah' + selectIndexRaw).attr('id', newSelectId);
+                
+                // Initialize Select2 for the newly added select element
+                $('#' + newSelectId).select2({});
+
+                // ketika select mentah di pilih
+                $('#' + newSelectId).on('change',function (params) {
+                  $('#totalpriceMentah'+(selectIndexRaw-1)).val(0)
+                  $('#qtyMentah'+(selectIndexRaw-1)).val(0)
 
 
+                  let code_raw = $('#' + newSelectId).val()
+                  let warehouse_id = $('#warehouse_id').val()
+                  var routeUrl = "{{ route('cook.data.raw', [':code',':warehouse_id']) }}";
+                      routeUrl = routeUrl.replace(':code', code_raw);
+                      routeUrl = routeUrl.replace(':warehouse_id', warehouse_id);
+                      $.ajax({
+                                url: routeUrl,
+                                method: 'GET',
+                                success: function(res) {
+                                  $('#priceMentah'+(selectIndexRaw-1)).val(res.price)
+                                //   ketika keyup pada qty
+                                  $('#qtyMentah'+(selectIndexRaw-1)).on('keyup',function (params) {
+                                      $('#totalpriceMentah'+(selectIndexRaw-1)).val( $('#qtyMentah'+(selectIndexRaw-1)).val() * res.price )
+                                })
+                    }
+            });
+        })
+
+                selectIndexRaw++;
+                }
+            });
+        });
 
 
+        }
 
 
+        function keyupQty() {
+            // ketika qty keyup, maka data total price adalah qty keyup value di kali dengan harga per item mentah
+            $('#qtyMentah0').on('keyup',function (params) {
+                    $('#totalpriceMentah0').val($('#priceMentah0').val() * $('#qtyMentah0').val())
+                })
+        }
 
+        function mentahOnChange() {
+            $('#mentah').on('change',function (params) {
+        // ketika mentah onchange, req ke backend, lalu isi inputan data harga dengan data hasil req
+                    let code_raw = $('#mentah').val()
+                    let warehouse_id = $('#warehouse_id').val()
+                    var routeUrl = "{{ route('cook.data.raw', [':code',':warehouse_id']) }}";
+                        routeUrl = routeUrl.replace(':code', code_raw);
+                        routeUrl = routeUrl.replace(':warehouse_id', warehouse_id);
+                    $.ajax({
+                            url: routeUrl,
+                            method: 'GET',
+                            success: function(res) {
+                            $('#priceMentah0').val(res.price)
+                            }
+                        });
+                    })
+        }
 
 
 

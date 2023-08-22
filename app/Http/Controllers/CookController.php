@@ -166,14 +166,26 @@ public function dataRaw($code,$warehouse_id)
     return DB::table('raw')->where('kode_bahan',$code)->where('warehouse_id',$warehouse_id)->get()->first();
 }
 
-    public function selectRaw($i)
+    public function selectRaw($i, $warehouse_id)
     {
         $raw_foods = DB::table('raw')
                         ->join('bahan_baku','raw.kode_bahan','=','bahan_baku.kode_bahan')
-                        ->where('warehouse_id',1)
+                        ->where('warehouse_id',$warehouse_id)
                         ->get();
         // return $raw_foods;
         $html = view('cook.select-option.raw-select',compact('i','raw_foods'))->render();
+
+        return response()->json($html);
+    }
+
+    public function selectRawContainer($warehouse_id)
+    {
+        $raw_foods = DB::table('raw')
+                        ->join('bahan_baku','raw.kode_bahan','=','bahan_baku.kode_bahan')
+                        ->where('warehouse_id',$warehouse_id)
+                        ->get();
+        // return $raw_foods;
+        $html = view('cook.select-option.raw-select-container',compact('raw_foods'))->render();
 
         return response()->json($html);
     }

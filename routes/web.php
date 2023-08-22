@@ -146,7 +146,8 @@ Route::get('/cook-process',[CookController::class,'cookProcess'])->name('cook.pr
 Route::get('/cook-process/raw-to-semi',[CookController::class,'rawToSemi'])->name('cook.process.raw.to.semi');
 Route::post('/cook-process/raw-to-semi/store',[CookController::class,'rawToSemiStore'])->name('cook.process.raw.to.semi.store');
 
-Route::get('/cook/select-option/raw/{i}',[CookController::class,'selectRaw'])->name('cook.select.raw');
+Route::get('/cook/select-option/raw/{i}/{warehouse_id}',[CookController::class,'selectRaw'])->name('cook.select.raw');
+Route::get('/cook/select-container/raw/{warehouse_id}',[CookController::class,'selectRawContainer'])->name('cook.select.container.raw');
 Route::get('/cook/select-option/half-cooked/{i}',[CookController::class,'selectHalfCooked'])->name('cook.select.half.cooked');
 
 Route::get('/cook/data-raw/{code}/{warehouse_id}',[CookController::class,'dataRaw'])->name('cook.data.raw');
