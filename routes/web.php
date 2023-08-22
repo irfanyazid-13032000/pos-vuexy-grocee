@@ -11,6 +11,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\IngredientsController;
@@ -163,3 +164,6 @@ Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('out
 
 
 Route::get('/fendor',[VendorController::class,'index'])->name('vendor');
+
+
+Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase');

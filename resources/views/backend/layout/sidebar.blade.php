@@ -180,7 +180,7 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="layouts-collapsed-menu.html" class="menu-link">
+                  <a href="{{route('purchase')}}" class="menu-link">
                     <div>Purchase List</div>
                   </a>
                 </li>
