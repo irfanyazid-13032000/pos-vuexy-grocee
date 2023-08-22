@@ -1,35 +1,33 @@
 @extends('backend.layout.main')
 @section('content')
-  <h4 class="fw-bold py-3 mb-4">Data Record Cook</span> </h4>
+  <h4 class="fw-bold">Data Cook Detail</h4>
+  <h4 class="fw-bold">Chef : {{$cook->chef}}</h4>
+  <h4 class="fw-bold mb-4">tanggal : {{$cook->created_at}}</h4>
     <div class="card">
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">
                 <thead>
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
-                        <th>No Reference Cook</th>
-                        <th>Chef</th>
+                        <th>Kode Bahan</th>
                         <th>Status</th>
+                        <th>Qty</th>
+                        <th>Price</th>
                         <th>Total Price</th>
-                        <th>Date</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
-                  @foreach ($cooks as $cook)
+                  @foreach ($cook_details as $cook)
                   <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$cook->no_reference_cook}}</td>
-                    <td>{{$cook->chef}}</td>
+                    <td>{{$cook->kode_bahan}}</td>
                     <td>{{$cook->status}}</td>
-                    <td>{{$cook->price}}</td>
-                    <td>{{$cook->created_at}}</td>
-                    <td>
-                     <a href="{{route('cook.detail',['no_reference_cook'=>$cook->no_reference_cook])}}" class="btn btn-primary">detail</a>
-                    </td>
+                    <td>{{$cook->qty}}</td>
+                    <td>Rp. {{number_format($cook->price)}}</td>
+                    <td>Rp. {{number_format($cook->total_price)}}</td>
                   </tr>
+                  @endforeach
                         
-                    @endforeach
                 
               
                 

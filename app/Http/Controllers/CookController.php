@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,9 @@ class CookController extends Controller
 
     public function cookRecord()
     {
-        return view('cook.record-cook');
+        $cooks = DB::table('cooks')->get();
+
+        return view('cook.record-cook',compact('cooks'));
     }
 
     public function cookProcess()
@@ -117,7 +120,8 @@ class CookController extends Controller
         'no_reference_cook' => $request->no_reference_cook,
         'chef' => $request->chef,
         'status' => 'raw-to-semi',
-        'price' => $total_price_raw
+        'price' => $total_price_raw,
+        'created_at' => Carbon::now()
     ]);
 
     for ($i=0; $i < count($raws); $i++) { 
@@ -146,10 +150,15 @@ class CookController extends Controller
     }
 
 
+}
 
 
-
-
+public function cookDetail($no_reference_cook)
+{
+    $cook_details = DB::table('cook_details')->where('no_reference_cook',$no_reference_cook)->get();
+    $cook = DB::table('cooks')->where('no_reference_cook',$no_reference_cook)->get()->first();
+    // return $cook;
+    return view('cook.cook-detail',compact('cook_details','cook'));
 }
 
 public function dataRaw($code,$warehouse_id)

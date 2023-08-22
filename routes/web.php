@@ -141,6 +141,7 @@ Route::get('/bahan-baku/{id}/delete',[BahanBakuController::class,'destroy'])->na
 
 
 Route::get('/cook-record',[CookController::class,'cookRecord'])->name('cook.record');
+Route::get('/cook/detail/{no_reference_cook}',[CookController::class,'cookDetail'])->name('cook.detail');
 Route::get('/cook-process',[CookController::class,'cookProcess'])->name('cook.process');
 Route::get('/cook-process/raw-to-semi',[CookController::class,'rawToSemi'])->name('cook.process.raw.to.semi');
 Route::post('/cook-process/raw-to-semi/store',[CookController::class,'rawToSemiStore'])->name('cook.process.raw.to.semi.store');
