@@ -35,7 +35,7 @@
                   @endforeach
                 </tbody>
             </table>
-            <a href="{{route('product.create')}}" class="btn btn-success">add</a>
+            <a href="{{route('purchase.create')}}" class="btn btn-success">add</a>
         </div>
     </div>
 @endsection

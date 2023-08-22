@@ -5,6 +5,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\RawController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CookController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\VendorController;
@@ -167,3 +168,10 @@ Route::get('/fendor',[VendorController::class,'index'])->name('vendor');
 
 
 Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase');
+Route::get('/vurchase/create',[PurchaseController::class,'create'])->name('purchase.create');
+
+
+Route::get('/food',[FoodController::class,'index'])->name('food');
+Route::get('/food/create',[FoodController::class,'create'])->name('food.create');
+Route::post('/food/store',[FoodController::class,'store'])->name('food.store');
+Route::get('/food/data/{id}',[FoodController::class,'foodData'])->name('food.data');

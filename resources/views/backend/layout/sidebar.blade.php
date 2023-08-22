@@ -200,6 +200,24 @@
             </li>
 
 
+            <!-- Food -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>Food</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{{route('food')}}" class="menu-link">
+                    <div>Food Process</div>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+
+
             <!-- sale -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">

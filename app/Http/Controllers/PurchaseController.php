@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purchase;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -28,7 +30,12 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $warehouses = Warehouse::all();
+        $kategori_bahans = DB::table('kategori_bahan')->get();
+        $bahans = DB::table('bahan_dasars')->get();
+        $satuans = DB::table('satuan')->get();
+        // return $kategori_bahans;
+        return view('purchase.create-purchase',compact('warehouses','kategori_bahans','bahans','satuans'));
     }
 
     /**
