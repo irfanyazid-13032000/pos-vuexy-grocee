@@ -15,6 +15,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\BahanDasarController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\WarehouseStockController;
@@ -190,3 +191,12 @@ Route::post('/kategori_bahan/store',[KategoriBahanController::class,'store'])->n
 Route::get('/kategori_bahan/edit/{id}',[KategoriBahanController::class,'edit'])->name('kategori.bahan.edit');
 Route::post('/kategori_bahan/update/{id}',[KategoriBahanController::class,'update'])->name('kategori.bahan.update');
 Route::get('/kategori_bahan/delete/{id}',[KategoriBahanController::class,'destroy'])->name('kategori.bahan.delete');
+
+
+
+Route::get('/bahan_dasar',[BahanDasarController::class,'index'])->name('bahan.dasar.index');
+Route::get('/bahan_dasar/create',[BahanDasarController::class,'create'])->name('bahan.dasar.create');
+Route::post('/bahan_dasar/store',[BahanDasarController::class,'store'])->name('bahan.dasar.store');
+Route::get('/bahan_dasar/edit/{id}',[BahanDasarController::class,'edit'])->name('bahan.dasar.edit');
+Route::post('/bahan_dasar/update/{id}',[BahanDasarController::class,'update'])->name('bahan.dasar.update');
+Route::get('/bahan_dasar/delete/{id}',[BahanDasarController::class,'destroy'])->name('bahan.dasar.delete');

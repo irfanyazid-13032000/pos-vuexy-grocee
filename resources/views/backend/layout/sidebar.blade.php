@@ -218,17 +218,23 @@
             </li>
 
 
-            <!-- Kategori Bahan -->
+            <!--Bahan -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div>Kategori Bahan</div>
+                <div>Bahan</div>
               </a>
 
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="{{route('kategori.bahan.index')}}" class="menu-link">
                     <div>Data Kategori Bahan</div>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="{{route('bahan.dasar.index')}}" class="menu-link">
+                    <div>Data Bahan Dasar</div>
                   </a>
                 </li>
                 
