@@ -15,18 +15,36 @@
                             @enderror
                         </div>
 
-                        <div id="select-container">
-                            <div class="input-group">
-                                <select name="select_option[]" class="form-control" id="makanan_pokok">
-                                    <option value="dfg">nasi</option>
-                                    <option value="dfg">kentang</option>
-                                    <option value="dfg">tepung goreng</option>
-                                </select>
-                                <button type="button" class="btn btn-danger remove-select">Hapus</button>
-                                <button type="button" class="btn btn-success add-select">Tambah</button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Alamat Warehouse</label>
+                            <input type="text" class="form-control" id="address" name="address"
+                                value="{{ old('address') }}" required>
+                            @error('address')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
                         </div>
-                       
+
+
+                        <div class="mb-3">
+                            <label for="pic" class="form-label">PIC</label>
+                            <input type="text" class="form-control" id="pic" name="pic"
+                                value="{{ old('pic') }}" required>
+                            @error('pic')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Contact</label>
+                            <input type="text" class="form-control" id="contact" name="contact"
+                                value="{{ old('contact') }}" required>
+                            @error('contact')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                    
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
                             <a href="{{route('warehouse.index')}}" class="btn btn-danger ms-3">Kembali</a>

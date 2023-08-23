@@ -31,7 +31,10 @@ class WarehouseController extends Controller
     {
         // return $request;
         Warehouse::create([
-            'name_warehouse' => $request->name_warehouse
+            'name_warehouse' => $request->name_warehouse,
+            'address' => $request->address,
+            'pic' => $request->pic,
+            'contact' => $request->contact,
         ]);
 
         return redirect()->route('warehouse.index');
