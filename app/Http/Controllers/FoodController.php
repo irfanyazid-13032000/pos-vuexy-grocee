@@ -13,11 +13,12 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods = DB::table('food_process')
-                        ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
-                        ->select('food_process.*','bahan_dasars.nama_bahan')
-                        ->get();
-        return view('food.index-food',compact('foods'));
+        // $foods = DB::table('food_process')
+        //                 ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
+        //                 ->select('food_process.*','bahan_dasars.nama_bahan')
+        //                 ->get();
+        $menus = DB::table('menu_masakan')->get();
+        return view('food.index-food',compact('menus'));
     }
 
     /**
@@ -40,16 +41,22 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('food_process')->insert([
-            'nama_menu_masakan' => $request->nama_menu_masakan,
-            'bahan_dasar_id' => $request->bahan_dasar_id,
-            'satuan_id' => $request->satuan_id,
-            'qty' => $request->qty,
-            'harga_satuan' => $request->harga_satuan,
-            'jumlah_harga' => $request->jumlah_harga,
-            'created_at' => Carbon::now(),
+
+        DB::table('menu_masakan')->insert([
+            'nama_menu' => $request->nama_menu
         ]);
+
         return redirect()->route('food');
+        // DB::table('food_process')->insert([
+        //     'nama_menu_masakan' => $request->nama_menu_masakan,
+        //     'bahan_dasar_id' => $request->bahan_dasar_id,
+        //     'satuan_id' => $request->satuan_id,
+        //     'qty' => $request->qty,
+        //     'harga_satuan' => $request->harga_satuan,
+        //     'jumlah_harga' => $request->jumlah_harga,
+        //     'created_at' => Carbon::now(),
+        // ]);
+        // return redirect()->route('food');
     }
 
     /**
@@ -65,7 +72,8 @@ class FoodController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $food = DB::table('menu_masakan')->where('id',$id)->get()->first();
+        return view('food.edit-food',compact('food'));
     }
 
     /**
@@ -73,7 +81,12 @@ class FoodController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table('menu_masakan')->where('id',$id)->update([
+            'nama_menu' => $request->nama_menu
+        ]);
+
+
+        return redirect()->route('food');
     }
 
     /**
@@ -81,6 +94,8 @@ class FoodController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('menu_masakan')->where('id',$id)->delete();
+
+        return redirect()->route('food');
     }
 }

@@ -186,6 +186,9 @@ Route::get('/vurchase/delete/{id}',[PurchaseController::class,'destroy'])->name(
 Route::get('/food',[FoodController::class,'index'])->name('food');
 Route::get('/food/create',[FoodController::class,'create'])->name('food.create');
 Route::post('/food/store',[FoodController::class,'store'])->name('food.store');
+Route::get('/food/edit/{id}',[FoodController::class,'edit'])->name('food.edit');
+Route::post('/food/update/{id}',[FoodController::class,'update'])->name('food.update');
+Route::get('/food/delete/{id}',[FoodController::class,'destroy'])->name('food.delete');
 Route::get('/food/data/{id}',[FoodController::class,'foodData'])->name('food.data');
 
 

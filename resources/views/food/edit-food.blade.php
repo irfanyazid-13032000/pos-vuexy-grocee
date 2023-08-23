@@ -2,15 +2,15 @@
 @section('content')
 <div class="col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Create Food</h5>
+                <h5 class="card-header">Edit Food</h5>
                 <div class="card-body">
-                    <form action="{{route('food.store')}}" method="POST" enctype="multipart/form-data" >
+                    <form action="{{route('food.update',['id'=>$food->id])}}" method="POST" enctype="multipart/form-data" >
                         @csrf
 
                         <div class="mb-3">
                             <label for="nama_menu" class="form-label">nama menu</label>
                             <input type="text" class="form-control" id="nama_menu" name="nama_menu"
-                                value="{{ old('nama_menu') }}" required>
+                                value="{{$food->nama_menu}}" required>
                             @error('nama_menu')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
