@@ -98,4 +98,73 @@ class FoodController extends Controller
 
         return redirect()->route('food');
     }
+
+
+
+    public function foodProcess($id)
+    {
+        $food = DB::table('menu_masakan')->where('id',$id)->get()->first();
+        // $foods_process = DB::table('food_process')->where('menu_masakan_id',$id)->get();
+        $foods_process = DB::table('food_process')
+                        ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
+                        ->join('satuan','food_process.satuan_id','=','satuan.id')
+                        ->where('food_process.menu_masakan_id',$id)
+                        ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
+                        ->get();
+        // return $foods_process;
+        return view('food.food_process.index-food-process',compact('foods_process','food','id'));
+    }
+
+    public function foodProcessCreate($id)
+    {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        $satuans = DB::table('satuan')->get();
+        return view('food.food_process.create-food-process',compact('bahan_dasars','satuans','id'));
+    }
+
+    public function foodProcessStore(Request $request, $id)
+    {
+        DB::table('food_process')->insert([
+            'menu_masakan_id' => $id,
+            'bahan_dasar_id' => $request->bahan_dasar_id,
+            'satuan_id' => $request->satuan_id,
+            'qty' => $request->qty,
+            'harga_satuan' => $request->harga_satuan,
+            'jumlah_harga' => $request->jumlah_harga,
+        ]);
+
+        return redirect()->route('food.process',['id'=>$id]);
+    }
+
+    public function foodProcessEdit($id_food_process)
+    {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        $satuans = DB::table('satuan')->get();
+        $food_process = DB::table('food_process')->where('id',$id_food_process)->get()->first();
+        return view('food.food_process.edit-food-process',compact('bahan_dasars','satuans','food_process'));
+    }
+
+    public function foodProcessUpdate(Request $request, $id_food_process)
+    {
+        $food = DB::table('food_process')->where('id',$id_food_process)->get()->first();
+
+        DB::table('food_process')->where('id',$id_food_process)->update([
+            'bahan_dasar_id' => $request->bahan_dasar_id,
+            'satuan_id' => $request->satuan_id,
+            'qty' => $request->qty,
+            'harga_satuan' => $request->harga_satuan,
+            'jumlah_harga' => $request->jumlah_harga,
+        ]);
+
+        return redirect()->route('food.process',['id'=>$food->menu_masakan_id]);
+    }
+
+    public function foodProcessDelete($id_food_process)
+    {
+        $food = DB::table('food_process')->where('id',$id_food_process)->get()->first();
+
+        DB::table('food_process')->where('id',$id_food_process)->delete();
+
+        return redirect()->route('food.process',['id'=>$food->menu_masakan_id]);
+    }
 }

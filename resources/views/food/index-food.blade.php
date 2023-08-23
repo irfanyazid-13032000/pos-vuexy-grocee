@@ -19,7 +19,7 @@
                      <td>
                      <a href="{{route('food.edit',['id'=>$menu->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('food.delete',['id'=>$menu->id])}}" class="btn btn-danger">delete</a>
-                      <a href="" class="btn btn-info">ingredients</a>
+                      <a href="{{route('food.process',['id'=>$menu->id])}}" class="btn btn-info">food process</a>
                      </td>
                   </tr>
                   @endforeach
