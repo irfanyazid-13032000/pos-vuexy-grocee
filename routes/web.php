@@ -16,6 +16,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\WarehouseStockController;
 
 /*
@@ -180,3 +181,12 @@ Route::get('/food',[FoodController::class,'index'])->name('food');
 Route::get('/food/create',[FoodController::class,'create'])->name('food.create');
 Route::post('/food/store',[FoodController::class,'store'])->name('food.store');
 Route::get('/food/data/{id}',[FoodController::class,'foodData'])->name('food.data');
+
+
+
+Route::get('/kategori_bahan',[KategoriBahanController::class,'index'])->name('kategori.bahan.index');
+Route::get('/kategori_bahan/create',[KategoriBahanController::class,'create'])->name('kategori.bahan.create');
+Route::post('/kategori_bahan/store',[KategoriBahanController::class,'store'])->name('kategori.bahan.store');
+Route::get('/kategori_bahan/edit/{id}',[KategoriBahanController::class,'edit'])->name('kategori.bahan.edit');
+Route::post('/kategori_bahan/update/{id}',[KategoriBahanController::class,'update'])->name('kategori.bahan.update');
+Route::get('/kategori_bahan/delete/{id}',[KategoriBahanController::class,'destroy'])->name('kategori.bahan.delete');

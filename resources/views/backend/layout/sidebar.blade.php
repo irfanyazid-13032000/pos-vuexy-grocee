@@ -218,6 +218,24 @@
             </li>
 
 
+            <!-- Kategori Bahan -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>Kategori Bahan</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{{route('kategori.bahan.index')}}" class="menu-link">
+                    <div>Data Kategori Bahan</div>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+
+
             <!-- sale -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
