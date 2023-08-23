@@ -237,6 +237,13 @@
                     <div>Data Bahan Dasar</div>
                   </a>
                 </li>
+
+
+                <li class="menu-item">
+                  <a href="{{route('satuan.index')}}" class="menu-link">
+                    <div>satuan</div>
+                  </a>
+                </li>
                 
               </ul>
             </li>

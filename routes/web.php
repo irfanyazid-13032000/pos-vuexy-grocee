@@ -8,6 +8,7 @@ use App\Http\Controllers\CookController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
@@ -200,3 +201,13 @@ Route::post('/bahan_dasar/store',[BahanDasarController::class,'store'])->name('b
 Route::get('/bahan_dasar/edit/{id}',[BahanDasarController::class,'edit'])->name('bahan.dasar.edit');
 Route::post('/bahan_dasar/update/{id}',[BahanDasarController::class,'update'])->name('bahan.dasar.update');
 Route::get('/bahan_dasar/delete/{id}',[BahanDasarController::class,'destroy'])->name('bahan.dasar.delete');
+
+
+
+
+Route::get('/satuan',[SatuanController::class,'index'])->name('satuan.index');
+Route::get('/satuan/create',[SatuanController::class,'create'])->name('satuan.create');
+Route::post('/satuan/store',[SatuanController::class,'store'])->name('satuan.store');
+Route::get('/satuan/edit/{id}',[SatuanController::class,'edit'])->name('satuan.edit');
+Route::post('/satuan/update/{id}',[SatuanController::class,'update'])->name('satuan.update');
+Route::get('/satuan/delete/{id}',[SatuanController::class,'destroy'])->name('satuan.delete');
