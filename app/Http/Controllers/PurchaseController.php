@@ -34,8 +34,9 @@ class PurchaseController extends Controller
         $kategori_bahans = DB::table('kategori_bahan')->get();
         $bahans = DB::table('bahan_dasars')->get();
         $satuans = DB::table('satuan')->get();
+        $vendors = DB::table('vendors')->get();
         // return $kategori_bahans;
-        return view('purchase.create-purchase',compact('warehouses','kategori_bahans','bahans','satuans'));
+        return view('purchase.create-purchase',compact('warehouses','kategori_bahans','bahans','satuans','vendors'));
     }
 
     /**
@@ -43,7 +44,19 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Purchase::create([
+            'warehouse_id' => $request->warehouse_id,
+            'kategori_bahan_id' => $request->kategori_bahan_id,
+            'bahan_dasar_id' => $request->bahan_dasar_id,
+            'satuan_id' => $request->satuan_id,
+            'qty' => $request->qty,
+            'harga_satuan' => $request->harga_satuan,
+            'jumlah_harga' => $request->jumlah_harga,
+            'vendor_id' => $request->vendor_id,
+        ]);
+
+        return redirect()->route('purchase');
+        
     }
 
     /**
@@ -59,7 +72,13 @@ class PurchaseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $warehouses = Warehouse::all();
+        $kategori_bahans = DB::table('kategori_bahan')->get();
+        $bahans = DB::table('bahan_dasars')->get();
+        $satuans = DB::table('satuan')->get();
+        $vendors = DB::table('vendors')->get();
+        $purchase = Purchase::find($id);
+        return view('purchase.edit-purchase',compact('warehouses','kategori_bahans','bahans','satuans','vendors','purchase'));
     }
 
     /**
@@ -67,7 +86,20 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $purchase = Purchase::find($id);
+        $purchase->update([
+            'warehouse_id' => $request->warehouse_id,
+            'kategori_bahan_id' => $request->kategori_bahan_id,
+            'bahan_dasar_id' => $request->bahan_dasar_id,
+            'satuan_id' => $request->satuan_id,
+            'qty' => $request->qty,
+            'harga_satuan' => $request->harga_satuan,
+            'jumlah_harga' => $request->jumlah_harga,
+            'vendor_id' => $request->vendor_id,
+        ]);
+
+
+        return redirect()->route('purchase');
     }
 
     /**
@@ -75,6 +107,8 @@ class PurchaseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Purchase::find($id)->delete();
+
+        return redirect()->route('purchase');
     }
 }

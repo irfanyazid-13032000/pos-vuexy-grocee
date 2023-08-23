@@ -177,6 +177,10 @@ Route::get('/fendor/delete/{id}',[VendorController::class,'destroy'])->name('ven
 
 Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase');
 Route::get('/vurchase/create',[PurchaseController::class,'create'])->name('purchase.create');
+Route::post('/vurchase/store',[PurchaseController::class,'store'])->name('purchase.store');
+Route::get('/vurchase/edit/{id}',[PurchaseController::class,'edit'])->name('purchase.edit');
+Route::post('/vurchase/update/{id}',[PurchaseController::class,'update'])->name('purchase.update');
+Route::get('/vurchase/delete/{id}',[PurchaseController::class,'destroy'])->name('purchase.delete');
 
 
 Route::get('/food',[FoodController::class,'index'])->name('food');

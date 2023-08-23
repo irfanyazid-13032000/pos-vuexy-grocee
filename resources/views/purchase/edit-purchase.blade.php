@@ -2,18 +2,21 @@
 @section('content')
 <div class="col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Tambah Data Purchase</h5>
+                <h5 class="card-header">Edit Data Purchase</h5>
                 <div class="card-body">
-                    <form action="{{route('purchase.store')}}" method="POST" enctype="multipart/form-data" >
+                    <form action="{{route('purchase.update',['id'=>$purchase->id])}}" method="POST" enctype="multipart/form-data" >
                         @csrf
 
 
                         <div class="mb-3">
                             <label for="warehouse_id" class="form-label">Warehouse</label>
                             <select name="warehouse_id" id="warehouse_id" class="form-control">
-                              <option value="">pilih warehouse</option>
                               @foreach ($warehouses as $warehouse)
+                              @if ($purchase->warehouse_id == $warehouse->id)
+                              <option value="{{ $warehouse->id }}" selected>{{ $warehouse->name_warehouse }}</option>
+                              @else
                               <option value="{{ $warehouse->id }}">{{ $warehouse->name_warehouse }}</option>
+                              @endif
                               @endforeach
                             </select>
                             @error('warehouse_id')
@@ -25,9 +28,13 @@
                         <div class="mb-3">
                             <label for="kategori_bahan_id" class="form-label">kategori bahan</label>
                             <select name="kategori_bahan_id" id="kategori_bahan_id" class="form-control">
-                              <option value="">pilih kategori bahan</option>
                               @foreach ($kategori_bahans as $kategori_bahan)
+                              @if ($purchase->kategori_bahan_id == $kategori_bahan->id)
+                              <option value="{{ $kategori_bahan->id }}" selected>{{ $kategori_bahan->nama_kategori_bahan }}</option>
+                              @else
                               <option value="{{ $kategori_bahan->id }}">{{ $kategori_bahan->nama_kategori_bahan }}</option>
+                              @endif
+
                               @endforeach
                             </select>
                             @error('kategori_bahan')
@@ -41,7 +48,11 @@
                             <select name="bahan_dasar_id" id="bahan_dasar_id" class="form-control">
                               <option value="">pilih kategori bahan</option>
                               @foreach ($bahans as $bahan)
+                              @if ($purchase->bahan_dasar_id == $bahan->id)
+                              <option value="{{ $bahan->id }}" selected>{{ $bahan->nama_bahan }}</option>
+                              @else
                               <option value="{{ $bahan->id }}">{{ $bahan->nama_bahan }}</option>
+                              @endif
                               @endforeach
                             </select>
                             @error('bahan_dasar_id')
@@ -53,9 +64,12 @@
                         <div class="mb-3">
                             <label for="satuan_id" class="form-label">satuan</label>
                             <select name="satuan_id" id="satuan_id" class="form-control">
-                              <option value="">pilih kategori satuan</option>
                               @foreach ($satuans as $satuan)
-                              <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
+                                @if ($purchase->satuan_id == $satuan->id)
+                                <option value="{{ $satuan->id }}" selected>{{ $satuan->nama_satuan }}</option>
+                                @else
+                                <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
+                                @endif
                               @endforeach
                             </select>
                             @error('satuan_id')
@@ -67,7 +81,7 @@
                         <div class="mb-3">
                             <label for="qty" class="form-label">Qty</label>
                             <input type="number" class="form-control" id="qty" name="qty"
-                                value="{{ old('qty') }}" required>
+                                value="{{ $purchase->qty }}" required>
                             @error('qty')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -77,7 +91,7 @@
                         <div class="mb-3">
                             <label for="harga_satuan" class="form-label">harga_satuan</label>
                             <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" required>
+                                value="{{ $purchase->harga_satuan }}" readonly>
                             @error('harga_satuan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -87,7 +101,7 @@
                         <div class="mb-3">
                             <label for="jumlah_harga" class="form-label">jumlah_harga</label>
                             <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="{{ old('jumlah_harga') }}" required>
+                                value="{{ $purchase->jumlah_harga }}" readonly>
                             @error('jumlah_harga')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -97,9 +111,12 @@
                         <div class="mb-3">
                             <label for="vendor_id" class="form-label">vendor</label>
                             <select name="vendor_id" id="vendor_id" class="form-control">
-                              <option value="">pilih kategori vendor</option>
                               @foreach ($vendors as $vendor)
-                              <option value="{{ $vendor->id }}">{{ $vendor->name_vendor }}</option>
+                              @if ($purchase->vendor_id == $vendor->id)
+                              <option value="{{ $vendor->id }}" selected>{{ $vendor->name_vendor }}</option>
+                              @else
+                              <option value="{{ $vendor->id }}" selected>{{ $vendor->name_vendor }}</option>
+                              @endif
                               @endforeach
                             </select>
                             @error('vendor_id')

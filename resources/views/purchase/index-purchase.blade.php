@@ -16,6 +16,7 @@
                         <th>harga satuan</th>
                         <th>jumlah harga</th>
                         <th>nama vendor</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
@@ -31,6 +32,10 @@
                      <td>Rp. {{number_format($purchase->harga_satuan)}}</td>
                      <td>Rp. {{number_format($purchase->jumlah_harga)}}</td>
                      <td>{{$purchase->name_vendor}}</td>
+                     <td>
+                     <a href="{{route('purchase.edit',['id'=>$purchase->id])}}" class="btn btn-primary">edit</a>
+                      <a href="{{route('purchase.delete',['id'=>$purchase->id])}}" class="btn btn-danger">delete</a>
+                     </td>
                   </tr>
                   @endforeach
                 </tbody>
