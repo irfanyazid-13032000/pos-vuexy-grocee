@@ -165,6 +165,11 @@ Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('out
 
 
 Route::get('/fendor',[VendorController::class,'index'])->name('vendor');
+Route::get('/fendor/create',[VendorController::class,'create'])->name('vendor.create');
+Route::post('/fendor/store',[VendorController::class,'store'])->name('vendor.store');
+Route::get('/fendor/edit/{id}',[VendorController::class,'edit'])->name('vendor.edit');
+Route::post('/fendor/update/{id}',[VendorController::class,'update'])->name('vendor.update');
+Route::get('/fendor/delete/{id}',[VendorController::class,'destroy'])->name('vendor.destroy');
 
 
 Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase');

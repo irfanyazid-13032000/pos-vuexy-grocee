@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -11,7 +12,8 @@ class VendorController extends Controller
      */
     public function index()
     {
-        return 'vendor loh';
+        $vendors = Vendor::all();
+        return view('vendor.index-vendor',compact('vendors'));
     }
 
     /**
@@ -19,7 +21,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendor.create-vendor');
     }
 
     /**
@@ -27,7 +29,14 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Vendor::create([
+            'name_vendor' => $request->name_vendor,
+            'telp' => $request->telp,
+            'address_vendor' => $request->address_vendor,
+            'contact_person' => $request->contact_person,
+        ]);
+
+        return redirect()->route('vendor');
     }
 
     /**
@@ -43,7 +52,9 @@ class VendorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $vendor = Vendor::find($id);
+        return view('vendor.edit-vendor',compact('vendor'));
+        
     }
 
     /**
@@ -51,7 +62,15 @@ class VendorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $vendor = Vendor::find($id);
+        $vendor->update([
+            'name_vendor' => $request->name_vendor,
+            'telp' => $request->telp,
+            'address_vendor' => $request->address_vendor,
+            'contact_person' => $request->contact_person,
+        ]);
+
+        return redirect()->route('vendor');
     }
 
     /**
@@ -59,6 +78,9 @@ class VendorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $vendor = Vendor::find($id);
+        $vendor->delete();
+
+        return redirect()->route('vendor');
     }
 }
