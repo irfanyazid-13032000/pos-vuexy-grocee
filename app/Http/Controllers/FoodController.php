@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class FoodController extends Controller
@@ -131,6 +131,7 @@ class FoodController extends Controller
             'qty' => $request->qty,
             'harga_satuan' => $request->harga_satuan,
             'jumlah_harga' => $request->jumlah_harga,
+            'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
 
         return redirect()->route('food.process',['id'=>$id]);
