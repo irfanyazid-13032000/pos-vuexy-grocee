@@ -77,7 +77,10 @@ class WarehouseController extends Controller
     public function update(Request $request, string $id)
     {
         Warehouse::find($id)->update([
-            'name_warehouse' => $request->name_warehouse
+            'name_warehouse' => $request->name_warehouse,
+            'address' => $request->address,
+            'pic' => $request->pic,
+            'contact' => $request->contact,
         ]);
 
         return redirect()->route('warehouse.index');

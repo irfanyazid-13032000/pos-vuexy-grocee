@@ -216,7 +216,7 @@
 
                 <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.dasar.index')}}" class="menu-link">
-                    <div>Data Bahan Dasar</div>
+                    <div>Data Bahan Produksi</div>
                   </a>
                 </li>
 
@@ -230,7 +230,7 @@
 
                 <li class="menu-item {{ Route::is('bahan.tambahan.produksi.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.tambahan.produksi.index')}}" class="menu-link">
-                    <div>Bahan Tambahan Produksi</div>
+                    <div>Pemakaian Bahan Tambahan Produksi</div>
                   </a>
                 </li>
                 

@@ -1,6 +1,6 @@
 @extends('backend.layout.main')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Bahan Dasar</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Bahan Produksi</h4>
     <div class="card">
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">

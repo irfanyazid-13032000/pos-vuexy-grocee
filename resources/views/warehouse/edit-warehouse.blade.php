@@ -14,6 +14,35 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Alamat Warehouse</label>
+                            <input type="text" class="form-control" id="address" name="address"
+                                value="{{ $warehouse->address }}" required>
+                            @error('address')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="pic" class="form-label">PIC</label>
+                            <input type="text" class="form-control" id="pic" name="pic"
+                                value="{{ $warehouse->pic }}" required>
+                            @error('pic')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Contact</label>
+                            <input type="text" class="form-control" id="contact" name="contact"
+                                value="{{ $warehouse->contact }}" required>
+                            @error('contact')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
                         
                         
                         <div class="d-flex justify-content-end mt-2">

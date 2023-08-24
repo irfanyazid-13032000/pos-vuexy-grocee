@@ -1,6 +1,6 @@
 @extends('backend.layout.main')
 @section('content')
-  <h4 class="fw-bold py-3 mb-4">Data Bahan Tambahan </h4>
+  <h4 class="fw-bold py-3 mb-4">Data Pemakaian Bahan Tambahan Produksi</h4>
     <div class="card">
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">
@@ -18,7 +18,7 @@
                   @foreach ($bahan_tambahan_produksis as $bahan)
                   <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$bahan->nama_bahan_tambahan_produksi}}</td>
+                    <td>{{$bahan->nama_bahan}}</td>
                     <td>{{$bahan->qty}}</td>
                     <td>Rp. {{number_format($bahan->harga_satuan)}}</td>
                     <td>Rp. {{number_format($bahan->jumlah_harga)}}</td>
@@ -41,6 +41,23 @@
     
     
 @endsection
+
+@push('addon-script')
+    <script src="{{ url('https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+      $('#table').DataTable({
+    columnDefs: [
+        {
+            targets: '_all', // Kolom terakhir
+            className: 'dt-center' // Membuat semua sel dalam kolom menjadi berpusat
+        },
+        
+    ]
+});
+
+    </script>
+@endpush
 
 
 

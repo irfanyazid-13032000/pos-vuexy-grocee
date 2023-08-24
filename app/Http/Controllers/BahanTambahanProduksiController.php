@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DateTimeZone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\BahanTambahanProduksi;
 
 class BahanTambahanProduksiController extends Controller
@@ -14,7 +15,10 @@ class BahanTambahanProduksiController extends Controller
      */
     public function index()
     {
-        $bahan_tambahan_produksis = BahanTambahanProduksi::all();
+        $bahan_tambahan_produksis = BahanTambahanProduksi::join('bahan_dasars','bahan_tambahan_produksi.nama_bahan_tambahan_produksi','=','bahan_dasars.id')
+                                                ->select('bahan_tambahan_produksi.*','bahan_dasars.nama_bahan')
+                                                ->get();
+        // return $bahan_tambahan_produksis;
         return view('bahan_tambahan_produksi.index-bahan-tambahan-produksi',compact('bahan_tambahan_produksis'));
     }
 
@@ -23,7 +27,8 @@ class BahanTambahanProduksiController extends Controller
      */
     public function create()
     {
-        return view('bahan_tambahan_produksi.create-bahan-tambahan-produksi');
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('bahan_tambahan_produksi.create-bahan-tambahan-produksi',compact('bahan_dasars'));
     }
 
     /**
@@ -56,8 +61,9 @@ class BahanTambahanProduksiController extends Controller
      */
     public function edit(string $id)
     {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
         $bahan_tambahan_produksi = BahanTambahanProduksi::find($id);
-        return view('bahan_tambahan_produksi.edit-bahan-tambahan-produksi',compact('bahan_tambahan_produksi'));
+        return view('bahan_tambahan_produksi.edit-bahan-tambahan-produksi',compact('bahan_tambahan_produksi','bahan_dasars'));
     }
 
     /**

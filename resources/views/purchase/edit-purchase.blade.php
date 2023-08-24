@@ -115,7 +115,7 @@
                               @if ($purchase->vendor_id == $vendor->id)
                               <option value="{{ $vendor->id }}" selected>{{ $vendor->name_vendor }}</option>
                               @else
-                              <option value="{{ $vendor->id }}" selected>{{ $vendor->name_vendor }}</option>
+                              <option value="{{ $vendor->id }}">{{ $vendor->name_vendor }}</option>
                               @endif
                               @endforeach
                             </select>
@@ -128,7 +128,7 @@
                         
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
-                            <a href="{{route('outlet')}}" class="btn btn-danger ms-3">Kembali</a>
+                            <a href="{{route('outlet.index')}}" class="btn btn-danger ms-3">Kembali</a>
                         </div>
                     </form>
                 </div>

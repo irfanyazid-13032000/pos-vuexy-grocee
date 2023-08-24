@@ -8,8 +8,15 @@
                         @csrf
                         <div class="mb-3">
                             <label for="nama_bahan_tambahan_produksi" class="form-label">Nama Bahan Tambahan</label>
-                            <input type="text" class="form-control" id="nama_bahan_tambahan_produksi" name="nama_bahan_tambahan_produksi"
-                                value="{{ $bahan_tambahan_produksi->nama_bahan_tambahan_produksi }}" required>
+                            <select name="nama_bahan_tambahan_produksi" id="nama_bahan_tambahan_produksi" class="form-control">
+                                @foreach ($bahan_dasars as $bahan)
+                                @if ($bahan_tambahan_produksi->nama_bahan_tambahan_produksi == $bahan->id)
+                                <option value="{{$bahan->id}}" selected>{{$bahan->nama_bahan}}</option>
+                                @else
+                                <option value="{{$bahan->id}}">{{$bahan->nama_bahan}}</option>
+                                @endif
+                                @endforeach
+                            </select>
                             @error('nama_bahan_tambahan_produksi')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -19,7 +26,7 @@
                         <div class="mb-3">
                             <label for="harga_satuan" class="form-label">Harga Satuan</label>
                             <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ $bahan_tambahan_produksi->harga_satuan }}" required>
+                                value="{{ $bahan_tambahan_produksi->harga_satuan }}" readonly>
                             @error('harga_satuan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -59,16 +66,24 @@
 
 @push('addon-script')
 <script>
-    $('#harga_satuan').on('keyup',function (params) {
+   $('#qty').on('keyup',function (params) {
         let harga_satuan = $('#harga_satuan').val()
         let qty = $('#qty').val()
         $('#jumlah_harga').val(harga_satuan * qty)
     })
 
-    $('#qty').on('keyup',function (params) {
-        let harga_satuan = $('#harga_satuan').val()
-        let qty = $('#qty').val()
-        $('#jumlah_harga').val(harga_satuan * qty)
-    })
+    $('#nama_bahan_tambahan_produksi').on('change',function (params) {
+        var routeUrl = "{{ route('data.bahan.dasar', ':index') }}";
+            routeUrl = routeUrl.replace(':index', $('#nama_bahan_tambahan_produksi').val());
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                    $('#harga_satuan').val(res.harga_satuan)
+                    console.log(res.harga_satuan);
+                }
+            });
+        });
 </script>
 @endpush

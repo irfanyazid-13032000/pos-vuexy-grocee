@@ -36,7 +36,7 @@ class VendorController extends Controller
             'contact_person' => $request->contact_person,
         ]);
 
-        return redirect()->route('vendor');
+        return redirect()->route('vendor.index');
     }
 
     /**

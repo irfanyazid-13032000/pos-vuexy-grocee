@@ -76,4 +76,10 @@ class BahanDasarController extends Controller
 
         return redirect()->route('bahan.dasar.index');
     }
+
+
+    public function dataBahanDasar($id)
+    {
+        return DB::table('bahan_dasars')->where('id',$id)->get()->first();
+    }
 }

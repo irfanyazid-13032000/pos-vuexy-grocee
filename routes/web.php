@@ -229,6 +229,8 @@ Route::post('/bahan_tambahan_produksi/store',[BahanTambahanProduksiController::c
 Route::get('/bahan_tambahan_produksi/edit/{id}',[BahanTambahanProduksiController::class,'edit'])->name('bahan.tambahan.produksi.edit');
 Route::post('/bahan_tambahan_produksi/update/{id}',[BahanTambahanProduksiController::class,'update'])->name('bahan.tambahan.produksi.update');
 Route::get('/bahan_tambahan_produksi/delete/{id}',[BahanTambahanProduksiController::class,'destroy'])->name('bahan.tambahan.produksi.delete');
+Route::get('/bahan_data/{id}',[BahanDasarController::class,'dataBahanDasar'])->name('data.bahan.dasar');
+
 
 
 
