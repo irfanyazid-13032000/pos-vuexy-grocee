@@ -40,7 +40,7 @@ class OutletController extends Controller
             'contact_outlet' => $request->contact_outlet,
         ]);
 
-        return redirect()->route('outlet');
+        return redirect()->route('outlet.index');
     }
 
     /**
@@ -76,7 +76,7 @@ class OutletController extends Controller
             'address_outlet' => $request->address_outlet,
         ]);
 
-        return redirect()->route('outlet');
+        return redirect()->route('outlet.index');
     }
 
     /**

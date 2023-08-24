@@ -48,26 +48,10 @@
                     <div>Item</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="../horizontal-menu-template" class="menu-link" target="_blank">
-                    <div>Print Barcode</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
-                    <div>Without menu</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-without-navbar.html" class="menu-link">
-                    <div>Adjustment List</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-fluid.html" class="menu-link">
-                    <div>Add Adjustment</div>
-                  </a>
-                </li>
+                
+               
+               
+                
                 <li class="menu-item {{ Route::is('warehouse.*') ? 'active' : '' }} ">
                   <a href="{{route('warehouse.index')}}" class="menu-link">
                     <div>Warehouse</div>
@@ -79,13 +63,13 @@
 
 
              <!-- inventory -->
-             <li class="menu-item {{ Route::is('raw.*') || Route::is('bahan.baku.*') ? 'active open' : '' }}">
+             <!-- <li class="menu-item {{ Route::is('raw.*') || Route::is('bahan.baku.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>inventory</div>
               </a>
 
-              <ul class="menu-sub">
+              <ul class="menu-sub"> -->
                 <!-- <li class="menu-item {/{ Route::is('raw.*') ? 'active' : '' }}">
                   <a href="{/{route('raw.index')}}" class="menu-link">
                     <div>Raw</div>
@@ -93,7 +77,7 @@
                 </li> -->
 
 
-                <li class="menu-item {{ Route::is('bahan.baku.*') ? 'active' : '' }}">
+                <!-- <li class="menu-item {{ Route::is('bahan.baku.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.baku.index')}}" class="menu-link">
                     <div>Material</div>
                   </a>
@@ -102,10 +86,10 @@
 
                 </ul>
 
-            </li>
+            </li> -->
 
              <!-- Cook -->
-             <li class="menu-item {{ Route::is('cook.*') ? 'active open' : '' }}">
+             <!-- <li class="menu-item {/{ Route::is('cook.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Cook</div>
@@ -129,7 +113,9 @@
 
                 </ul>
 
-            </li>
+            </li> -->
+
+
              <!-- Outlet -->
              <li class="menu-item {{ Route::is('outlet.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -141,7 +127,7 @@
 
 
                 <li class="menu-item {{ Route::is('outlet.*') ? 'active' : '' }}">
-                  <a href="{{route('outlet')}}" class="menu-link">
+                  <a href="{{route('outlet.index')}}" class="menu-link">
                     <div>Data Outlet</div>
                   </a>
                 </li>
@@ -162,7 +148,7 @@
 
 
                 <li class="menu-item {{ Route::is('vendor.*') ? 'active' : '' }}">
-                  <a href="{{route('vendor')}}" class="menu-link">
+                  <a href="{{route('vendor.index')}}" class="menu-link">
                     <div>Data Vendor</div>
                   </a>
                 </li>
@@ -172,44 +158,33 @@
             </li>
 
             <!-- purchase -->
-            <li class="menu-item">
+            <li class="menu-item {{ Route::is('purchase.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Purchase</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="{{route('purchase')}}" class="menu-link">
+                <li class="menu-item {{ Route::is('purchase.*') ? 'active' : '' }}">
+                  <a href="{{route('purchase.index')}}" class="menu-link">
                     <div>Purchase List</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="layouts-content-navbar.html" class="menu-link">
-                    <div>Add Purchase</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
-                    <div>Import Purchase By CSV</div>
-                  </a>
-                </li>
-                
                 
               </ul>
             </li>
 
 
             <!-- Food -->
-            <li class="menu-item">
+            <li class="menu-item {{ Route::is('food.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Food</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="{{route('food')}}" class="menu-link">
+                <li class="menu-item {{ Route::is('food.*') ? 'active' : '' }}">
+                  <a href="{{route('food.index')}}" class="menu-link">
                     <div>Food Process</div>
                   </a>
                 </li>
@@ -226,34 +201,34 @@
 
 
             <!--Bahan -->
-            <li class="menu-item">
+            <li class="menu-item {{ Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('satuan.*') || Route::is('bahan.tambahan.produksi.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Bahan</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
                   <a href="{{route('kategori.bahan.index')}}" class="menu-link">
                     <div>Data Kategori Bahan</div>
                   </a>
                 </li>
 
-                <li class="menu-item">
+                <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.dasar.index')}}" class="menu-link">
                     <div>Data Bahan Dasar</div>
                   </a>
                 </li>
 
 
-                <li class="menu-item">
+                <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
                   <a href="{{route('satuan.index')}}" class="menu-link">
                     <div>satuan</div>
                   </a>
                 </li>
 
 
-                <li class="menu-item">
+                <li class="menu-item {{ Route::is('bahan.tambahan.produksi.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.tambahan.produksi.index')}}" class="menu-link">
                     <div>Bahan Tambahan Produksi</div>
                   </a>

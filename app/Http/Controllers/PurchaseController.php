@@ -99,7 +99,7 @@ class PurchaseController extends Controller
         ]);
 
 
-        return redirect()->route('purchase');
+        return redirect()->route('purchase.index');
     }
 
     /**
@@ -109,6 +109,6 @@ class PurchaseController extends Controller
     {
         Purchase::find($id)->delete();
 
-        return redirect()->route('purchase');
+        return redirect()->route('purchase.index');
     }
 }

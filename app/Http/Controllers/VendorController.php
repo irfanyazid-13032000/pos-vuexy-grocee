@@ -70,7 +70,7 @@ class VendorController extends Controller
             'contact_person' => $request->contact_person,
         ]);
 
-        return redirect()->route('vendor');
+        return redirect()->route('vendor.index');
     }
 
     /**
@@ -81,6 +81,6 @@ class VendorController extends Controller
         $vendor = Vendor::find($id);
         $vendor->delete();
 
-        return redirect()->route('vendor');
+        return redirect()->route('vendor.index');
     }
 }

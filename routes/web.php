@@ -162,14 +162,14 @@ Route::get('/cook/data-raw/{code}/{warehouse_id}',[CookController::class,'dataRa
  
 
 
-Route::get('/outlet',[OutletController::class,'index'])->name('outlet');
+Route::get('/outlet',[OutletController::class,'index'])->name('outlet.index');
 Route::get('/outlet/create',[OutletController::class,'create'])->name('outlet.create');
 Route::post('/outlet/store',[OutletController::class,'store'])->name('outlet.store');
 Route::get('/outlet/edit/{id}',[OutletController::class,'edit'])->name('outlet.edit');
 Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('outlet.update');
 
 
-Route::get('/fendor',[VendorController::class,'index'])->name('vendor');
+Route::get('/fendor',[VendorController::class,'index'])->name('vendor.index');
 Route::get('/fendor/create',[VendorController::class,'create'])->name('vendor.create');
 Route::post('/fendor/store',[VendorController::class,'store'])->name('vendor.store');
 Route::get('/fendor/edit/{id}',[VendorController::class,'edit'])->name('vendor.edit');
@@ -177,7 +177,7 @@ Route::post('/fendor/update/{id}',[VendorController::class,'update'])->name('ven
 Route::get('/fendor/delete/{id}',[VendorController::class,'destroy'])->name('vendor.destroy');
 
 
-Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase');
+Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase.index');
 Route::get('/vurchase/create',[PurchaseController::class,'create'])->name('purchase.create');
 Route::post('/vurchase/store',[PurchaseController::class,'store'])->name('purchase.store');
 Route::get('/vurchase/edit/{id}',[PurchaseController::class,'edit'])->name('purchase.edit');
@@ -185,7 +185,7 @@ Route::post('/vurchase/update/{id}',[PurchaseController::class,'update'])->name(
 Route::get('/vurchase/delete/{id}',[PurchaseController::class,'destroy'])->name('purchase.delete');
 
 
-Route::get('/food',[FoodController::class,'index'])->name('food');
+Route::get('/food',[FoodController::class,'index'])->name('food.index');
 Route::get('/food/create',[FoodController::class,'create'])->name('food.create');
 Route::post('/food/store',[FoodController::class,'store'])->name('food.store');
 Route::get('/food/edit/{id}',[FoodController::class,'edit'])->name('food.edit');
