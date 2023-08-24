@@ -213,6 +213,13 @@
                     <div>Food Process</div>
                   </a>
                 </li>
+
+
+                <li class="menu-item">
+                  <a href="{{route('food.process.daily')}}" class="menu-link">
+                    <div>Food Process Daily</div>
+                  </a>
+                </li>
                 
               </ul>
             </li>
@@ -242,6 +249,13 @@
                 <li class="menu-item">
                   <a href="{{route('satuan.index')}}" class="menu-link">
                     <div>satuan</div>
+                  </a>
+                </li>
+
+
+                <li class="menu-item">
+                  <a href="{{route('bahan.tambahan.produksi.index')}}" class="menu-link">
+                    <div>Bahan Tambahan Produksi</div>
                   </a>
                 </li>
                 

@@ -1,6 +1,6 @@
 @extends('backend.layout.main')
 @section('content')
-  <h4 class="fw-bold py-3 mb-4">Data Resep <span class="btn btn-success">{{$food->nama_menu}}</span></h4>
+  <h4 class="fw-bold py-3 mb-4">Data Food Process Masakan <span class="btn btn-success">{{$food->nama_menu}}</span></h4>
     <div class="card">
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">

@@ -17,9 +17,11 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\BahanDasarController;
+use App\Http\Controllers\FoodProcessController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\WarehouseStockController;
+use App\Http\Controllers\BahanTambahanProduksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -200,6 +202,9 @@ Route::post('/food-process/update/{id_food_process}',[FoodController::class,'foo
 Route::get('/food-process/delete/{id_food_process}',[FoodController::class,'foodProcessDelete'])->name('food.process.delete');
 
 
+Route::get('/food-process-daily/',[FoodProcessController::class,'index'])->name('food.process.daily');
+
+
 
 Route::get('/kategori_bahan',[KategoriBahanController::class,'index'])->name('kategori.bahan.index');
 Route::get('/kategori_bahan/create',[KategoriBahanController::class,'create'])->name('kategori.bahan.create');
@@ -217,6 +222,13 @@ Route::get('/bahan_dasar/edit/{id}',[BahanDasarController::class,'edit'])->name(
 Route::post('/bahan_dasar/update/{id}',[BahanDasarController::class,'update'])->name('bahan.dasar.update');
 Route::get('/bahan_dasar/delete/{id}',[BahanDasarController::class,'destroy'])->name('bahan.dasar.delete');
 
+
+Route::get('/bahan_tambahan_produksi',[BahanTambahanProduksiController::class,'index'])->name('bahan.tambahan.produksi.index');
+Route::get('/bahan_tambahan_produksi/create',[BahanTambahanProduksiController::class,'create'])->name('bahan.tambahan.produksi.create');
+Route::post('/bahan_tambahan_produksi/store',[BahanTambahanProduksiController::class,'store'])->name('bahan.tambahan.produksi.store');
+Route::get('/bahan_tambahan_produksi/edit/{id}',[BahanTambahanProduksiController::class,'edit'])->name('bahan.tambahan.produksi.edit');
+Route::post('/bahan_tambahan_produksi/update/{id}',[BahanTambahanProduksiController::class,'update'])->name('bahan.tambahan.produksi.update');
+Route::get('/bahan_tambahan_produksi/delete/{id}',[BahanTambahanProduksiController::class,'destroy'])->name('bahan.tambahan.produksi.delete');
 
 
 
