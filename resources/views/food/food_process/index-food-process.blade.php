@@ -50,7 +50,7 @@
 
 
             <a href="{{route('food.process.create',['id'=>$id])}}" class="btn btn-success">Add</a>
-            <a href="{{route('food')}}" class="btn btn-danger">Back</a>
+            <a href="{{route('food.index')}}" class="btn btn-danger">Back</a>
         </div>
     </div>
 

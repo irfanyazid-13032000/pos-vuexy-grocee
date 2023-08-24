@@ -46,7 +46,7 @@ class FoodController extends Controller
             'nama_menu' => $request->nama_menu
         ]);
 
-        return redirect()->route('food');
+        return redirect()->route('food.index');
         // DB::table('food_process')->insert([
         //     'nama_menu_masakan' => $request->nama_menu_masakan,
         //     'bahan_dasar_id' => $request->bahan_dasar_id,
@@ -86,7 +86,7 @@ class FoodController extends Controller
         ]);
 
 
-        return redirect()->route('food');
+        return redirect()->route('food.index');
     }
 
     /**
@@ -96,7 +96,7 @@ class FoodController extends Controller
     {
         DB::table('menu_masakan')->where('id',$id)->delete();
 
-        return redirect()->route('food');
+        return redirect()->route('food.index');
     }
 
 
