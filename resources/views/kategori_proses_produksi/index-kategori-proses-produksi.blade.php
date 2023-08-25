@@ -1,36 +1,30 @@
 @extends('backend.layout.main')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Outlet</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Kategori Proses Produksi</h4>
     <div class="card">
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">
                 <thead>
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
-                        <th>nama warehouse</th>
-                        <th>Nama outlet</th>
-                        <th>alamat outlet</th>
-                        <th>kontak</th>
+                        <th>nama kategori proses produksi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
-                  @foreach ($outlets as $outlet)
+                  @foreach ($kategori_proses_produksis as $produksi)
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
-                     <td>{{$outlet->name_warehouse}}</td>
-                     <td>{{$outlet->name_outlet}}</td>
-                     <td>{{$outlet->address_outlet}}</td>
-                     <td>{{$outlet->contact_outlet}}</td>
+                     <td>{{$produksi->nama_kategori}}</td>
                      <td>
-                      <a href="{{route('outlet.edit',['id'=>$outlet->id])}}" class="btn btn-primary">edit</a>
-                      <a href="{{route('outlet.delete',['id'=>$outlet->id])}}" class="btn btn-danger">delete</a>
+                      <a href="{{route('kategori.proses.produksi.edit',['id'=>$produksi->id])}}" class="btn btn-primary">edit</a>
+                      <a href="{{route('kategori.proses.produksi.delete',['id'=>$produksi->id])}}" class="btn btn-danger">delete</a>
                      </td>
                   </tr>
                   @endforeach
                 </tbody>
             </table>
-            <a href="{{route('outlet.create')}}" class="btn btn-success">add</a>
+            <a href="{{route('kategori.proses.produksi.create')}}" class="btn btn-success">add</a>
         </div>
     </div>
 @endsection

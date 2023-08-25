@@ -22,6 +22,7 @@ use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\WarehouseStockController;
 use App\Http\Controllers\BahanTambahanProduksiController;
+use App\Http\Controllers\KategoriProsesProduksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,6 +168,7 @@ Route::get('/outlet/create',[OutletController::class,'create'])->name('outlet.cr
 Route::post('/outlet/store',[OutletController::class,'store'])->name('outlet.store');
 Route::get('/outlet/edit/{id}',[OutletController::class,'edit'])->name('outlet.edit');
 Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('outlet.update');
+Route::get('/outlet/delete/{id}',[OutletController::class,'destroy'])->name('outlet.delete');
 
 
 Route::get('/fendor',[VendorController::class,'index'])->name('vendor.index');
@@ -240,3 +242,12 @@ Route::post('/satuan/store',[SatuanController::class,'store'])->name('satuan.sto
 Route::get('/satuan/edit/{id}',[SatuanController::class,'edit'])->name('satuan.edit');
 Route::post('/satuan/update/{id}',[SatuanController::class,'update'])->name('satuan.update');
 Route::get('/satuan/delete/{id}',[SatuanController::class,'destroy'])->name('satuan.delete');
+
+
+
+Route::get('/kategori_proses_produksi',[KategoriProsesProduksiController::class,'index'])->name('kategori.proses.produksi.index');
+Route::get('/kategori_proses_produksi/create',[KategoriProsesProduksiController::class,'create'])->name('kategori.proses.produksi.create');
+Route::post('/kategori_proses_produksi/store',[KategoriProsesProduksiController::class,'store'])->name('kategori.proses.produksi.store');
+Route::get('/kategori_proses_produksi/edit/{id}',[KategoriProsesProduksiController::class,'edit'])->name('kategori.proses.produksi.edit');
+Route::post('/kategori_proses_produksi/update/{id}',[KategoriProsesProduksiController::class,'update'])->name('kategori.proses.produksi.update');
+Route::get('/kategori_proses_produksi/delete/{id}',[KategoriProsesProduksiController::class,'destroy'])->name('kategori.proses.produksi.delete');

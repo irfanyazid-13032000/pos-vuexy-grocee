@@ -84,6 +84,8 @@ class OutletController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Outlet::find($id)->delete();
+
+        return redirect()->route('outlet.index');
     }
 }

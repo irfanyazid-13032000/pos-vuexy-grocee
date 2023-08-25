@@ -238,6 +238,30 @@
             </li>
 
 
+              <!-- Food -->
+              <li class="menu-item {{ Route::is('kategori.proses.produksi.*') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>Produksi</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item {{ Route::is('kategori.proses.produksi.*') ? 'active' : '' }}">
+                  <a href="{{route('kategori.proses.produksi.index')}}" class="menu-link">
+                    <div>Kategori Proses Produksi</div>
+                  </a>
+                </li>
+
+
+                <li class="menu-item">
+                  <a href="" class="menu-link">
+                    <div>Proses Produksi</div>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+
             <!-- sale -->
             <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
