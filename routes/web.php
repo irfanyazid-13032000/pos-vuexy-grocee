@@ -20,6 +20,7 @@ use App\Http\Controllers\BahanDasarController;
 use App\Http\Controllers\FoodProcessController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\KategoriBahanController;
+use App\Http\Controllers\ProsesProduksiController;
 use App\Http\Controllers\WarehouseStockController;
 use App\Http\Controllers\BahanTambahanProduksiController;
 use App\Http\Controllers\KategoriProsesProduksiController;
@@ -251,3 +252,13 @@ Route::post('/kategori_proses_produksi/store',[KategoriProsesProduksiController:
 Route::get('/kategori_proses_produksi/edit/{id}',[KategoriProsesProduksiController::class,'edit'])->name('kategori.proses.produksi.edit');
 Route::post('/kategori_proses_produksi/update/{id}',[KategoriProsesProduksiController::class,'update'])->name('kategori.proses.produksi.update');
 Route::get('/kategori_proses_produksi/delete/{id}',[KategoriProsesProduksiController::class,'destroy'])->name('kategori.proses.produksi.delete');
+
+
+
+Route::get('/proses_produksi',[ProsesProduksiController::class,'index'])->name('proses.produksi.index');
+Route::get('/proses_produksi/create',[ProsesProduksiController::class,'create'])->name('proses.produksi.create');
+Route::post('/proses_produksi/store',[ProsesProduksiController::class,'store'])->name('proses.produksi.store');
+Route::get('/proses_produksi/delete/{id}',[ProsesProduksiController::class,'destroy'])->name('proses.produksi.delete');
+Route::get('/proses_produksi/edit/{id}',[ProsesProduksiController::class,'edit'])->name('proses.produksi.edit');
+Route::post('/proses_produksi/update/{id}',[ProsesProduksiController::class,'update'])->name('proses.produksi.update');
+Route::get('/proses_produksi/rincian_resep/{id}/{qty}',[ProsesProduksiController::class,'rincianResep'])->name('proses.produksi.rincian.resep');

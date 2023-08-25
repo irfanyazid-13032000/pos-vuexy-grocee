@@ -254,7 +254,7 @@
 
 
                 <li class="menu-item">
-                  <a href="" class="menu-link">
+                  <a href="{{route('proses.produksi.index')}}" class="menu-link">
                     <div>Proses Produksi</div>
                   </a>
                 </li>
