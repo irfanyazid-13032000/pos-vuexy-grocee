@@ -239,7 +239,7 @@
 
 
             <!-- sale -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Sale</div>
@@ -288,11 +288,11 @@
                 
                 
               </ul>
-            </li>
+            </li> -->
 
 
             <!-- expense -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Expense</div>
@@ -316,7 +316,7 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- quotation -->
             <!-- <li class="menu-item">
@@ -464,7 +464,7 @@
             </li> -->
 
             <!-- people -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>People</div>
@@ -508,11 +508,11 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
 
             <!-- reports -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Reports</div>
@@ -616,10 +616,10 @@
                 </li>
 
               </ul>
-            </li>
+            </li> -->
 
             <!-- settings -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Settings</div>
@@ -719,6 +719,6 @@
                
 
               </ul>
-            </li>
+            </li> -->
            
           </ul>
