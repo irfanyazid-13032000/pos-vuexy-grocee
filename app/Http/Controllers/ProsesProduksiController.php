@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTimeZone;
 use Carbon\Carbon;
+use App\Models\RecordBahan;
 use Illuminate\Http\Request;
 use App\Models\ProsesProduksi;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,26 @@ class ProsesProduksiController extends Controller
      */
     public function store(Request $request)
     {
+
+        $menu_masakan_id = $request->menu_masakan_id;
+
+        $masakans = DB::table('food_process')->where('menu_masakan_id',$menu_masakan_id)->get();
+        
+
+        foreach ($masakans as $value) {
+            RecordBahan::create([
+                'kategori_produksi_id' =>$request->kategori_produksi_id,
+                'menu_masakan_id' => $value->menu_masakan_id,
+                'bahan_dasar_id' => $value->bahan_dasar_id,
+                'qty_masakan' => $request->qty,
+                'qty_bahan' => $value->qty * $request->qty,
+                'price_per_bahan' => $value->harga_satuan,
+                'jumlah_cost_per_bahan' => $value->jumlah_harga * $request->qty,
+            ]);
+        }
+
+        // return $masakan;
+
         ProsesProduksi::create([
             'kategori_produksi_id' => $request->kategori_produksi_id,
             'menu_masakan_id' => $request->menu_masakan_id,
@@ -45,6 +66,8 @@ class ProsesProduksiController extends Controller
             'qty' => $request->qty,
             'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
+
+        
 
         return redirect()->route('proses.produksi.index');
     }
