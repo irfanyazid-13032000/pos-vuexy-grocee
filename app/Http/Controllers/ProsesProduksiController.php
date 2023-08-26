@@ -129,7 +129,7 @@ class ProsesProduksiController extends Controller
                             ->where('food_process.menu_masakan_id',$id)
                             ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                             ->get();
-        return $foods_process;
+        // return $foods_process;
 
 
         $html = view('proses_produksi.table-rincian-resep',compact('foods_process','qty'))->render();
@@ -139,12 +139,23 @@ class ProsesProduksiController extends Controller
 
     public function stockPurchase($id,$qty,$warehouse_id)
     {
-        return $foods_process = DB::table('food_process')
-                                    ->join('purchases','food_process.bahan_dasar_id','=','purchases.bahan_dasar_id')
-                                    ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
-                                    ->where('purchases.warehouse_id',$warehouse_id)
-                                    ->where('food_process.menu_masakan_id',$id)
-                                    ->select('food_process.bahan_dasar_id','food_process.qty AS qty_resep','purchases.qty AS qty_stock','purchases.warehouse_id','bahan_dasars.nama_bahan')
-                                    ->get();
+        $food_stock_warehouses = DB::table('food_process')
+                                ->leftJoin('purchases', 'food_process.bahan_dasar_id', '=', 'purchases.bahan_dasar_id')
+                                ->leftJoin('bahan_dasars', 'food_process.bahan_dasar_id', '=', 'bahan_dasars.id')
+                                ->where('purchases.warehouse_id', $warehouse_id)
+                                ->where('food_process.menu_masakan_id', $id)
+                                ->select('food_process.bahan_dasar_id', 'food_process.qty AS qty_resep', 'purchases.qty AS qty_stock', 'purchases.warehouse_id', 'bahan_dasars.nama_bahan')
+                                ->get();
+
+         $foods_process = DB::table('food_process')
+                                ->where('food_process.menu_masakan_id',$id)
+                                ->get();
+        
+        $lengkap = (count($food_stock_warehouses) === count($foods_process) ? true : false);
+    
+
+        $html = view('proses_produksi.table-stock-warehouse-purchase',compact('food_stock_warehouses','qty','lengkap'))->render();
+
+        return response()->json($html);
     }
 }

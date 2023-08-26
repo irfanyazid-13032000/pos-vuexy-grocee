@@ -263,7 +263,7 @@ Route::get('/proses_produksi/delete/{id}',[ProsesProduksiController::class,'dest
 Route::get('/proses_produksi/edit/{id}',[ProsesProduksiController::class,'edit'])->name('proses.produksi.edit');
 Route::post('/proses_produksi/update/{id}',[ProsesProduksiController::class,'update'])->name('proses.produksi.update');
 Route::get('/proses_produksi/rincian_resep/{id}/{qty}',[ProsesProduksiController::class,'rincianResep'])->name('proses.produksi.rincian.resep');
-Route::get('/proses_produksi/stock_purchase/{id}/{qty}/{warehouse_id}',[ProsesProduksiController::class,'stockPurchase'])->name('proses.produksi.stock.purchase');
+Route::get('/proses_produksi/stock_purchase/{id}/{qty}/{warehouse_id}',[ProsesProduksiController::class,'stockPurchase'])->name('proses.produksi.stock.purchase.warehouse');
 
 
 

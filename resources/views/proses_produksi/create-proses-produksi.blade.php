@@ -34,7 +34,7 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                             <br>
-                            <div id="table-rincian"></div>
+                            <div id="table-stock-warehouse"></div>
                         </div>
 
 
@@ -71,7 +71,7 @@
 
                         
                         <div class="d-flex justify-content-end mt-2">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                            <button class="btn btn-primary" type="submit" id="submit-button">Simpan</button>
                             <a href="{{route('outlet.index')}}" class="btn btn-danger ms-3">Kembali</a>
                         </div>
                     </form>
@@ -84,10 +84,13 @@
 <script>
   $('#menu_masakan_id').on('change',function () {
            tableRecipe()
+           tableStockWarehouse()
         });
 
     $('#warehouse_id').on('change',function (params) {
-        alert('warehouse nih')
+        alert($('#warehouse_id').val())
+        tableRecipe()
+        tableStockWarehouse()
     })
 
 
@@ -108,8 +111,47 @@
         }
 
 
+
+
+
+        function tableStockWarehouse() {
+            var routeUrl = "{{ route('proses.produksi.stock.purchase.warehouse', [':id',':qty',':warehouse_id']) }}";
+            routeUrl = routeUrl.replace(':id', $('#menu_masakan_id').val());
+            routeUrl = routeUrl.replace(':qty', $('#qty').val());
+            routeUrl = routeUrl.replace(':warehouse_id', $('#warehouse_id').val());
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(html) {
+                  $('#table-stock-warehouse').html('')
+                    $('#table-stock-warehouse').html(html)
+                }
+            });
+
+        }
+
+
         $('#qty').on('keyup',function (params) {
           tableRecipe()
+          tableStockWarehouse()
         })
+
+
+        $('#submit-button').on('click',function (event) {
+            if (!cukup) {
+                alert('stock tidak mencukupi')
+                 event.preventDefault()
+            }
+
+            if(lengkap == 'tidak'){
+                alert('stock tidak lengkap')
+                 event.preventDefault()
+            }
+
+        });
+    
+
+
 </script>
 @endpush
