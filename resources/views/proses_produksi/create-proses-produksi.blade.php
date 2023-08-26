@@ -6,6 +6,8 @@
                 <div class="card-body">
                     <form action="{{route('proses.produksi.store')}}" method="POST" enctype="multipart/form-data" >
                         @csrf
+
+
                         <div class="mb-3">
                             <label for="kategori_produksi_id" class="form-label">Kategori Produksi</label>
                             <select id="kategori_produksi_id" name="kategori_produksi_id" class="form-control">
@@ -17,6 +19,22 @@
                             @error('kategori_produksi_id')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="warehouse_id" class="form-label">warehouse</label>
+                            <select id="warehouse_id" name="warehouse_id" class="form-control">
+                              <option value="">pilih warehouse</option>
+                              @foreach ($warehouses as $warehouse)
+                              <option value="{{$warehouse->id}}">{{$warehouse->name_warehouse}}</option>
+                              @endforeach
+                            </select>
+                            @error('warehouse_id')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                            <br>
+                            <div id="table-rincian"></div>
                         </div>
 
 
@@ -34,6 +52,9 @@
                             <br>
                             <div id="table-rincian-resep"></div>
                         </div>
+
+
+                      
                         
 
 
@@ -64,6 +85,10 @@
   $('#menu_masakan_id').on('change',function () {
            tableRecipe()
         });
+
+    $('#warehouse_id').on('change',function (params) {
+        alert('warehouse nih')
+    })
 
 
 

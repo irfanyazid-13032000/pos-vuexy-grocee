@@ -31,7 +31,8 @@ class ProsesProduksiController extends Controller
     {
         $kategori_proses_produksis = DB::table('kategori_proses_produksi')->get();
         $menu_masakans = DB::table('menu_masakan')->get();
-        return view('proses_produksi.create-proses-produksi',compact('kategori_proses_produksis','menu_masakans'));
+        $warehouses = DB::table('warehouses')->get();
+        return view('proses_produksi.create-proses-produksi',compact('kategori_proses_produksis','menu_masakans','warehouses'));
     }
 
     /**
@@ -128,11 +129,22 @@ class ProsesProduksiController extends Controller
                             ->where('food_process.menu_masakan_id',$id)
                             ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                             ->get();
-        // return $foods_process;
+        return $foods_process;
 
 
         $html = view('proses_produksi.table-rincian-resep',compact('foods_process','qty'))->render();
 
         return response()->json($html);
+    }
+
+    public function stockPurchase($id,$qty,$warehouse_id)
+    {
+        return $foods_process = DB::table('food_process')
+                                    ->join('purchases','food_process.bahan_dasar_id','=','purchases.bahan_dasar_id')
+                                    ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
+                                    ->where('purchases.warehouse_id',$warehouse_id)
+                                    ->where('food_process.menu_masakan_id',$id)
+                                    ->select('food_process.bahan_dasar_id','food_process.qty AS qty_resep','purchases.qty AS qty_stock','purchases.warehouse_id','bahan_dasars.nama_bahan')
+                                    ->get();
     }
 }
