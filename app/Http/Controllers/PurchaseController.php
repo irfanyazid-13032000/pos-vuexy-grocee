@@ -55,7 +55,7 @@ class PurchaseController extends Controller
             'vendor_id' => $request->vendor_id,
         ]);
 
-        return redirect()->route('purchase');
+        return redirect()->route('purchase.index');
         
     }
 

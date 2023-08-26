@@ -33,6 +33,13 @@
               </a>
 
               <ul class="menu-sub">
+
+              <li class="menu-item {{ Route::is('warehouse.*') ? 'active' : '' }} ">
+                  <a href="{{route('warehouse.index')}}" class="menu-link">
+                    <div>Warehouse</div>
+                  </a>
+                </li>
+
                 <li class="menu-item {{ Route::is('category.*') ? 'active' : '' }}">
                   <a href="{{route('category.index')}}" class="menu-link">
                     <div>Category</div>
@@ -50,28 +57,77 @@
                 </li>
                 
                
-               
                 
-                <li class="menu-item {{ Route::is('warehouse.*') ? 'active' : '' }} ">
+              </ul>
+            </li>
+
+            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>Data Master</div>
+              </a>
+
+              <ul class="menu-sub">
+
+              <li class="menu-item {{ Route::is('vendor.*') ? 'active' : '' }}">
+                  <a href="{{route('vendor.index')}}" class="menu-link">
+                    <div>Vendor</div>
+                  </a>
+                </li>
+
+              <li class="menu-item {{ Route::is('warehouse.*') ? 'active' : '' }} ">
                   <a href="{{route('warehouse.index')}}" class="menu-link">
                     <div>Warehouse</div>
                   </a>
                 </li>
+
+                  <li class="menu-item {{ Route::is('outlet.*') ? 'active' : '' }}">
+                  <a href="{{route('outlet.index')}}" class="menu-link">
+                    <div>Outlet</div>
+                  </a>
+                </li>
+
+                <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
+                  <a href="{{route('kategori.bahan.index')}}" class="menu-link">
+                    <div>Data Kategori Bahan</div>
+                  </a>
+                </li>
+
+                
+                <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
+                  <a href="{{route('satuan.index')}}" class="menu-link">
+                    <div>satuan</div>
+                  </a>
+                </li>
+
+                <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
+                  <a href="{{route('bahan.dasar.index')}}" class="menu-link">
+                    <div>Data Bahan Produksi</div>
+                  </a>
+                </li>
+
+                <li class="menu-item {{ Route::is('bahan.tambahan.produksi.*') ? 'active' : '' }}">
+                  <a href="{{route('bahan.tambahan.produksi.index')}}" class="menu-link">
+                    <div>Pemakaian Bahan Tambahan Produksi</div>
+                  </a>
+                </li>
+              
+                  
                 
               </ul>
             </li>
 
 
              <!-- inventory -->
-             <!-- <li class="menu-item {{ Route::is('raw.*') || Route::is('bahan.baku.*') ? 'active open' : '' }}">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
+             <!-- <li class="menu-item {{ Route::is('raw.*') || Route::is('bahan.baku.*') ? 'active open' : '' }}"> -->
+              <!-- <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>inventory</div>
-              </a>
+              </a> -->
 
-              <ul class="menu-sub"> -->
-                <!-- <li class="menu-item {/{ Route::is('raw.*') ? 'active' : '' }}">
-                  <a href="{/{route('raw.index')}}" class="menu-link">
+              <!-- <ul class="menu-sub"> -->
+                <!-- <li class="menu-item {{ Route::is('raw.*') ? 'active' : '' }}">
+                  <a href="{{route('raw.index')}}" class="menu-link">
                     <div>Raw</div>
                   </a>
                 </li> -->
@@ -81,12 +137,12 @@
                   <a href="{{route('bahan.baku.index')}}" class="menu-link">
                     <div>Material</div>
                   </a>
-                </li>
+                </li> -->
 
 
-                </ul>
+                <!-- </ul> -->
 
-            </li> -->
+            <!-- </li> -->
 
              <!-- Cook -->
              <!-- <li class="menu-item {/{ Route::is('cook.*') ? 'active open' : '' }}">
@@ -117,7 +173,7 @@
 
 
              <!-- Outlet -->
-             <li class="menu-item {{ Route::is('outlet.*') ? 'active open' : '' }}">
+             <!-- <li class="menu-item {{ Route::is('outlet.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Outlet</div>
@@ -134,11 +190,11 @@
 
                 </ul>
 
-            </li>
+            </li> -->
 
 
              <!-- Vendor -->
-             <li class="menu-item {{ Route::is('vendor.*') ? 'active open' : '' }}">
+             <!-- <li class="menu-item {{ Route::is('vendor.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Vendor</div>
@@ -155,7 +211,7 @@
 
                 </ul>
 
-            </li>
+            </li> -->
 
             <!-- purchase -->
             <li class="menu-item {{ Route::is('purchase.*') ? 'active open' : '' }}">
@@ -201,16 +257,22 @@
 
 
             <!--Bahan -->
-            <li class="menu-item {{ Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('satuan.*') || Route::is('bahan.tambahan.produksi.*') ? 'active open' : '' }}">
+            <li class="menu-item {{ Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('satuan.*') || Route::is('bahan.tambahan.produksi.*') || Route::is('record.bahan.*')? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Bahan</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
+                <!-- <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
                   <a href="{{route('kategori.bahan.index')}}" class="menu-link">
                     <div>Data Kategori Bahan</div>
+                  </a>
+                </li> -->
+
+                <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
+                  <a href="{{route('kategori.bahan.index')}}" class="menu-link">
+                    <div>Stock Bahan Baku</div>
                   </a>
                 </li>
 
@@ -221,18 +283,25 @@
                 </li>
 
 
-                <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
+                <!-- <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
                   <a href="{{route('satuan.index')}}" class="menu-link">
                     <div>satuan</div>
                   </a>
+                </li> -->
+
+
+                <li class="menu-item {{ Route::is('record.bahan.*') ? 'active' : '' }}">
+                  <a href="{{route('record.bahan.index')}}" class="menu-link">
+                    <div>record bahan</div>
+                  </a>
                 </li>
 
 
-                <li class="menu-item {{ Route::is('bahan.tambahan.produksi.*') ? 'active' : '' }}">
+                <!-- <li class="menu-item {{ Route::is('bahan.tambahan.produksi.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.tambahan.produksi.index')}}" class="menu-link">
                     <div>Pemakaian Bahan Tambahan Produksi</div>
                   </a>
-                </li>
+                </li> -->
                 
               </ul>
             </li>

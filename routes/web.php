@@ -19,6 +19,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\BahanDasarController;
 use App\Http\Controllers\FoodProcessController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\RecordBahanController;
 use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\ProsesProduksiController;
 use App\Http\Controllers\WarehouseStockController;
@@ -262,3 +263,10 @@ Route::get('/proses_produksi/delete/{id}',[ProsesProduksiController::class,'dest
 Route::get('/proses_produksi/edit/{id}',[ProsesProduksiController::class,'edit'])->name('proses.produksi.edit');
 Route::post('/proses_produksi/update/{id}',[ProsesProduksiController::class,'update'])->name('proses.produksi.update');
 Route::get('/proses_produksi/rincian_resep/{id}/{qty}',[ProsesProduksiController::class,'rincianResep'])->name('proses.produksi.rincian.resep');
+
+
+
+
+
+Route::get('/record_bahan',[RecordBahanController::class,'index'])->name('record.bahan.index');
+Route::post('/record_bahan/data',[RecordBahanController::class,'data'])->name('record.bahan.data');
