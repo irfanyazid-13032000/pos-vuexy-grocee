@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTimeZone;
 use Carbon\Carbon;
+use App\Models\Purchase;
 use App\Models\RecordBahan;
 use Illuminate\Http\Request;
 use App\Models\ProsesProduksi;
@@ -44,9 +45,15 @@ class ProsesProduksiController extends Controller
         $menu_masakan_id = $request->menu_masakan_id;
 
         $masakans = DB::table('food_process')->where('menu_masakan_id',$menu_masakan_id)->get();
-        
 
+        
+        
         foreach ($masakans as $value) {
+            $purchase_stok_warehouse = Purchase::where('warehouse_id',$request->warehouse_id)->where('bahan_dasar_id',$value->bahan_dasar_id)->get();
+            foreach ($purchase_stok_warehouse as $purchase) {
+                $sisa_bahan = $purchase->qty - ($value->qty * $request->qty);
+                $purchase->update(['qty' => $sisa_bahan]);
+            }
             RecordBahan::create([
                 'kategori_produksi_id' =>$request->kategori_produksi_id,
                 'menu_masakan_id' => $value->menu_masakan_id,
@@ -55,6 +62,7 @@ class ProsesProduksiController extends Controller
                 'qty_bahan' => $value->qty * $request->qty,
                 'price_per_bahan' => $value->harga_satuan,
                 'jumlah_cost_per_bahan' => $value->jumlah_harga * $request->qty,
+                'warehouse_id' => $request->warehouse_id,
             ]);
         }
 
@@ -151,10 +159,29 @@ class ProsesProduksiController extends Controller
                                 ->where('food_process.menu_masakan_id',$id)
                                 ->get();
         
-        $lengkap = (count($food_stock_warehouses) === count($foods_process) ? true : false);
+        // return $food_stock_warehouses;
+        // return $foods_process;
+
+        $food_stock_warehouses->map(function ($item) use ($qty) {
+            $item->total_qty_used = $item->qty_resep * $qty;
+            $item->sisa_stock = $item->qty_stock - $item->total_qty_used;
+            return $item;
+        });
+
+        $cukup = 'cukup';
+        foreach ($food_stock_warehouses as $value) {
+            if ($value->sisa_stock < 0) {
+                $cukup = 'kurang';
+                break;
+            }
+        }
+
+        // dd($cukup);
+        
+        $lengkap = (count($food_stock_warehouses) == count($foods_process) ? 'lengkap' : 'kurang');
     
 
-        $html = view('proses_produksi.table-stock-warehouse-purchase',compact('food_stock_warehouses','qty','lengkap'))->render();
+        $html = view('proses_produksi.table-stock-warehouse-purchase',compact('food_stock_warehouses','qty','lengkap','cukup'))->render();
 
         return response()->json($html);
     }
