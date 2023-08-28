@@ -15,7 +15,15 @@ class RecordBahanController extends Controller
      */
     public function index()
     {
-       return view('record_bahan.index-record-bahan');
+    //    return view('record_bahan.index-record-bahan');
+    $record_bahans = RecordBahan::join('kategori_proses_produksi', 'record_bahan.kategori_produksi_id', '=', 'kategori_proses_produksi.id')
+                        ->join('bahan_dasars', 'record_bahan.bahan_dasar_id', 'bahan_dasars.id')
+                        ->join('menu_masakan', 'record_bahan.menu_masakan_id', '=', 'menu_masakan.id')
+                        ->select('record_bahan.*', 'kategori_proses_produksi.nama_kategori', 'bahan_dasars.nama_bahan', 'menu_masakan.nama_menu')
+                        ->paginate(5);
+
+
+        return view('record_bahan.record-bahan-pagination-sendiri',compact('record_bahans'));
     }
 
     /**

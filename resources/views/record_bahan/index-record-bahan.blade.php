@@ -6,10 +6,10 @@
         <div class="table-responsive text-nowrap p-4">
         <div class="row mb-4">
             <div class="col-md-3">
-                <input type="text" id="dateFrom" class="form-control" placeholder="Date From">
+                <input type="date" id="dateFrom" class="form-control" placeholder="Date From" value="{{ date('Y-m-d') }}">
             </div>
             <div class="col-md-3">
-                <input type="text" id="dateTo" class="form-control" placeholder="Date To">
+                <input type="date" id="dateTo" class="form-control" placeholder="Date To" value="{{ date('Y-m-d') }}">
             </div>
         </div>
             <table class="table table-hover" id="table">
