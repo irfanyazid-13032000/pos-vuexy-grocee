@@ -34,7 +34,11 @@ class FoodController extends Controller
 
     public function foodData($id)
     {
-        return DB::table('bahan_dasars')->where('bahan_dasars.id',$id)->join('satuan','bahan_dasars.satuan_id','=','satuan.id')->select('bahan_dasars.*','satuan.nama_satuan')->get()->first();
+        return DB::table('bahan_dasars')->where('bahan_dasars.id',$id)
+                                        ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                                        ->join('kategori_bahan','bahan_dasars.kategori_bahan_id','=','kategori_bahan.id')
+                                        ->select('bahan_dasars.*','satuan.nama_satuan','kategori_bahan.nama_kategori_bahan')
+                                        ->get()->first();
     }
 
     /**

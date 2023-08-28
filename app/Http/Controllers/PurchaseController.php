@@ -77,7 +77,12 @@ class PurchaseController extends Controller
         $bahans = DB::table('bahan_dasars')->get();
         $satuans = DB::table('satuan')->get();
         $vendors = DB::table('vendors')->get();
-        $purchase = Purchase::find($id);
+        $purchase = Purchase::join('kategori_bahan','purchases.kategori_bahan_id','=','kategori_bahan.id')
+                            ->join('satuan','purchases.satuan_id','=','satuan.id')
+                            ->select('purchases.*','kategori_bahan.nama_kategori_bahan','satuan.nama_satuan')
+                            ->where('purchases.id',$id)
+                            ->get()->first();
+        // return $purchase;
         return view('purchase.edit-purchase',compact('warehouses','kategori_bahans','bahans','satuans','vendors','purchase'));
     }
 

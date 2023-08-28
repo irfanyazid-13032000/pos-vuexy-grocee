@@ -22,19 +22,6 @@
                         </div>
 
 
-                        <div class="mb-3">
-                            <label for="kategori_bahan_id" class="form-label">kategori bahan</label>
-                            <select name="kategori_bahan_id" id="kategori_bahan_id" class="form-control">
-                              <option value="">pilih kategori bahan</option>
-                              @foreach ($kategori_bahans as $kategori_bahan)
-                              <option value="{{ $kategori_bahan->id }}">{{ $kategori_bahan->nama_kategori_bahan }}</option>
-                              @endforeach
-                            </select>
-                            @error('kategori_bahan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
 
                         <div class="mb-3">
                             <label for="bahan_dasar_id" class="form-label">nama bahan</label>
@@ -50,18 +37,28 @@
                         </div>
 
 
+
                         <div class="mb-3">
-                            <label for="satuan_id" class="form-label">satuan</label>
-                            <select name="satuan_id" id="satuan_id" class="form-control">
-                              <option value="">pilih kategori satuan</option>
-                              @foreach ($satuans as $satuan)
-                              <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
-                              @endforeach
-                            </select>
-                            @error('satuan_id')
+                            <label for="nama_kategori_bahan" class="form-label">kategori bahan</label>
+                            <input type="text" class="form-control" id="nama_kategori_bahan" readonly>
+                            @error('kategori_bahan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <input type="hidden" name="kategori_bahan_id" id="kategori_bahan_id">
+
+
+                        <div class="mb-3">
+                            <label for="nama_satuan" class="form-label">nama satuan</label>
+                            <input type="text" class="form-control" id="nama_satuan" readonly>
+                            @error('nama_satuan')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <input type="hidden" name="satuan_id" id="satuan_id">
+
 
 
                         <div class="mb-3">
@@ -127,8 +124,8 @@
 <script>
   $('#bahan_dasar_id').select2({})
   $('#warehouse_id').select2({})
-  $('#kategori_bahan_id').select2({})
-  $('#satuan_id').select2({})
+//   $('#kategori_bahan_id').select2({})
+//   $('#satuan_id').select2({})
   $('#vendor_id').select2({})
   $('#bahan_dasar_id').on('change',function (params) {
     var routeUrl = "{{ route('food.data', ':index') }}";
@@ -140,6 +137,10 @@
                 success: function(res) {
                     // console.log(res.harga_satuan);
                     $('#harga_satuan').val(res.harga_satuan)
+                    $('#nama_kategori_bahan').val(res.nama_kategori_bahan)
+                    $('#nama_satuan').val(res.nama_satuan)
+                    $('#kategori_bahan_id').val(res.kategori_bahan_id)
+                    $('#satuan_id').val(res.satuan_id)
                 }
             });
   })

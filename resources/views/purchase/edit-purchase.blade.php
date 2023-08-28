@@ -26,24 +26,6 @@
 
 
                         <div class="mb-3">
-                            <label for="kategori_bahan_id" class="form-label">kategori bahan</label>
-                            <select name="kategori_bahan_id" id="kategori_bahan_id" class="form-control">
-                              @foreach ($kategori_bahans as $kategori_bahan)
-                              @if ($purchase->kategori_bahan_id == $kategori_bahan->id)
-                              <option value="{{ $kategori_bahan->id }}" selected>{{ $kategori_bahan->nama_kategori_bahan }}</option>
-                              @else
-                              <option value="{{ $kategori_bahan->id }}">{{ $kategori_bahan->nama_kategori_bahan }}</option>
-                              @endif
-
-                              @endforeach
-                            </select>
-                            @error('kategori_bahan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
                             <label for="bahan_dasar_id" class="form-label">nama bahan</label>
                             <select name="bahan_dasar_id" id="bahan_dasar_id" class="form-control">
                               <option value="">pilih kategori bahan</option>
@@ -61,21 +43,31 @@
                         </div>
 
 
+
+
                         <div class="mb-3">
-                            <label for="satuan_id" class="form-label">satuan</label>
-                            <select name="satuan_id" id="satuan_id" class="form-control">
-                              @foreach ($satuans as $satuan)
-                                @if ($purchase->satuan_id == $satuan->id)
-                                <option value="{{ $satuan->id }}" selected>{{ $satuan->nama_satuan }}</option>
-                                @else
-                                <option value="{{ $satuan->id }}">{{ $satuan->nama_satuan }}</option>
-                                @endif
-                              @endforeach
-                            </select>
-                            @error('satuan_id')
+                            <label for="nama_kategori_bahan" class="form-label">kategori bahan</label>
+                            <input type="text" value="{{$purchase->nama_kategori_bahan}}" class="form-control" id="nama_kategori_bahan" readonly>
+                            @error('nama_kategori_bahan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <input type="text" id="kategori_bahan_id" name="kategori_bahan_id" value="{{$purchase->kategori_bahan_id}}">
+
+
+                       
+
+
+                        <div class="mb-3">
+                            <label for="nama_satuan" class="form-label">nama satuan</label>
+                            <input type="text" value="{{$purchase->nama_satuan}}" class="form-control" id="nama_satuan" readonly>
+                            @error('nama_satuan')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <input type="text" value="{{$purchase->satuan_id}}" name="satuan_id" id="satuan_id">
 
 
                         <div class="mb-3">
@@ -144,8 +136,8 @@
 <script>
   $('#bahan_dasar_id').select2({})
   $('#warehouse_id').select2({})
-  $('#kategori_bahan_id').select2({})
-  $('#satuan_id').select2({})
+//   $('#kategori_bahan_id').select2({})
+//   $('#satuan_id').select2({})
   $('#vendor_id').select2({})
   $('#bahan_dasar_id').on('change',function (params) {
     var routeUrl = "{{ route('food.data', ':index') }}";
@@ -157,6 +149,10 @@
                 success: function(res) {
                     // console.log(res.harga_satuan);
                     $('#harga_satuan').val(res.harga_satuan)
+                    $('#nama_kategori_bahan').val(res.nama_kategori_bahan)
+                    $('#nama_satuan').val(res.nama_satuan)
+                    $('#kategori_bahan_id').val(res.kategori_bahan_id)
+                    $('#satuan_id').val(res.satuan_id)
                 }
             });
   })

@@ -12,7 +12,11 @@ class BahanDasarController extends Controller
      */
     public function index()
     {
-        $bahan_dasars = DB::table('bahan_dasars')->join('satuan','bahan_dasars.satuan_id','=','satuan.id')->select('bahan_dasars.*','satuan.nama_satuan')->get();
+        $bahan_dasars = DB::table('bahan_dasars')
+                                ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                                ->join('kategori_bahan','bahan_dasars.kategori_bahan_id','=','kategori_bahan.id')
+                                ->select('bahan_dasars.*','satuan.nama_satuan','kategori_bahan.nama_kategori_bahan')
+                                ->get();
         return view('bahan_dasar.index-bahan-dasar',compact('bahan_dasars'));
     }
 
