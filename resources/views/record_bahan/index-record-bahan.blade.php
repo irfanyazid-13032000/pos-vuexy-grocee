@@ -27,7 +27,7 @@
                         <th>action</th>
                     </tr>
                 </thead>
-                <tbody class="table-border-bottom-0" id="table">
+                <tbody class="table-border-bottom-0">
                   
                 </tbody>
             </table>

@@ -272,3 +272,4 @@ Route::get('/proses_produksi/stock_purchase/{id}/{qty}/{warehouse_id}',[ProsesPr
 Route::get('/record_bahan',[RecordBahanController::class,'index'])->name('record.bahan.index');
 Route::get('/record_bahan/delete/{id}',[RecordBahanController::class,'destroy'])->name('record.bahan.delete');
 Route::post('/record_bahan/data',[RecordBahanController::class,'data'])->name('record.bahan.data');
+Route::get('/record_bahan/table',[RecordBahanController::class,'table'])->name('record.bahan.table');
