@@ -24,6 +24,7 @@
                         <th>price per bahan</th>
                         <th>jumlah cost per bahan</th>
                         <th>Date</th>
+                        <th>action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
@@ -65,6 +66,7 @@ $(document).ready(function() {
             { data: 'price_per_bahan', name: 'price_per_bahan' ,orderable: true, searchable: true},
             { data: 'jumlah_cost_per_bahan', name: 'jumlah_cost_per_bahan', orderable: true, searchable: true },
             { data: 'created_at', name: 'created_at', orderable: true, searchable: true },
+            { data: 'action', name: 'action', orderable: true, searchable: true },
         ],
     });
 

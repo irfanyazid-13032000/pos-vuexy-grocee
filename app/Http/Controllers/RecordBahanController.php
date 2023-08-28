@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\RecordBahan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class RecordBahanController extends Controller
@@ -62,7 +63,8 @@ class RecordBahanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('record_bahan')->where('id',$id)->delete();
+        return redirect()->route('record.bahan.index');
     }
 
     
@@ -100,7 +102,7 @@ class RecordBahanController extends Controller
                 return  date("d-m-Y", strtotime($item->created_at));
             })
             ->addColumn('action', function ($item) {
-                return '<a href="" class="btn btn-primary">edit</a> <a href="" class="btn btn-danger">delete</a>';
+                return '<a href="'.route('record.bahan.delete',['id'=>$item->id]).'" class="btn btn-danger">delete</a>';
             })
             ->toJson();
     }
