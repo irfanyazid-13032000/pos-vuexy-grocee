@@ -44,20 +44,11 @@ class FoodController extends Controller
     {
 
         DB::table('menu_masakan')->insert([
-            'nama_menu' => $request->nama_menu
+            'nama_menu' => $request->nama_menu,
+            'porsi' => $request->porsi,
         ]);
 
         return redirect()->route('food.index');
-        // DB::table('food_process')->insert([
-        //     'nama_menu_masakan' => $request->nama_menu_masakan,
-        //     'bahan_dasar_id' => $request->bahan_dasar_id,
-        //     'satuan_id' => $request->satuan_id,
-        //     'qty' => $request->qty,
-        //     'harga_satuan' => $request->harga_satuan,
-        //     'jumlah_harga' => $request->jumlah_harga,
-        //     'created_at' => Carbon::now(),
-        // ]);
-        // return redirect()->route('food');
     }
 
     /**
@@ -83,7 +74,8 @@ class FoodController extends Controller
     public function update(Request $request, string $id)
     {
         DB::table('menu_masakan')->where('id',$id)->update([
-            'nama_menu' => $request->nama_menu
+            'nama_menu' => $request->nama_menu,
+            'porsi' => $request->porsi,
         ]);
 
 
@@ -105,8 +97,8 @@ class FoodController extends Controller
     public function foodProcess($id)
     {
         $food = DB::table('menu_masakan')->where('id',$id)->get()->first();
-        $count_set_menu = DB::table('count_set_menu')->where('menu_masakan_id',$id)->get()->first();
-        // return $count_set_menu;
+        // $count_set_menu = DB::table('count_set_menu')->where('menu_masakan_id',$id)->get()->first();
+        // return $food;
         // $foods_process = DB::table('food_process')->where('menu_masakan_id',$id)->get();
         $foods_process = DB::table('food_process')
                         ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
@@ -115,7 +107,7 @@ class FoodController extends Controller
                         ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                         ->get();
         // return $foods_process;
-        return view('food.food_process.index-food-process',compact('foods_process','food','id','count_set_menu'));
+        return view('food.food_process.index-food-process',compact('foods_process','food','id'));
     }
 
     public function foodProcessCreate($id)

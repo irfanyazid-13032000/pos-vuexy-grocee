@@ -16,17 +16,17 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
-                  @foreach ($foods_process as $food)
+                  @foreach ($foods_process as $makanan)
                   <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$food->nama_bahan}}</td>
-                    <td>{{$food->nama_satuan}}</td>
-                    <td>{{$food->qty}}</td>
-                    <td>Rp. {{number_format($food->harga_satuan)}}</td>
-                    <td>Rp. {{number_format($food->jumlah_harga)}}</td>
+                    <td>{{$makanan->nama_bahan}}</td>
+                    <td>{{$makanan->nama_satuan}}</td>
+                    <td>{{$makanan->qty}}</td>
+                    <td>Rp. {{number_format($makanan->harga_satuan)}}</td>
+                    <td>Rp. {{number_format($makanan->jumlah_harga)}}</td>
                     <td>
-                    <a href="{{route('food.process.edit',['id_food_process'=>$food->id])}}" class="btn btn-primary">edit</a>
-                     <a href="{{route('food.process.delete',['id_food_process'=>$food->id])}}" class="btn btn-danger">delete</a>
+                    <a href="{{route('food.process.edit',['id_food_process'=>$makanan->id])}}" class="btn btn-primary">edit</a>
+                     <a href="{{route('food.process.delete',['id_food_process'=>$makanan->id])}}" class="btn btn-danger">delete</a>
                     </td>
                  </tr>
                     @endforeach
@@ -45,7 +45,7 @@
                   </tr>
                   <tr>
                     <th colspan="5"></th>
-                    <th style="text-align:center;">Porsi : {{$count_set_menu->porsi}}</th>
+                    <th style="text-align:center;">Porsi : {{$food->porsi}}</th>
                     <th></th>
                   </tr>
                   

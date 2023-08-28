@@ -15,6 +15,16 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+
+                        <div class="mb-3">
+                            <label for="porsi" class="form-label">Porsi</label>
+                            <input type="number" class="form-control" id="porsi" name="porsi"
+                                value="{{ old('porsi') }}" required>
+                            @error('porsi')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
                         
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>

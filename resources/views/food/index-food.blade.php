@@ -8,6 +8,7 @@
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
                         <th>Nama Makanan</th>
+                        <th>Porsi</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -16,6 +17,7 @@
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
                      <td>{{$menu->nama_menu}}</td>
+                     <td>{{$menu->porsi}}</td>
                      <td>
                      <a href="{{route('food.edit',['id'=>$menu->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('food.delete',['id'=>$menu->id])}}" class="btn btn-danger">delete</a>
