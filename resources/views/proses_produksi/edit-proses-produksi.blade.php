@@ -23,6 +23,21 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="warehouse_id" class="form-label">warehouse</label>
+                            <select id="warehouse_id" name="warehouse_id" class="form-control">
+                              <option value="">pilih warehouse</option>
+                              @foreach ($warehouses as $warehouse)
+                              <option value="{{$warehouse->id}}">{{$warehouse->name_warehouse}}</option>
+                              @endforeach
+                            </select>
+                            @error('warehouse_id')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                            <br>
+                            <div id="table-stock-warehouse"></div>
+                        </div>
+
 
                         <div class="mb-3">
                             <label for="menu_masakan_id" class="form-label">menu masakan</label>
