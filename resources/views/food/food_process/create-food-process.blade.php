@@ -21,22 +21,24 @@
                             @enderror
                         </div>
 
+                       
+
                         <div class="mb-3">
-                            <label for="satuan_id" class="form-label">Satuan</label>
-                            <select name="satuan_id" id="satuan_id" class="form-control">
-                              @foreach ($satuans as $satuan)
-                              <option value="{{$satuan->id}}">{{$satuan->nama_satuan}}</option>
-                              @endforeach
-                            </select>
-                            @error('satuan_id')
+                            <label for="nama_satuan" class="form-label">nama_satuan</label>
+                            <input type="text" class="form-control" id="nama_satuan" name="nama_satuan"
+                                value="" required>
+                            @error('nama_satuan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
 
+                        <input type="text" name="satuan_id" id="satuan_id">
+
+
                         <div class="mb-3">
                             <label for="qty" class="form-label">Qty</label>
                             <input type="number" class="form-control" id="qty" name="qty"
-                                value="{{ old('qty') }}" required>
+                                value="{{ old('qty') }}" step="any" required>
                             @error('qty')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -79,17 +81,20 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
 <script>
   $('#bahan_dasar_id').select2({})
-  $('#satuan_id').select2({})
+//   $('#satuan_id').select2({})
   $('#bahan_dasar_id').on('change',function (params) {
     var routeUrl = "{{ route('food.data', ':index') }}";
             routeUrl = routeUrl.replace(':index', $('#bahan_dasar_id').val());
+            console.log($('#bahan_dasar_id').val())
 
             $.ajax({
                 url: routeUrl,
                 method: 'GET',
                 success: function(res) {
-                    // console.log(res.harga_satuan);
+                    // console.log(res);
                     $('#harga_satuan').val(res.harga_satuan)
+                    $('#nama_satuan').val(res.nama_satuan)
+                    $('#satuan_id').val(res.satuan_id)
                 }
             });
   })

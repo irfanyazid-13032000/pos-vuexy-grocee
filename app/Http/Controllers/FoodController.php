@@ -34,7 +34,7 @@ class FoodController extends Controller
 
     public function foodData($id)
     {
-        return DB::table('bahan_dasars')->where('id',$id)->get()->first();
+        return DB::table('bahan_dasars')->where('bahan_dasars.id',$id)->join('satuan','bahan_dasars.satuan_id','=','satuan.id')->select('bahan_dasars.*','satuan.nama_satuan')->get()->first();
     }
 
     /**
@@ -105,6 +105,8 @@ class FoodController extends Controller
     public function foodProcess($id)
     {
         $food = DB::table('menu_masakan')->where('id',$id)->get()->first();
+        $count_set_menu = DB::table('count_set_menu')->where('menu_masakan_id',$id)->get()->first();
+        // return $count_set_menu;
         // $foods_process = DB::table('food_process')->where('menu_masakan_id',$id)->get();
         $foods_process = DB::table('food_process')
                         ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
@@ -113,15 +115,16 @@ class FoodController extends Controller
                         ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                         ->get();
         // return $foods_process;
-        return view('food.food_process.index-food-process',compact('foods_process','food','id'));
+        return view('food.food_process.index-food-process',compact('foods_process','food','id','count_set_menu'));
     }
 
     public function foodProcessCreate($id)
     {
-        $bahan_dasars = DB::table('bahan_dasars')->get();
-        $satuans = DB::table('satuan')->get();
-        return view('food.food_process.create-food-process',compact('bahan_dasars','satuans','id'));
+        $bahan_dasars = DB::table('bahan_dasars')->join('satuan','bahan_dasars.satuan_id','=','satuan.id')->select('bahan_dasars.*','satuan.nama_satuan','satuan.id AS satuan_id')->get();
+        return view('food.food_process.create-food-process',compact('bahan_dasars','id'));
     }
+
+
 
     public function foodProcessStore(Request $request, $id)
     {

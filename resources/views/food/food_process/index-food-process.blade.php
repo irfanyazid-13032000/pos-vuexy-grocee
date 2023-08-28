@@ -43,6 +43,12 @@
                     <th style="text-align:center;">Rp. {{number_format($foods_process->sum('jumlah_harga'))}}</th>
                     <th></th>
                   </tr>
+                  <tr>
+                    <th colspan="5"></th>
+                    <th style="text-align:center;">Porsi : {{$count_set_menu->porsi}}</th>
+                    <th></th>
+                  </tr>
+                  
                 
                 
                 </tbody>
