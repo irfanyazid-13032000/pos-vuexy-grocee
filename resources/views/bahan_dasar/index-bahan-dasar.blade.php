@@ -9,6 +9,7 @@
                         <th>No</th>
                         <th>nama bahan</th>
                         <th>harga satuan</th>
+                        <th>Satuan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -18,6 +19,7 @@
                      <td>{{$loop->iteration}}</td>
                      <td>{{$bahan->nama_bahan}}</td>
                      <td>Rp. {{number_format($bahan->harga_satuan)}}</td>
+                     <td>{{$bahan->nama_satuan}}</td>
                      <td>
                       <a href="{{route('bahan.dasar.edit',['id'=>$bahan->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('bahan.dasar.delete',['id'=>$bahan->id])}}" class="btn btn-danger">delete</a>

@@ -12,7 +12,7 @@ class BahanDasarController extends Controller
      */
     public function index()
     {
-        $bahan_dasars = DB::table('bahan_dasars')->get();
+        $bahan_dasars = DB::table('bahan_dasars')->join('satuan','bahan_dasars.satuan_id','=','satuan.id')->select('bahan_dasars.*','satuan.nama_satuan')->get();
         return view('bahan_dasar.index-bahan-dasar',compact('bahan_dasars'));
     }
 
@@ -21,7 +21,8 @@ class BahanDasarController extends Controller
      */
     public function create()
     {
-        return view('bahan_dasar.create-bahan-dasar');
+        $satuans = DB::table('satuan')->get();
+        return view('bahan_dasar.create-bahan-dasar',compact('satuans'));
     }
 
     /**
@@ -32,6 +33,7 @@ class BahanDasarController extends Controller
         DB::table('bahan_dasars')->insert([
             'nama_bahan' => $request->nama_bahan,
             'harga_satuan' => $request->harga_satuan,
+            'satuan_id' => $request->satuan_id,
         ]);
 
         return redirect()->route('bahan.dasar.index');
