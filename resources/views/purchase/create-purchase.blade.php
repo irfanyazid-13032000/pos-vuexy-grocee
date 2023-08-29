@@ -26,7 +26,7 @@
                         <div class="mb-3">
                             <label for="bahan_dasar_id" class="form-label">nama bahan</label>
                             <select name="bahan_dasar_id" id="bahan_dasar_id" class="form-control">
-                              <option value="">pilih kategori bahan</option>
+                              <option value="">pilih bahan</option>
                               @foreach ($bahans as $bahan)
                               <option value="{{ $bahan->id }}">{{ $bahan->nama_bahan }}</option>
                               @endforeach

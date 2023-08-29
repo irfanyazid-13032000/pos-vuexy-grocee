@@ -142,7 +142,7 @@ class FoodController extends Controller
         $bahan_dasars = DB::table('bahan_dasars')->get();
         $satuans = DB::table('satuan')->get();
         $food_process = DB::table('food_process')->where('id',$id_food_process)->get()->first();
-        return view('food.food_process.edit-food-process',compact('bahan_dasars','satuans','food_process'));
+        return view('food.food_process.edit-food-process',compact('bahan_dasars','satuans','food_process','id_food_process'));
     }
 
     public function foodProcessUpdate(Request $request, $id_food_process)
@@ -155,6 +155,7 @@ class FoodController extends Controller
             'qty' => $request->qty,
             'harga_satuan' => $request->harga_satuan,
             'jumlah_harga' => $request->jumlah_harga,
+            'warehouse_id' => $request->warehouse_id,
         ]);
 
         return redirect()->route('food.process',['id'=>$food->menu_masakan_id]);

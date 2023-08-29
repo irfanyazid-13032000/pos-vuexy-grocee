@@ -32,7 +32,7 @@
                             @enderror
                         </div>
 
-                        <input type="text" name="satuan_id" id="satuan_id">
+                        <input type="hidden" name="satuan_id" id="satuan_id">
 
 
                         <div class="mb-3">

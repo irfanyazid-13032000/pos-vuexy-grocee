@@ -7,6 +7,7 @@
                 <thead>
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
+                        <th>warehouse</th>
                         <th>nama Kategori Produksi</th>
                         <th>menu masakan</th>
                         <th>qty</th>
@@ -19,6 +20,7 @@
                   @foreach ($proses_produksis as $proses)
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
+                     <td>{{$proses->name_warehouse}}</td>
                      <td>{{$proses->nama_kategori}}</td>
                      <td>{{$proses->nama_menu}}</td>
                      <td>{{$proses->qty}}</td>

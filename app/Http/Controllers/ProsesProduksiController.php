@@ -19,7 +19,8 @@ class ProsesProduksiController extends Controller
     {
         $proses_produksis = ProsesProduksi::join('kategori_proses_produksi','proses_produksi.kategori_produksi_id','=','kategori_proses_produksi.id')
                                 ->join('menu_masakan','proses_produksi.menu_masakan_id','=','menu_masakan.id')
-                                ->select('proses_produksi.*','kategori_proses_produksi.nama_kategori','menu_masakan.nama_menu')
+                                ->join('warehouses','proses_produksi.warehouse_id','=','warehouses.id')
+                                ->select('proses_produksi.*','kategori_proses_produksi.nama_kategori','menu_masakan.nama_menu','warehouses.name_warehouse')
                                 ->get();
         // return $proses_produksis;
         return view('proses_produksi.index-proses-produksi',compact('proses_produksis'));
@@ -73,6 +74,7 @@ class ProsesProduksiController extends Controller
             'menu_masakan_id' => $request->menu_masakan_id,
             'jumlah_cost' => $request->jumlah_cost,
             'qty' => $request->qty,
+            'warehouse_id' => $request->warehouse_id,
             'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
 
@@ -98,8 +100,8 @@ class ProsesProduksiController extends Controller
         $menu_masakans = DB::table('menu_masakan')->get();
         $warehouses = DB::table('warehouses')->get();
         $proses_produksi = ProsesProduksi::find($id);
-        return $proses_produksi;
-        return view('proses_produksi.edit-proses-produksi',compact('kategori_proses_produksis','menu_masakans','proses_produksi','warehouses'));
+        // return $proses_produksi;
+        return view('proses_produksi.edit-proses-produksi',compact('kategori_proses_produksis','menu_masakans','proses_produksi','warehouses','id'));
     }
 
     /**
