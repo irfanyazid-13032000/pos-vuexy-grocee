@@ -2,42 +2,60 @@
 @section('content')
 <div class="col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Edit Data Bahan Tambahan Produksi</h5>
+                <h5 class="card-header">Tambah Data Bahan Tambahan Produksi</h5>
                 <div class="card-body">
-                    <form action="{{route('bahan.tambahan.produksi.update',['id'=>$bahan_tambahan_produksi->id])}}" method="POST" >
+                    <form action="{{route('bahan.tambahan.produksi.update',['id'=>$id])}}" method="POST" >
                         @csrf
                         <div class="mb-3">
-                            <label for="nama_bahan_tambahan_produksi" class="form-label">Nama Bahan Tambahan</label>
-                            <select name="nama_bahan_tambahan_produksi" id="nama_bahan_tambahan_produksi" class="form-control">
-                                @foreach ($bahan_dasars as $bahan)
-                                @if ($bahan_tambahan_produksi->nama_bahan_tambahan_produksi == $bahan->id)
-                                <option value="{{$bahan->id}}" selected>{{$bahan->nama_bahan}}</option>
+                            <label for="warehouse_id" class="form-label">Nama Warehouse</label>
+                            <select name="warehouse_id" id="warehouse_id" class="form-control">
+                                <option value="">pilih warehouse</option>
+                                @foreach ($warehouses as $warehouse)
+                                @if ($bahan_tambahan_produksi->warehouse_id == $warehouse->id)
+                                <option value="{{$warehouse->id}}" selected>{{$warehouse->name_warehouse}}</option>
                                 @else
-                                <option value="{{$bahan->id}}">{{$bahan->nama_bahan}}</option>
+                                <option value="{{$warehouse->id}}">{{$warehouse->name_warehouse}}</option>
                                 @endif
                                 @endforeach
                             </select>
-                            @error('nama_bahan_tambahan_produksi')
+                            @error('warehouse_id')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
+                        </div>
+
+                        <div class="mb-3" id="bahan-tambahan">
+                            
                         </div>
 
 
                         <div class="mb-3">
                             <label for="harga_satuan" class="form-label">Harga Satuan</label>
                             <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ $bahan_tambahan_produksi->harga_satuan }}" readonly>
+                                value="" readonly>
                             @error('harga_satuan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
 
 
+                      
+
+
                         <div class="mb-3">
                             <label for="qty" class="form-label">Qty</label>
                             <input type="number" class="form-control" id="qty" name="qty"
-                                value="{{ $bahan_tambahan_produksi->qty }}" required>
+                                value="{{ old('qty') }}" required>
                             @error('qty')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="qty_warehouse" class="form-label">Qty In Warehouse</label>
+                            <input type="number" class="form-control" id="qty_warehouse" name="qty_warehouse"
+                                value="{{ old('qty_warehouse') }}" required>
+                            @error('qty_warehouse')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
@@ -48,7 +66,7 @@
                         <div class="mb-3">
                             <label for="jumlah_harga" class="form-label">jumlah harga</label>
                             <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="{{ $bahan_tambahan_produksi->jumlah_harga }}" readonly>
+                                value="{{ old('jumlah_harga') }}" readonly>
                             @error('jumlah_harga')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -66,24 +84,70 @@
 
 @push('addon-script')
 <script>
-   $('#qty').on('keyup',function (params) {
-        let harga_satuan = $('#harga_satuan').val()
-        let qty = $('#qty').val()
-        $('#jumlah_harga').val(harga_satuan * qty)
-    })
+   
+    $('#warehouse_id').on('change',function (params) {
+        renderOptionBahanTambahan()
+        });
 
-    $('#nama_bahan_tambahan_produksi').on('change',function (params) {
-        var routeUrl = "{{ route('data.bahan.dasar', ':index') }}";
-            routeUrl = routeUrl.replace(':index', $('#nama_bahan_tambahan_produksi').val());
+        
+
+
+
+        function renderOptionBahanTambahan(){
+            var routeUrl = "{{ route('data.bahan.tambahan', ':id_warehouse') }}";
+            routeUrl = routeUrl.replace(':id_warehouse', $('#warehouse_id').val());
 
             $.ajax({
                 url: routeUrl,
                 method: 'GET',
                 success: function(res) {
-                    $('#harga_satuan').val(res.harga_satuan)
-                    console.log(res.harga_satuan);
+                    $('#bahan-tambahan').html(res)
+                    getPriceBahanDasar()
+
                 }
             });
-        });
+        }
+
+
+        function getPriceBahanDasar(){
+            $('#bahan_dasar_id').on('change',function (params) {
+                alert($('#bahan_dasar_id').val())
+            var routeUrl = "{{ route('harga.bahan.tambahan', [':id_warehouse',':id_bahan_dasar']) }}";
+            routeUrl = routeUrl.replace(':id_warehouse', $('#warehouse_id').val());
+            routeUrl = routeUrl.replace(':id_bahan_dasar', $('#bahan_dasar_id').val());
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                    // $('#bahan-tambahan').html(res)
+                    // getPriceBahanDasar()
+                    // console.log(res);
+                    $('#harga_satuan').val(res.harga_satuan)
+                    $('#qty_warehouse').val(res.qty)
+                    hitungSisaGudang(res.qty)
+
+                }
+            });
+        })
+        }
+
+
+        function hitungSisaGudang(qtyGudang) {
+            $('#qty').on('keyup',function () {
+                    let harga_satuan = $('#harga_satuan').val()
+                    let qty = $('#qty').val()
+                    let sisaQty = qtyGudang - qty
+                    $('#jumlah_harga').val(harga_satuan * qty)
+                    $('#qty_warehouse').val(sisaQty)
+                    if (sisaQty < 0) {
+                        alert('stock tidak cukup!!!')
+                    }
+                })
+        }
+
+        renderOptionBahanTambahan()
+
+
 </script>
 @endpush

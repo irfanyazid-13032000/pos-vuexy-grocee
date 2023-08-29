@@ -78,9 +78,10 @@ class BahanTambahanProduksiController extends Controller
      */
     public function edit(string $id)
     {
-        $bahan_dasars = DB::table('bahan_dasars')->get();
         $bahan_tambahan_produksi = BahanTambahanProduksi::find($id);
-        return view('bahan_tambahan_produksi.edit-bahan-tambahan-produksi',compact('bahan_tambahan_produksi','bahan_dasars'));
+        $bahan_dasars = DB::table('bahan_dan_kategori')->where('kategori_bahan_id',14)->get();
+        $warehouses = DB::table('warehouses')->get();
+        return view('bahan_tambahan_produksi.edit-bahan-tambahan-produksi',compact('bahan_tambahan_produksi','bahan_dasars','warehouses','id'));
     }
 
     /**
@@ -88,11 +89,23 @@ class BahanTambahanProduksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         BahanTambahanProduksi::find($id)->update([
-            'nama_bahan_tambahan_produksi' => $request->nama_bahan_tambahan_produksi,
+            'bahan_dasar_id' => $request->bahan_dasar_id,
+            'warehouse_id' => $request->warehouse_id,
             'harga_satuan' => $request->harga_satuan,
             'qty' => $request->qty,
             'jumlah_harga' => $request->jumlah_harga,
+        ]);
+
+         // get data stock warehouse yang ada di purchase
+         $updateStockWarehouse = Purchase::where('bahan_dasar_id', $request->bahan_dasar_id)
+         ->where('warehouse_id', $request->warehouse_id)
+         ->first();
+
+        // update stock dengan qty yang sudah dikurangi
+        $updateStockWarehouse->update([
+        'qty' => $request->qty_warehouse
         ]);
 
 
