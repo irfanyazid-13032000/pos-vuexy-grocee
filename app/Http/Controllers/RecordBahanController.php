@@ -17,35 +17,34 @@ class RecordBahanController extends Controller
     {
 
         $cari = $request->query('cari');
-        $date_from = $request->query('date_from');
-        // return $date_from;
-        $date_to = $request->query('date_to');
+        if (!empty($request->query('startDate')) && !empty($request->query('endDate'))) {
+            $date_from = date("Y-m-d",strtotime($request->query('startDate')));
+            $date_to = date("Y-m-d",strtotime($request->query('endDate')));
+            $date_from_start = $date_from . ' 00:00:00';
+            $date_to_end = $date_to . ' 23:59:59';
+        }else{
+            $date_from_start = '';
+            $date_to_end = '';
+        }
 
-        $date_from_start = $date_from . ' 00:00:00';
-        $date_to_end = $date_to . ' 23:59:59';
-
-    if (!empty($cari) && !empty($date_from) && !empty($date_to)) {
         $record_bahans = RecordBahan::join('kategori_proses_produksi', 'record_bahan.kategori_produksi_id', '=', 'kategori_proses_produksi.id')
         ->join('bahan_dasars', 'record_bahan.bahan_dasar_id', 'bahan_dasars.id')
-        ->join('menu_masakan', 'record_bahan.menu_masakan_id', '=', 'menu_masakan.id')
-        ->where('bahan_dasars.nama_bahan','like','%'.$cari.'%')
-        ->where('record_bahan.created_at', '>=', $date_from_start)
-        ->where('record_bahan.created_at', '<=', $date_to_end)
-        ->select('record_bahan.*', 'kategori_proses_produksi.nama_kategori', 'bahan_dasars.nama_bahan', 'menu_masakan.nama_menu')
+        ->join('menu_masakan', 'record_bahan.menu_masakan_id', '=', 'menu_masakan.id');
+
+        if(!empty($cari)){
+            $record_bahans->where('bahan_dasars.nama_bahan','like','%'.$cari.'%')
+                            ->orWhere('menu_masakan.nama_menu','like','%'.$cari.'%');
+        }
+
+        if (!empty($date_from) && !empty($date_to)) {
+            $record_bahans->where('record_bahan.created_at', '>=', $date_from_start)
+                          ->where('record_bahan.created_at', '<=', $date_to_end);
+        }
+
+        $record_bahans = $record_bahans->select('record_bahan.*', 'kategori_proses_produksi.nama_kategori', 'bahan_dasars.nama_bahan', 'menu_masakan.nama_menu')
         ->paginate(5)->onEachSide(2);
-    }else{
-        // return 'lalal';
-        $record_bahans = RecordBahan::join('kategori_proses_produksi', 'record_bahan.kategori_produksi_id', '=', 'kategori_proses_produksi.id')
-                        ->join('bahan_dasars', 'record_bahan.bahan_dasar_id', 'bahan_dasars.id')
-                        ->join('menu_masakan', 'record_bahan.menu_masakan_id', '=', 'menu_masakan.id')
-                        ->select('record_bahan.*', 'kategori_proses_produksi.nama_kategori', 'bahan_dasars.nama_bahan', 'menu_masakan.nama_menu')
-                        ->paginate(5)->onEachSide(2);
-    }
-    //    return view('record_bahan.index-record-bahan');
-    
-
-
-        return view('record_bahan.record-bahan-pagination-sendiri',compact('record_bahans','cari'));
+   
+        return view('record_bahan.record-bahan-pagination-sendiri',compact('record_bahans','cari','date_to_end','date_from_start'));
     }
 
     /**

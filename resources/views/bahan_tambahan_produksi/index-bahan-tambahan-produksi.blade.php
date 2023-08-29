@@ -12,6 +12,7 @@
                         <th>qty</th>
                         <th>harga satuan</th>
                         <th>jumlah harga</th>
+                        <th>date</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                     <td>{{$bahan->qty}}</td>
                     <td>Rp. {{number_format($bahan->harga_satuan)}}</td>
                     <td>Rp. {{number_format($bahan->jumlah_harga)}}</td>
+                    <td>{{$bahan->created_at}}</td>
                     <td>
                     <a href="{{route('bahan.tambahan.produksi.edit',['id'=>$bahan->id])}}" class="btn btn-primary">edit</a>
                     <a href="{{route('bahan.tambahan.produksi.delete',['id'=>$bahan->id])}}" class="btn btn-danger">delete</a>
