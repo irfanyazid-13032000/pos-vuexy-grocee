@@ -219,6 +219,15 @@ Route::get('/kategori_bahan/delete/{id}',[KategoriBahanController::class,'destro
 
 
 
+
+Route::get('/bahan_kategori_bahan/{id}',[KategoriBahanController::class,'indexBahan'])->name('bahan.baku.kategori.bahan.index');
+Route::get('/bahan_kategori_bahan/{id}/create',[KategoriBahanController::class,'createBahan'])->name('bahan.baku.kategori.bahan.create');
+Route::post('/bahan_kategori_bahan/{id}/store',[KategoriBahanController::class,'storeBahan'])->name('bahan.baku.kategori.bahan.store');
+Route::get('/bahan_kategori_bahan/edit/{id_bahan}',[KategoriBahanController::class,'editBahan'])->name('bahan.baku.kategori.bahan.edit');
+Route::post('/bahan_kategori_bahan/update/{id_bahan}',[KategoriBahanController::class,'updateBahan'])->name('bahan.baku.kategori.bahan.update');
+Route::get('/bahan_kategori_bahan/{id}/delete/{id_bahan}',[KategoriBahanController::class,'deleteBahan'])->name('bahan.baku.kategori.bahan.delete');
+
+
 Route::get('/bahan_dasar',[BahanDasarController::class,'index'])->name('bahan.dasar.index');
 Route::get('/bahan_dasar/create',[BahanDasarController::class,'create'])->name('bahan.dasar.create');
 Route::post('/bahan_dasar/store',[BahanDasarController::class,'store'])->name('bahan.dasar.store');

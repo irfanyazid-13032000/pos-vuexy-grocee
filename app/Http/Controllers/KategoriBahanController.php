@@ -68,4 +68,51 @@ class KategoriBahanController extends Controller
         DB::table('kategori_bahan')->where('id',$id)->delete();
         return redirect()->route('kategori.bahan.index');
     }
+
+    public function indexBahan($id)
+    {
+        $kategori_bahan = DB::table('kategori_bahan')->where('id',$id)->get()->first();
+        $bahans = DB::table('bahan_dan_kategori')->where('kategori_bahan_id',$id)->get();
+        return view('kategori_bahan.bahan.index-bahan-kategori-bahan',compact('kategori_bahan','id','bahans'));
+    }
+
+    public function createBahan($id)
+    {
+        $kategori_bahan = DB::table('kategori_bahan')->where('id',$id)->get()->first();
+        return view('kategori_bahan.bahan.create-bahan-kategori-bahan',compact('kategori_bahan'));
+    }
+
+    public function storeBahan(Request $request, $id)
+    {
+        DB::table('bahan_dan_kategori')->insert([
+            'kategori_bahan_id' => $request->kategori_bahan_id,
+            'nama_bahan' => $request->nama_bahan,
+        ]);
+
+        return redirect()->route('bahan.baku.kategori.bahan.index',['id'=>$id]);
+    }
+
+    public function editBahan($id)
+    {
+        $bahan = DB::table('bahan_dan_kategori')->where('id',$id)->get()->first();
+        $kategori_bahan = DB::table('kategori_bahan')->where('id',$bahan->kategori_bahan_id)->get()->first();
+        return view('kategori_bahan.bahan.edit-bahan-kategori-bahan',compact('kategori_bahan','bahan'));
+    }
+
+    public function updateBahan(Request $request, $id_bahan)
+    {
+        DB::table('bahan_dan_kategori')->where('id',$id_bahan)->update([
+            'kategori_bahan_id' => $request->kategori_bahan_id,
+            'nama_bahan' => $request->nama_bahan,
+        ]);
+
+        return redirect()->route('bahan.baku.kategori.bahan.index',['id'=>$request->kategori_bahan_id,]);
+    }
+
+    public function deleteBahan($id, $id_bahan)
+    {
+        DB::table('bahan_dan_kategori')->where('id',$id_bahan)->delete();
+
+        return redirect()->route('bahan.baku.kategori.bahan.index',['id'=>$id]);
+    }
 }
