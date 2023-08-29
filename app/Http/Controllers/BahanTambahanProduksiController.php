@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTimeZone;
 use Carbon\Carbon;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\BahanTambahanProduksi;
@@ -15,9 +16,11 @@ class BahanTambahanProduksiController extends Controller
      */
     public function index()
     {
-        $bahan_tambahan_produksis = BahanTambahanProduksi::join('bahan_dasars','bahan_tambahan_produksi.nama_bahan_tambahan_produksi','=','bahan_dasars.id')
-                                                ->select('bahan_tambahan_produksi.*','bahan_dasars.nama_bahan')
+        $bahan_tambahan_produksis = BahanTambahanProduksi::join('bahan_dasars','bahan_tambahan_produksi.bahan_dasar_id','=','bahan_dasars.id')
+                                                ->join('warehouses','bahan_tambahan_produksi.warehouse_id','=','warehouses.id')
+                                                ->select('bahan_tambahan_produksi.*','bahan_dasars.nama_bahan','warehouses.name_warehouse')
                                                 ->get();
+        // return $bahan_tambahan_produksis;
         // return $bahan_tambahan_produksis;
         return view('bahan_tambahan_produksi.index-bahan-tambahan-produksi',compact('bahan_tambahan_produksis'));
     }
@@ -27,8 +30,9 @@ class BahanTambahanProduksiController extends Controller
      */
     public function create()
     {
-        $bahan_dasars = DB::table('bahan_dasars')->get();
-        return view('bahan_tambahan_produksi.create-bahan-tambahan-produksi',compact('bahan_dasars'));
+        $bahan_dasars = DB::table('bahan_dan_kategori')->where('kategori_bahan_id',14)->get();
+        $warehouses = DB::table('warehouses')->get();
+        return view('bahan_tambahan_produksi.create-bahan-tambahan-produksi',compact('bahan_dasars','warehouses'));
     }
 
     /**
@@ -36,14 +40,27 @@ class BahanTambahanProduksiController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         BahanTambahanProduksi::create([
-            'nama_bahan_tambahan_produksi' => $request->nama_bahan_tambahan_produksi,
+            'bahan_dasar_id' => $request->bahan_dasar_id,
+            'warehouse_id' => $request->warehouse_id,
             'harga_satuan' => $request->harga_satuan,
             'qty' => $request->qty,
             'jumlah_harga' => $request->jumlah_harga,
             'start_pemakaian' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
             'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
+
+        // get data stock warehouse yang ada di purchase
+        $updateStockWarehouse = Purchase::where('bahan_dasar_id', $request->bahan_dasar_id)
+                            ->where('warehouse_id', $request->warehouse_id)
+                            ->first();
+
+        // update stock dengan qty yang sudah dikurangi
+        $updateStockWarehouse->update([
+            'qty' => $request->qty_warehouse
+        ]);
+
 
         return redirect()->route('bahan.tambahan.produksi.index');
     }

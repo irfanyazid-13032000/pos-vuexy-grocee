@@ -7,6 +7,7 @@
                 <thead>
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
+                        <th>Warehouse</th>
                         <th>nama bahan tambahan produksi</th>
                         <th>qty</th>
                         <th>harga satuan</th>
@@ -18,6 +19,7 @@
                   @foreach ($bahan_tambahan_produksis as $bahan)
                   <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
+                    <td>{{$bahan->name_warehouse}}</td>
                     <td>{{$bahan->nama_bahan}}</td>
                     <td>{{$bahan->qty}}</td>
                     <td>Rp. {{number_format($bahan->harga_satuan)}}</td>

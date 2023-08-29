@@ -141,12 +141,18 @@
                     $('#nama_satuan').val(res.nama_satuan)
                     $('#kategori_bahan_id').val(res.kategori_bahan_id)
                     $('#satuan_id').val(res.satuan_id)
+                    hitungJumlahHarga()
                 }
             });
   })
 
   $('#qty').on('keyup',function (params) {
-    $('#jumlah_harga').val($('#qty').val() * $('#harga_satuan').val())
+    hitungJumlahHarga()
   })
+
+  function hitungJumlahHarga(){
+    $('#jumlah_harga').val($('#qty').val() * $('#harga_satuan').val())
+  }
+
 </script>
 @endpush

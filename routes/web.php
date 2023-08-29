@@ -244,6 +244,8 @@ Route::get('/bahan_tambahan_produksi/edit/{id}',[BahanTambahanProduksiController
 Route::post('/bahan_tambahan_produksi/update/{id}',[BahanTambahanProduksiController::class,'update'])->name('bahan.tambahan.produksi.update');
 Route::get('/bahan_tambahan_produksi/delete/{id}',[BahanTambahanProduksiController::class,'destroy'])->name('bahan.tambahan.produksi.delete');
 Route::get('/bahan_data/{id}',[BahanDasarController::class,'dataBahanDasar'])->name('data.bahan.dasar');
+Route::get('/bahan_tambahan_data_by_warehouse/{id_warehouse}',[BahanDasarController::class,'dataBahanTambahan'])->name('data.bahan.tambahan');
+Route::get('/harga_bahan_tambahan_data_by_warehouse/{id_warehouse}/{id_bahan_dasar}',[BahanDasarController::class,'hargaBahanTambahan'])->name('harga.bahan.tambahan');
 
 
 
