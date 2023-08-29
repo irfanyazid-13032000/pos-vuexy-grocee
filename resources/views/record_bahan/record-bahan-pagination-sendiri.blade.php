@@ -19,16 +19,23 @@
             <div class="col-md-3">
                 <input type="text" id="search" class="form-control" placeholder="cari data" value="{{$cari}}" name="cari">
             </div>
-            
-
-            <div class="week-picker"></div>
 
             <div class="col-md-3">
-                <input id="startDate" name="startDate" value="{{$date_from_start}}" class="form-control">
+                <select name="proses_produksi_id" id="proses_produksi_id" class="form-control">
+                    <option value="">pilih line produksi</option>
+                    @foreach ($kategori_proses_produksis as $kat_proses_produksi)
+                    <option value="{{$kat_proses_produksi->id}}">{{$kat_proses_produksi->nama_kategori}}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+
+            <div class="col-md-3">
+                <input type="date" id="startDate" name="startDate" value="{{$date_from}}" class="form-control">
             </div>
 
             <div class="col-md-3">
-                <input id="endDate" name="endDate" value="{{$date_to_end}}" class="form-control">
+                <input type="date" id="endDate" name="endDate" value="{{$date_to}}" class="form-control">
             </div>
               
 
@@ -71,7 +78,7 @@
               </tbody>
           </table>
 
-          {{ $record_bahans->appends(['cari' => $cari, 'startDate' => $date_from_start, 'endDate' => $date_to_end])->links() }}
+          {{ $record_bahans->appends(['cari' => $cari, 'startDate' => $date_from, 'endDate' => $date_to])->links() }}
 
 
         </div>
@@ -82,48 +89,4 @@
         
 @endsection
 
-@push('addon-script')
- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- <script>
-    $(function() {
-    var startDate;
-    var endDate;
-    
-    var selectCurrentWeek = function() {
-        window.setTimeout(function () {
-            $('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
-        }, 1);
-    }
-    
-    $('.week-picker').datepicker( {
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        firstDay: 1,
-        onSelect: function(dateText, inst) { 
-            var date = $(this).datepicker('getDate');
-            startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 1);
-            endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 7);
-            var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
-            $('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
-            $('#startDate').val($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
-            $('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
-            $('#endDate').val($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
-            
-            selectCurrentWeek();
-        },
-        beforeShowDay: function(date) {
-            var cssClass = '';
-            if(date >= startDate && date <= endDate)
-                cssClass = 'ui-datepicker-current-day';
-            return [true, cssClass];
-        },
-        onChangeMonthYear: function(year, month, inst) {
-            selectCurrentWeek();
-        }
-    });
-    
-    $('.week-picker .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
-    $('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
-});
-</script>
-@endpush
+
