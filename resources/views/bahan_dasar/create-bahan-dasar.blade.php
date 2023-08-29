@@ -7,12 +7,20 @@
                     <form action="{{route('bahan.dasar.store')}}" method="POST" >
                         @csrf
                         <div class="mb-3">
-                            <label for="nama_bahan" class="form-label">Nama bahan</label>
-                            <input type="text" class="form-control" id="nama_bahan" name="nama_bahan"
-                                value="{{ old('nama_bahan') }}" required>
-                            @error('nama_bahan')
+                            <label for="kategori_bahan_id" class="form-label">kategori bahan</label>
+                            <select name="kategori_bahan_id" id="kategori_bahan_id" class="form-control">
+                                <option value="">pilih kategori bahan</option>
+                                @foreach ($kategori_bahans as $kategori_bahan)
+                                <option value="{{$kategori_bahan->id}}">{{$kategori_bahan->nama_kategori_bahan}}</option>
+                                @endforeach
+                            </select>
+                            @error('kategori_bahan_id')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
+                        </div>
+
+                        <div class="mb-3" id="bahan_dasar">
+                            
                         </div>
 
                         <div class="mb-3">
@@ -55,5 +63,28 @@
 
 <script>
     $('#satuan_id').select2({})
+    $('#kategori_bahan_id').select2({})
+
+
+
+    $('#kategori_bahan_id').on('change',function (params) {
+        renderOption()
+    })
+
+
+
+
+    function renderOption() {
+        var routeUrl = "{{ route('bahan.dasar.option', ':id_kategori') }}";
+            routeUrl = routeUrl.replace(':id_kategori', $('#kategori_bahan_id').val());
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                    $('#bahan_dasar').html(res)
+                }
+            });
+    }
 </script>
 @endpush

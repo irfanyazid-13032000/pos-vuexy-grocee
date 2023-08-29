@@ -26,7 +26,8 @@ class BahanDasarController extends Controller
     public function create()
     {
         $satuans = DB::table('satuan')->get();
-        return view('bahan_dasar.create-bahan-dasar',compact('satuans'));
+        $kategori_bahans = DB::table('kategori_bahan')->get();
+        return view('bahan_dasar.create-bahan-dasar',compact('satuans','kategori_bahans'));
     }
 
     /**
@@ -34,10 +35,14 @@ class BahanDasarController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request;
+
         DB::table('bahan_dasars')->insert([
             'nama_bahan' => $request->nama_bahan,
             'harga_satuan' => $request->harga_satuan,
             'satuan_id' => $request->satuan_id,
+            'kategori_bahan_id' => $request->kategori_bahan_id,
         ]);
 
         return redirect()->route('bahan.dasar.index');
@@ -57,7 +62,9 @@ class BahanDasarController extends Controller
     public function edit(string $id)
     {
         $bahan_dasar = DB::table('bahan_dasars')->where('id',$id)->get()->first();
-        return view('bahan_dasar.edit-bahan-dasar',compact('bahan_dasar'));
+        $kategori_bahans = DB::table('kategori_bahan')->get();
+        $satuans = DB::table('satuan')->get();
+        return view('bahan_dasar.edit-bahan-dasar',compact('bahan_dasar','kategori_bahans','satuans'));
     }
 
     /**
@@ -87,5 +94,14 @@ class BahanDasarController extends Controller
     public function dataBahanDasar($id)
     {
         return DB::table('bahan_dasars')->where('id',$id)->get()->first();
+    }
+
+    public function option($id)
+    {
+        $bahans = DB::table('bahan_dan_kategori')->where('kategori_bahan_id',$id)->get();
+
+        $html = view('bahan_dasar.option-bahan-dasar-by-kategori',compact('bahans'))->render();
+
+        return $html;
     }
 }

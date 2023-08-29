@@ -230,6 +230,7 @@ Route::get('/bahan_kategori_bahan/{id}/delete/{id_bahan}',[KategoriBahanControll
 
 Route::get('/bahan_dasar',[BahanDasarController::class,'index'])->name('bahan.dasar.index');
 Route::get('/bahan_dasar/create',[BahanDasarController::class,'create'])->name('bahan.dasar.create');
+Route::get('/bahan_dasar/option/{id_kategori}',[BahanDasarController::class,'option'])->name('bahan.dasar.option');
 Route::post('/bahan_dasar/store',[BahanDasarController::class,'store'])->name('bahan.dasar.store');
 Route::get('/bahan_dasar/edit/{id}',[BahanDasarController::class,'edit'])->name('bahan.dasar.edit');
 Route::post('/bahan_dasar/update/{id}',[BahanDasarController::class,'update'])->name('bahan.dasar.update');

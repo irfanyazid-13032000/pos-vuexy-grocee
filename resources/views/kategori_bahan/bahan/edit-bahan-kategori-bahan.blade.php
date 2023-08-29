@@ -15,7 +15,7 @@
                             @enderror
                         </div>
 
-                        <input type="number" name="kategori_bahan_id" value="{{$kategori_bahan->id}}">
+                        <input type="hidden" name="kategori_bahan_id" value="{{$kategori_bahan->id}}">
 
                         <div class="mb-3">
                             <label for="nama_bahan" class="form-label">Nama  Bahan</label>
