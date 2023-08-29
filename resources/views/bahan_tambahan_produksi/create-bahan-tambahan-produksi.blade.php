@@ -2,7 +2,7 @@
 @section('content')
 <div class="col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Tambah Data Bahan Tambahan Produksi</h5>
+                <h5 class="card-header">Data Penggunaan Bahan Tambahan Produksi</h5>
                 <div class="card-body">
                     <form action="{{route('bahan.tambahan.produksi.store')}}" method="POST" >
                         @csrf

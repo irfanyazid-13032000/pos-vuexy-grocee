@@ -87,6 +87,12 @@
                   </a>
                 </li>
 
+                <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
+                  <a href="{{route('satuan.index')}}" class="menu-link">
+                    <div>satuan</div>
+                  </a>
+                </li>
+
                 <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
                   <a href="{{route('kategori.bahan.index')}}" class="menu-link">
                     <div>Data Kategori Bahan</div>
@@ -94,11 +100,7 @@
                 </li>
 
                 
-                <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
-                  <a href="{{route('satuan.index')}}" class="menu-link">
-                    <div>satuan</div>
-                  </a>
-                </li>
+                
 
                 <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.dasar.index')}}" class="menu-link">
@@ -276,11 +278,11 @@
                   </a>
                 </li>
 
-                <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
+                <!-- <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.dasar.index')}}" class="menu-link">
                     <div>Data Bahan Produksi</div>
                   </a>
-                </li>
+                </li> -->
 
 
                 <!-- <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">

@@ -8,11 +8,11 @@
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
                         <th>Warehouse</th>
-                        <th>nama bahan tambahan produksi</th>
+                        <th>bahan tambahan produksi</th>
                         <th>qty</th>
                         <th>harga satuan</th>
                         <th>jumlah harga</th>
-                        <th>date</th>
+                        <th>Tanggal Pemakaian</th>
                         <th>action</th>
                     </tr>
                 </thead>

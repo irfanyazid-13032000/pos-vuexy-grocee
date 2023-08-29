@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="satuan_id" class="form-label">kategori bahan</label>
+                            <label for="satuan_id" class="form-label">Satuan</label>
                             <select name="satuan_id" id="satuan_id" class="form-control">
                                 <option value="">pilih satuan</option>
                                 @foreach ($satuans as $satuan)
