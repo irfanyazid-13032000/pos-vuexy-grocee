@@ -55,6 +55,20 @@ class PurchaseController extends Controller
             'vendor_id' => $request->vendor_id,
         ]);
 
+        $warehouse_id = $request->warehouse_id;
+        $bahan_dasar_id = $request->bahan_dasar_id;
+        $qty = $request->qty;
+    
+        DB::table('warehouse_stock')->updateOrInsert(
+            [
+                'warehouse_id' => $warehouse_id,
+                'bahan_dasar_id' => $bahan_dasar_id,
+            ],
+            [
+                'stock' => DB::raw("stock + $qty") // Increment the stock by the given qty
+            ]
+        );
+
         return redirect()->route('purchase.index');
         
     }

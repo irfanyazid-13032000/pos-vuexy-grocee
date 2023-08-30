@@ -25,6 +25,7 @@
                      <td>
                       <a href="{{route('warehouse.edit',['id'=> $warehouse->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('warehouse.delete',['id'=> $warehouse->id])}}" class="btn btn-danger">delete</a>
+                      <a href="{{route('warehouse.stock.index',['id_warehouse'=> $warehouse->id])}}" class="btn btn-info">stock</a>
                      </td>
                   </tr>
                   @endforeach

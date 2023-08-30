@@ -15,8 +15,14 @@ class WarehouseStockController extends Controller
     public function index($id_warehouse)
     {
         $warehouse = Warehouse::find($id_warehouse);
-        // return $warehouse;
-        return view('stock-warehouse.index-stock-warehouse',compact('id_warehouse','warehouse'));
+        $warehouse_stocks = DB::table('warehouse_stock')
+                                ->join('bahan_dasars','warehouse_stock.bahan_dasar_id','=','bahan_dasars.id')
+                                ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                                ->select('warehouse_stock.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
+                                ->where('warehouse_stock.warehouse_id',$id_warehouse)
+                                ->get();
+        // return $warehouse_stocks;
+        return view('stock-warehouse.index-stock-warehouse',compact('id_warehouse','warehouse','warehouse_stocks'));
     }
 
     public function raw($id_warehouse)

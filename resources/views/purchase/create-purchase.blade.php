@@ -74,7 +74,7 @@
                         <div class="mb-3">
                             <label for="harga_satuan" class="form-label">harga_satuan</label>
                             <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" required>
+                                value="{{ old('harga_satuan') }}" readonly>
                             @error('harga_satuan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -84,7 +84,7 @@
                         <div class="mb-3">
                             <label for="jumlah_harga" class="form-label">jumlah_harga</label>
                             <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="{{ old('jumlah_harga') }}" required>
+                                value="{{ old('jumlah_harga') }}" readonly>
                             @error('jumlah_harga')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
