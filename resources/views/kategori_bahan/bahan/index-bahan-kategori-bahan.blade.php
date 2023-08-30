@@ -18,7 +18,7 @@
                     <td>{{$bahan->nama_bahan}}</td>
                     <td>
                     <a href="{{route('bahan.baku.kategori.bahan.edit',['id_bahan'=>$bahan->id])}}" class="btn btn-primary">edit</a>
-                     <a href="{{route('bahan.baku.kategori.bahan.delete',['id'=>$kategori_bahan->id,'id_bahan'=>$bahan->id])}}" class="btn btn-danger">delete</a>
+                     <a href="{{route('bahan.baku.kategori.bahan.delete',['id'=>$kategori_bahan->id,'id_bahan'=>$bahan->id])}}" onclick="return confirm('apakah anda yakin menghapus data ini?')" class="btn btn-danger">delete</a>
                     </td>
                  </tr>
                   @endforeach
@@ -31,7 +31,7 @@
 
 
             <a href="{{route('bahan.baku.kategori.bahan.create',['id'=>$id])}}" class="btn btn-success">Add</a>
-            <a href="{{route('kategori.bahan.index')}}" onclick="return confirm('apakah anda yakin menghapus data ini?')" class="btn btn-danger">Back</a>
+            <a href="{{route('kategori.bahan.index')}}" class="btn btn-danger">Back</a>
         </div>
     </div>
 
