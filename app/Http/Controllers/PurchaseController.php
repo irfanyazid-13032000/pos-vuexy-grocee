@@ -46,6 +46,7 @@ class PurchaseController extends Controller
     {
         Purchase::create([
             'warehouse_id' => $request->warehouse_id,
+            'no_invoice' => $request->no_invoice,
             'kategori_bahan_id' => $request->kategori_bahan_id,
             'bahan_dasar_id' => $request->bahan_dasar_id,
             'satuan_id' => $request->satuan_id,

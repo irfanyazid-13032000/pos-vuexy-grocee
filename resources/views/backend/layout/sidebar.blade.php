@@ -272,11 +272,7 @@
                   </a>
                 </li> -->
 
-                <li class="menu-item {{ Route::is('kategori.bahan.*') ? 'active' : '' }}">
-                  <a href="{{route('kategori.bahan.index')}}" class="menu-link">
-                    <div>Stock Bahan Baku</div>
-                  </a>
-                </li>
+               
 
                 <!-- <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.dasar.index')}}" class="menu-link">

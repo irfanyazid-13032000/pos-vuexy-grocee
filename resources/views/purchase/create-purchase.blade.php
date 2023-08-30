@@ -21,6 +21,14 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="no_invoice" class="form-label">no invoice</label>
+                            <input type="text" class="form-control" id="no_invoice" name="no_invoice">
+                            @error('no_invoice')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
 
 
                         <div class="mb-3">

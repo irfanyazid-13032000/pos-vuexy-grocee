@@ -8,6 +8,7 @@
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
                         <th>Warehouse</th>
+                        <th>Invoice</th>
                         <th>Tgl Pembelian</th>
                         <th>Kategori Bahan</th>
                         <th>Nama Bahan</th>
@@ -24,6 +25,7 @@
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
                      <td>{{$purchase->name_warehouse}}</td>
+                     <td>{{$purchase->no_invoice}}</td>
                      <td>{{$purchase->created_at}}</td>
                      <td>{{$purchase->nama_kategori_bahan}}</td>
                      <td>{{$purchase->nama_bahan}}</td>
