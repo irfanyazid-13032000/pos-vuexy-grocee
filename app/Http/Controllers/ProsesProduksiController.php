@@ -134,12 +134,17 @@ class ProsesProduksiController extends Controller
     public function rincianResep($id,$qty)
     {
 
-        $foods_process = DB::table('food_process')
+         $foods_process = DB::table('food_process')
                             ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
                             ->join('satuan','food_process.satuan_id','=','satuan.id')
                             ->where('food_process.menu_masakan_id',$id)
-                            ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
+                            ->select('food_process.*','bahan_dasars.nama_bahan','bahan_dasars.harga_satuan','satuan.nama_satuan')
                             ->get();
+
+        $foods_process->map(function ($food_process) use ($qty) {
+            $food_process->jumlah_harga = $food_process->harga_satuan * $food_process->qty;
+            return $food_process;
+        });
         // return $foods_process;
 
 

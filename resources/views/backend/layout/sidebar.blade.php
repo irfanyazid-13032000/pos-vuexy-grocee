@@ -61,7 +61,7 @@
               </ul>
             </li>
 
-            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('item.*') ? 'active open' : '' }}">
+            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('satuan.*') || Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('bahan.tambahan.produksi.*')  || Route::is('vendor.*') || Route::is('outlet.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Data Master</div>
@@ -99,8 +99,6 @@
                   </a>
                 </li>
 
-                
-                
 
                 <li class="menu-item {{ Route::is('bahan.dasar.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.dasar.index')}}" class="menu-link">
@@ -305,8 +303,8 @@
             </li>
 
 
-              <!-- Food -->
-              <li class="menu-item {{ Route::is('kategori.proses.produksi.*') ? 'active open' : '' }}">
+              <!-- Produksi -->
+              <li class="menu-item {{ Route::is('kategori.proses.produksi.*') || Route::is('proses.produksi.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Produksi</div>
