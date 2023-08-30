@@ -23,6 +23,7 @@ use App\Http\Controllers\RecordBahanController;
 use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\ProsesProduksiController;
 use App\Http\Controllers\WarehouseStockController;
+use App\Http\Controllers\WarehouseRecordController;
 use App\Http\Controllers\BahanTambahanProduksiController;
 use App\Http\Controllers\KategoriProsesProduksiController;
 
@@ -84,6 +85,13 @@ Route::get('/warehouse-stock/{id_warehouse}/create',[WarehouseStockController::c
 Route::post('/warehouse-stock/{id_warehouse}/store',[WarehouseStockController::class,'store'])->name('warehouse.stock.store');
 Route::get('/warehouse-stock/{id_warehouse}/delete/{stock_id}',[WarehouseStockController::class,'destroy'])->name('warehouse.stock.delete');
 Route::get('/warehouse-stock/{id_warehouse}/edit/{stock_id}',[WarehouseStockController::class,'edit'])->name('warehouse.stock.edit');
+
+
+
+
+Route::get('/warehouse-record/{id_warehouse}',[WarehouseRecordController::class,'index'])->name('warehouse.record.index');
+
+
 
 
 Route::get('/warehouse-stock/{id_warehouse}/raw/',[WarehouseStockController::class,'raw'])->name('warehouse.stock.raw');

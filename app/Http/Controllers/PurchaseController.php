@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Purchase;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use App\Models\WarehouseRecord;
 use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
@@ -59,6 +60,7 @@ class PurchaseController extends Controller
         $warehouse_id = $request->warehouse_id;
         $bahan_dasar_id = $request->bahan_dasar_id;
         $qty = $request->qty;
+        $hargaSatuan = $request->harga_satuan;
     
         DB::table('warehouse_stock')->updateOrInsert(
             [
@@ -66,9 +68,17 @@ class PurchaseController extends Controller
                 'bahan_dasar_id' => $bahan_dasar_id,
             ],
             [
-                'stock' => DB::raw("stock + $qty") // Increment the stock by the given qty
+                'stock' => DB::raw("stock + $qty"), // Increment the stock by the given qty
+                'harga_satuan' => DB::raw("CASE WHEN harga_satuan < $hargaSatuan THEN $hargaSatuan ELSE harga_satuan END"),
             ]
         );
+
+        WarehouseRecord::create([
+            'warehouse_id' => $warehouse_id,
+            'stock' => $qty,
+            'bahan_dasar_id' => $bahan_dasar_id,
+            'harga_satuan' => $request->harga_satuan,
+        ]);
 
         return redirect()->route('purchase.index');
         

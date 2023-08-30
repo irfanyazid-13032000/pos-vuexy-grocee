@@ -82,7 +82,7 @@
                         <div class="mb-3">
                             <label for="harga_satuan" class="form-label">harga_satuan</label>
                             <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" readonly>
+                                value="{{ old('harga_satuan') }}" required>
                             @error('harga_satuan')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -143,8 +143,6 @@
                 url: routeUrl,
                 method: 'GET',
                 success: function(res) {
-                    // console.log(res.harga_satuan);
-                    $('#harga_satuan').val(res.harga_satuan)
                     $('#nama_kategori_bahan').val(res.nama_kategori_bahan)
                     $('#nama_satuan').val(res.nama_satuan)
                     $('#kategori_bahan_id').val(res.kategori_bahan_id)
@@ -155,6 +153,10 @@
   })
 
   $('#qty').on('keyup',function (params) {
+    hitungJumlahHarga()
+  })
+
+  $('#harga_satuan').on('keyup',function (params) {
     hitungJumlahHarga()
   })
 
