@@ -10,8 +10,6 @@
                         <th>bahan dasar</th>
                         <th>satuan</th>
                         <th>qty</th>
-                        <th>harga satuan</th>
-                        <th>jumlah harga</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -22,15 +20,13 @@
                     <td>{{$makanan->nama_bahan}}</td>
                     <td>{{$makanan->nama_satuan}}</td>
                     <td>{{$makanan->qty}}</td>
-                    <td>{{number_format($makanan->harga_satuan_bahan_dasar)}}</td>
-                    <td>{{number_format($makanan->harga_satuan_bahan_dasar * $makanan->qty)}}</td>
                     <td>
                     <a href="{{route('food.process.edit',['id_food_process'=>$makanan->id])}}" class="btn btn-primary">edit</a>
                      <a href="{{route('food.process.delete',['id_food_process'=>$makanan->id])}}" class="btn btn-danger">delete</a>
                     </td>
                  </tr>
                     @endforeach
-                  <tr>
+                  <!-- <tr>
                     <th colspan="8"></th>
                   </tr>
                   <tr>
@@ -53,7 +49,7 @@
                     <th colspan="5"></th>
                     <th style="text-align:center;">Harga per Porsi : Rp. {{number_format($totalPrice/$food->porsi)}}</th>
                     <th></th>
-                  </tr>
+                  </tr> -->
                   
                 
                 
@@ -69,6 +65,24 @@
     
     
 @endsection
+
+
+@push('addon-script')
+    <script src="{{ url('https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+      $('#table').DataTable({
+    columnDefs: [
+        {
+            targets: '_all', // Kolom terakhir
+            className: 'dt-center' // Membuat semua sel dalam kolom menjadi berpusat
+        },
+        
+    ]
+});
+
+    </script>
+@endpush
 
 
 

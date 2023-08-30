@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Models\WarehouseRecord;
 
@@ -12,7 +13,12 @@ class WarehouseRecordController extends Controller
      */
     public function index($id_warehouse)
     {
-        return WarehouseRecord::where('warehouse_id',$id_warehouse)->get();
+        $warehouse = Warehouse::find($id_warehouse);
+        $warehouse_records = WarehouseRecord::where('warehouse_id',$id_warehouse)
+                                            ->join('bahan_dasars','warehouse_record.bahan_dasar_id','=','bahan_dasars.id')
+                                            ->select('warehouse_record.*','bahan_dasars.nama_bahan')
+                                            ->get();
+        return view('record_warehouse.index-record-warehouse',compact('warehouse_records','warehouse'));
     }
 
     /**

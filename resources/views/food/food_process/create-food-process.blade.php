@@ -45,24 +45,6 @@
                         </div>
 
 
-                        <div class="mb-3">
-                            <label for="harga_satuan" class="form-label">harga Satuan</label>
-                            <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" readonly>
-                            @error('harga_satuan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="jumlah_harga" class="form-label">jumlah harga</label>
-                            <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="{{ old('jumlah_harga') }}" readonly>
-                            @error('jumlah_harga')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
                         
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -81,7 +63,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
 <script>
   $('#bahan_dasar_id').select2({})
-//   $('#satuan_id').select2({})
   $('#bahan_dasar_id').on('change',function (params) {
     var routeUrl = "{{ route('food.data', ':index') }}";
             routeUrl = routeUrl.replace(':index', $('#bahan_dasar_id').val());
@@ -91,16 +72,11 @@
                 url: routeUrl,
                 method: 'GET',
                 success: function(res) {
-                    // console.log(res);
-                    $('#harga_satuan').val(res.harga_satuan)
                     $('#nama_satuan').val(res.nama_satuan)
                     $('#satuan_id').val(res.satuan_id)
                 }
             });
   })
 
-  $('#qty').on('keyup',function (params) {
-    $('#jumlah_harga').val($('#qty').val() * $('#harga_satuan').val())
-  })
 </script>
 @endpush
