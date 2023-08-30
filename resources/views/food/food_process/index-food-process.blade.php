@@ -22,8 +22,8 @@
                     <td>{{$makanan->nama_bahan}}</td>
                     <td>{{$makanan->nama_satuan}}</td>
                     <td>{{$makanan->qty}}</td>
-                    <td>Rp. {{number_format($makanan->harga_satuan)}}</td>
-                    <td>Rp. {{number_format($makanan->jumlah_harga)}}</td>
+                    <td>{{number_format($makanan->harga_satuan_bahan_dasar)}}</td>
+                    <td>{{number_format($makanan->harga_satuan_bahan_dasar * $makanan->qty)}}</td>
                     <td>
                     <a href="{{route('food.process.edit',['id_food_process'=>$makanan->id])}}" class="btn btn-primary">edit</a>
                      <a href="{{route('food.process.delete',['id_food_process'=>$makanan->id])}}" class="btn btn-danger">delete</a>
@@ -40,12 +40,18 @@
                   </tr>
                   <tr>
                     <th colspan="5"></th>
-                    <th style="text-align:center;">Rp. {{number_format($foods_process->sum('jumlah_harga'))}}</th>
+                    <th style="text-align:center;">Rp. {{number_format($totalPrice)}}</th>
                     <th></th>
                   </tr>
                   <tr>
                     <th colspan="5"></th>
                     <th style="text-align:center;">Porsi : {{$food->porsi}}</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+
+                    <th colspan="5"></th>
+                    <th style="text-align:center;">Harga per Porsi : Rp. {{number_format($totalPrice/$food->porsi)}}</th>
                     <th></th>
                   </tr>
                   

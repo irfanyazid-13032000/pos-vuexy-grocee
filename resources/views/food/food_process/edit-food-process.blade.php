@@ -64,7 +64,7 @@
                         <div class="mb-3">
                             <label for="jumlah_harga" class="form-label">jumlah harga</label>
                             <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="{{$food_process->jumlah_harga}}" readonly>
+                                value="" readonly>
                             @error('jumlah_harga')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
