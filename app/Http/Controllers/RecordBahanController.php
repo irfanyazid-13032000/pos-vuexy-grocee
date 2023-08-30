@@ -140,7 +140,7 @@ class RecordBahanController extends Controller
                 return  date("d-m-Y", strtotime($item->created_at));
             })
             ->addColumn('action', function ($item) {
-                return '<a href="'.route('record.bahan.delete',['id'=>$item->id]).'" class="btn btn-danger">delete</a>';
+                return '<a href="'.route('record.bahan.delete',['id'=>$item->id]).'" onclick="return confirm("apakah anda yakin menghapus data ini?")" class="btn btn-danger">delete</a>';
             })
             ->toJson();
     }

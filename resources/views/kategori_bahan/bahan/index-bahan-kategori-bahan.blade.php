@@ -31,7 +31,7 @@
 
 
             <a href="{{route('bahan.baku.kategori.bahan.create',['id'=>$id])}}" class="btn btn-success">Add</a>
-            <a href="{{route('kategori.bahan.index')}}" class="btn btn-danger">Back</a>
+            <a href="{{route('kategori.bahan.index')}}" onclick="return confirm('apakah anda yakin menghapus data ini?')" class="btn btn-danger">Back</a>
         </div>
     </div>
 

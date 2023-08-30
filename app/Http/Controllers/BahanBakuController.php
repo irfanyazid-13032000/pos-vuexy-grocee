@@ -24,7 +24,7 @@ class BahanBakuController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     return '<a href="'.route('bahan.baku.edit',['id'=>$row->id]).'" class="btn btn-primary">edit</a>' .
-                        '<a href="'.route('bahan.baku.delete',['id'=>$row->id]).'" class="btn btn-danger">delete</a>';
+                        '<a href="'.route('bahan.baku.delete',['id'=>$row->id]).'" onclick="return confirm("apakah anda yakin menghapus data ini?")" class="btn btn-danger">delete</a>';
                 })
                 ->rawColumns(['action'])
                 ->toJson();
