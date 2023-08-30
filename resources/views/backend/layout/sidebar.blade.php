@@ -61,7 +61,7 @@
               </ul>
             </li>
 
-            <li class="menu-item {{ Route::is('category.*') || Route::is('product.*') || Route::is('warehouse.*') || Route::is('satuan.*') || Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('bahan.tambahan.produksi.*')  || Route::is('vendor.*') || Route::is('outlet.*') ? 'active open' : '' }}">
+            <li class="menu-item {{  Route::is('warehouse.*') || Route::is('satuan.*') || Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('bahan.tambahan.produksi.*')  || Route::is('vendor.*') || Route::is('outlet.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Data Master</div>
@@ -89,7 +89,7 @@
 
                 <li class="menu-item {{ Route::is('satuan.*') ? 'active' : '' }}">
                   <a href="{{route('satuan.index')}}" class="menu-link">
-                    <div>satuan</div>
+                    <div>Satuan</div>
                   </a>
                 </li>
 

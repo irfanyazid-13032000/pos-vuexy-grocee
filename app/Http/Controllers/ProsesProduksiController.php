@@ -34,7 +34,8 @@ class ProsesProduksiController extends Controller
         $kategori_proses_produksis = DB::table('kategori_proses_produksi')->get();
         $menu_masakans = DB::table('menu_masakan')->get();
         $warehouses = DB::table('warehouses')->get();
-        return view('proses_produksi.create-proses-produksi',compact('kategori_proses_produksis','menu_masakans','warehouses'));
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('proses_produksi.create-proses-produksi',compact('kategori_proses_produksis','menu_masakans','warehouses','bahan_dasars'));
     }
 
     /**

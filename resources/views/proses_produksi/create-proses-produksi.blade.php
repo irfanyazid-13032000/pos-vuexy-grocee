@@ -69,6 +69,22 @@
                         </div>
 
 
+                        <hr>
+                        <h4>output</h4>
+
+
+                        <div class="mb-3">
+                            <label for="bahan_dasar_id" class="form-label">Bahan Dasar</label>
+                            <select id="bahan_dasar_id" name="bahan_dasar_id" class="form-control">
+                              <option value="">Pilih Output Bahan Dasar</option>
+                              @foreach ($bahan_dasars as $bahan)
+                              <option value="{{$bahan->id}}">{{$bahan->nama_bahan}}</option>
+                              @endforeach
+                            </select>
+                            
+                        </div>
+
+
                       
 
                         
@@ -83,14 +99,20 @@
 @endsection
 
 @push('addon-script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 <script>
+
+    $('#bahan_dasar_id').select2({})
+
+    
   $('#menu_masakan_id').on('change',function () {
            tableRecipe()
            tableStockWarehouse()
         });
 
     $('#warehouse_id').on('change',function (params) {
-        alert($('#warehouse_id').val())
         tableRecipe()
         tableStockWarehouse()
     })
