@@ -10,7 +10,8 @@
                         <th>nama warehouse</th>
                         <th>Nama outlet</th>
                         <th>alamat outlet</th>
-                        <th>kontak</th>
+                        <th>PIC</th>
+                        <th>no telpon</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -22,6 +23,7 @@
                      <td>{{$outlet->name_outlet}}</td>
                      <td>{{$outlet->address_outlet}}</td>
                      <td>{{$outlet->contact_outlet}}</td>
+                     <td><a href="https://wa.me/{{$outlet->no_telp}}">{{$outlet->no_telp}}</a></td>
                      <td>
                       <a href="{{route('outlet.edit',['id'=>$outlet->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('outlet.delete',['id'=>$outlet->id])}}" class="btn btn-danger">delete</a>

@@ -17,9 +17,6 @@
 
 
 
-                      
-
-
                         <div class="mb-3">
                             <label for="warehouse_id" class="form-label">Warehouse</label>
                             <select name="warehouse_id" id="warehouse_id" class="form-control">
@@ -45,10 +42,20 @@
 
 
                         <div class="mb-3">
-                            <label for="contact_outlet" class="form-label">Contact Outlet</label>
+                            <label for="contact_outlet" class="form-label">PIC</label>
                             <input type="text" class="form-control" id="contact_outlet" name="contact_outlet"
                                 value="{{ old('contact_outlet') }}" required>
                             @error('contact_outlet')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="no_telp" class="form-label">no telepon</label>
+                            <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                value="62" required>
+                            @error('no_telp')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>

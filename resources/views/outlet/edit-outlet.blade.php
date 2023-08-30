@@ -41,10 +41,20 @@
 
 
                         <div class="mb-3">
-                            <label for="contact_outlet" class="form-label">contact outlet</label>
+                            <label for="contact_outlet" class="form-label">PIC</label>
                             <input type="text" class="form-control" id="contact_outlet" name="contact_outlet"
                                 value="{{$outlet->contact_outlet}}" required>
                             @error('contact_outlet')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="no_telp" class="form-label">No Telp</label>
+                            <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                value="{{$outlet->no_telp}}" required>
+                            @error('no_telp')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>

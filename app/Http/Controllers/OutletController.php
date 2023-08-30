@@ -38,6 +38,7 @@ class OutletController extends Controller
             'warehouse_id' => $request->warehouse_id,
             'address_outlet' => $request->address_outlet,
             'contact_outlet' => $request->contact_outlet,
+            'no_telp' => $request->no_telp,
         ]);
 
         return redirect()->route('outlet.index');
@@ -74,6 +75,7 @@ class OutletController extends Controller
             'warehouse_id' => $request->warehouse_id,
             'contact_outlet' => $request->contact_outlet,
             'address_outlet' => $request->address_outlet,
+            'no_telp' => $request->no_telp,
         ]);
 
         return redirect()->route('outlet.index');
