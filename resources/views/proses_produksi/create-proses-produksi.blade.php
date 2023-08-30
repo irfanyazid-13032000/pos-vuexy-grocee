@@ -49,25 +49,27 @@
                             @error('menu_masakan_id')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
-                            <br>
-                            <div id="table-rincian-resep"></div>
+                            
                         </div>
-
-
-                      
-                        
 
 
 
                         <div class="mb-3">
                             <label for="qty" class="form-label">Qty</label>
-                            <input type="text" class="form-control" id="qty" name="qty"
+                            <input type="number" class="form-control" id="qty" name="qty"
                                 value="1" required>
                             @error('qty')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+                        
+                        
+                        <div class="mb-3">
+                            <div id="table-rincian-resep"></div>
+                        </div>
 
+
+                      
 
                         
                         <div class="d-flex justify-content-end mt-2">

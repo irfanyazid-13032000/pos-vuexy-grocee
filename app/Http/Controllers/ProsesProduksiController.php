@@ -45,15 +45,19 @@ class ProsesProduksiController extends Controller
 
         $menu_masakan_id = $request->menu_masakan_id;
 
-        $masakans = DB::table('food_process')->where('menu_masakan_id',$menu_masakan_id)->get();
+        $masakans = DB::table('food_process')->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
+                                    ->select('food_process.*','bahan_dasars.nama_bahan','bahan_dasars.harga_satuan')
+                                    ->where('menu_masakan_id',$menu_masakan_id)->get();
 
         
         
         foreach ($masakans as $value) {
-            $purchase_stok_warehouse = Purchase::where('warehouse_id',$request->warehouse_id)->where('bahan_dasar_id',$value->bahan_dasar_id)->get();
-            foreach ($purchase_stok_warehouse as $purchase) {
-                $sisa_bahan = $purchase->qty - ($value->qty * $request->qty);
-                $purchase->update(['qty' => $sisa_bahan]);
+            $warehouse_update_stock = DB::table('warehouse_stock')->where('warehouse_id',$request->warehouse_id)->where('bahan_dasar_id',$value->bahan_dasar_id)->get();
+            foreach ($warehouse_update_stock as $update_stock) {
+                $sisa_bahan = $update_stock->stock - ($value->qty * $request->qty);
+                DB::table('warehouse_stock')->where('warehouse_id',$request->warehouse_id)
+                                            ->where('bahan_dasar_id',$value->bahan_dasar_id)
+                                            ->update(['stock'=>$sisa_bahan]);
             }
             RecordBahan::create([
                 'kategori_produksi_id' =>$request->kategori_produksi_id,
@@ -62,7 +66,7 @@ class ProsesProduksiController extends Controller
                 'qty_masakan' => $request->qty,
                 'qty_bahan' => $value->qty * $request->qty,
                 'price_per_bahan' => $value->harga_satuan,
-                'jumlah_cost_per_bahan' => $value->jumlah_harga * $request->qty,
+                'jumlah_cost_per_bahan' => $value->qty * $value->harga_satuan * $request->qty,
                 'warehouse_id' => $request->warehouse_id,
             ]);
         }
@@ -156,11 +160,11 @@ class ProsesProduksiController extends Controller
     public function stockPurchase($id,$qty,$warehouse_id)
     {
         $food_stock_warehouses = DB::table('food_process')
-                                ->leftJoin('purchases', 'food_process.bahan_dasar_id', '=', 'purchases.bahan_dasar_id')
-                                ->leftJoin('bahan_dasars', 'food_process.bahan_dasar_id', '=', 'bahan_dasars.id')
-                                ->where('purchases.warehouse_id', $warehouse_id)
+                                ->join('warehouse_stock', 'food_process.bahan_dasar_id', '=', 'warehouse_stock.bahan_dasar_id')
+                                ->join('bahan_dasars', 'food_process.bahan_dasar_id', '=', 'bahan_dasars.id')
+                                ->where('warehouse_stock.warehouse_id', $warehouse_id)
                                 ->where('food_process.menu_masakan_id', $id)
-                                ->select('food_process.bahan_dasar_id', 'food_process.qty AS qty_resep', 'purchases.qty AS qty_stock', 'purchases.warehouse_id', 'bahan_dasars.nama_bahan')
+                                ->select('food_process.bahan_dasar_id', 'food_process.qty AS qty_resep', 'warehouse_stock.stock AS qty_stock', 'warehouse_stock.warehouse_id', 'bahan_dasars.nama_bahan')
                                 ->get();
 
          $foods_process = DB::table('food_process')

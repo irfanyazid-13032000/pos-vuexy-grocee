@@ -28,7 +28,7 @@
                      <td>{{$proses->created_at}}</td>
                      <td>
                       <a href="{{route('proses.produksi.edit',['id'=>$proses->id])}}" class="btn btn-primary">edit</a>
-                      <a href="{{route('proses.produksi.delete',['id'=>$proses->id])}}" class="btn btn-danger">delete</a>
+                      <a href="{{route('proses.produksi.delete',['id'=>$proses->id])}}" onclick="return confirm('apakah anda yakin menghapus data ini?')" class="btn btn-danger">delete</a>
                      </td>
                   </tr>
                   @endforeach

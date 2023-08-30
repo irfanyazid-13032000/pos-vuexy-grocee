@@ -14,7 +14,7 @@
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$food->nama_bahan}}</td>
                                   <td>{{$food->qty * $qty}}</td>
-                                  <td>Rp. {{number_format($food->harga_satuan * $qty)}}</td>
+                                  <td>Rp. {{number_format($food->harga_satuan)}}</td>
                                   <td>Rp. {{number_format($food->jumlah_harga * $qty)}}</td>
                                 </tr>
                               @endforeach
