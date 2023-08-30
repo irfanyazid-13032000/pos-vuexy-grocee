@@ -8,7 +8,6 @@
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
                         <th>nama bahan</th>
-                        <th>harga satuan</th>
                         <th>Satuan</th>
                         <th>kategori bahan</th>
                         <th>Action</th>
@@ -19,7 +18,6 @@
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
                      <td>{{$bahan->nama_bahan}}</td>
-                     <td>Rp. {{number_format($bahan->harga_satuan)}}</td>
                      <td>{{$bahan->nama_satuan}}</td>
                      <td>{{$bahan->nama_kategori_bahan}}</td>
                      <td>

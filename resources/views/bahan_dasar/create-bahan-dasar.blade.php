@@ -23,14 +23,7 @@
                             
                         </div>
 
-                        <div class="mb-3">
-                            <label for="harga_satuan" class="form-label">Harga Satuan</label>
-                            <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" required>
-                            @error('harga_satuan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
+                      
 
 
                         <div class="mb-3">
