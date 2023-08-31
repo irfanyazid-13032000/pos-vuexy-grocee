@@ -17,7 +17,7 @@
                                 <tr style="@if ($food->sisa_stock < 0) background-color: rgb(234, 84, 85); color: white; @endif">
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$food->nama_bahan}}</td>
-                                  <td>{{$food->qty_stock}}</td>
+                                  <td>{{$food->stock}}</td>
                                   <td>{{$food->total_qty_used}}</td>
                                   <td>{{$food->sisa_stock}}</td>
                                 </tr>

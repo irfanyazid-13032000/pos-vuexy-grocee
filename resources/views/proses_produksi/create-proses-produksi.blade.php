@@ -70,7 +70,7 @@
 
 
                         <hr>
-                        <h4>output</h4>
+                        <h5>output</h4>
 
 
                         <div class="mb-3">
@@ -82,6 +82,12 @@
                               @endforeach
                             </select>
                             
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="qty_output" class="form-label">Qty Output</label>
+                            <input type="number" name="qty_output" id="qty_output" class="form-control">
                         </div>
 
 
@@ -123,6 +129,7 @@
           var routeUrl = "{{ route('proses.produksi.rincian.resep', [':id',':qty']) }}";
             routeUrl = routeUrl.replace(':id', $('#menu_masakan_id').val());
             routeUrl = routeUrl.replace(':qty', $('#qty').val());
+            // routeUrl = routeUrl.replace(':warehouse_id', $('#warehouse_id').val());
 
             $.ajax({
                 url: routeUrl,
