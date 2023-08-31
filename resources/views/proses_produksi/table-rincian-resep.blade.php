@@ -12,9 +12,10 @@
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$food->nama_bahan}}</td>
                                   <td>{{$food->qty * $qty}}</td>
+                                 
                                 </tr>
                               @endforeach
                             </tbody>
                             </table>
 
-                            <input type="hidden" value="{{$foods_process->sum('jumlah_harga') * $qty}}" name="jumlah_cost">
+                            

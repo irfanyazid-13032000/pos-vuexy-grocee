@@ -178,12 +178,12 @@ class ProsesProduksiController extends Controller
         //                         ->select('food_process.bahan_dasar_id', 'food_process.qty AS qty_resep', 'warehouse_stock.stock AS qty_stock', 'warehouse_stock.warehouse_id', 'bahan_dasars.nama_bahan')
         //                         ->get();
 
-         $food_stock_warehouses = DB::table('food_process')
+          $food_stock_warehouses = DB::table('food_process')
                                             ->join('warehouse_stock','food_process.bahan_dasar_id','=','warehouse_stock.bahan_dasar_id')
                                             ->join('bahan_dasars','warehouse_stock.bahan_dasar_id','=','bahan_dasars.id')
                                             ->where('food_process.menu_masakan_id',$id)
                                             ->where('warehouse_stock.warehouse_id',$warehouse_id)
-                                            ->select('food_process.*','warehouse_stock.stock','bahan_dasars.nama_bahan')
+                                            ->select('food_process.*','warehouse_stock.stock','warehouse_stock.harga_satuan','bahan_dasars.nama_bahan')
                                             ->get();
 
          $foods_process = DB::table('food_process')
