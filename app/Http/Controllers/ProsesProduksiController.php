@@ -83,6 +83,18 @@ class ProsesProduksiController extends Controller
             'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
 
+
+        DB::table('warehouse_stock')->updateOrInsert(
+            [
+                'warehouse_id' => $request->warehouse_id,
+                'bahan_dasar_id' => $request->bahan_dasar_id,
+            ],
+            [
+                'stock' => DB::raw("stock + $request->qty_output"), // Increment the stock by the given qty
+                'harga_satuan' => DB::raw("CASE WHEN harga_satuan < $request->jumlah_cost THEN $request->jumlah_cost ELSE harga_satuan END"),
+            ]
+        );
+
         
 
         return redirect()->route('proses.produksi.index');
