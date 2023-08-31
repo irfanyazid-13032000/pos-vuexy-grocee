@@ -51,24 +51,7 @@
                         </div>
 
 
-                        <div class="mb-3">
-                            <label for="harga_satuan" class="form-label">harga Satuan</label>
-                            <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" readonly>
-                            @error('harga_satuan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
 
-
-                        <div class="mb-3">
-                            <label for="jumlah_harga" class="form-label">jumlah harga</label>
-                            <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="" readonly>
-                            @error('jumlah_harga')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
                         
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -102,22 +85,22 @@
                 method: 'GET',
                 success: function(res) {
                     // console.log(res.harga_satuan);
-                    $('#harga_satuan').val(res.harga_satuan)
-                    getJumlahHarga()
+                    // $('#harga_satuan').val(res.harga_satuan)
+                    // getJumlahHarga()
                 }
             });
   }
 
-  function getJumlahHarga() {
-    $('#jumlah_harga').val($('#qty').val() * $('#harga_satuan').val())
-  }
+//   function getJumlahHarga() {
+//     $('#jumlah_harga').val($('#qty').val() * $('#harga_satuan').val())
+//   }
 
   getFoodData()
 
   // getJumlahHarga()
 
   $('#qty').on('keyup',function (params) {
-    getJumlahHarga()
+    // getJumlahHarga()
   })
 
 
