@@ -124,8 +124,8 @@
                     // getPriceBahanDasar()
                     // console.log(res);
                     $('#harga_satuan').val(res.harga_satuan)
-                    $('#qty_warehouse').val(res.qty)
-                    hitungSisaGudang(res.qty)
+                    $('#qty_warehouse').val(res.stock)
+                    hitungSisaGudang(res.stock)
 
                 }
             });

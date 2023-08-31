@@ -51,15 +51,13 @@ class BahanTambahanProduksiController extends Controller
             'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
 
-        // get data stock warehouse yang ada di purchase
-        $updateStockWarehouse = Purchase::where('bahan_dasar_id', $request->bahan_dasar_id)
-                            ->where('warehouse_id', $request->warehouse_id)
-                            ->first();
-
-        // update stock dengan qty yang sudah dikurangi
-        $updateStockWarehouse->update([
-            'qty' => $request->qty_warehouse
-        ]);
+         // update stock warehouse yang ada di warehouse_stock
+        DB::table('warehouse_stock')
+                ->where('bahan_dasar_id', $request->bahan_dasar_id)
+                ->where('warehouse_id', $request->warehouse_id)
+                ->update([
+                    'stock' => $request->qty_warehouse
+                ]);
 
 
         return redirect()->route('bahan.tambahan.produksi.index');

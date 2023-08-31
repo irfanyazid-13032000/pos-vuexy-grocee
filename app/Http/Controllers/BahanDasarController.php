@@ -108,11 +108,18 @@ class BahanDasarController extends Controller
 
     public function dataBahanTambahan($id_warehouse)
     {
-        $bahan_tambahans = DB::table('purchases')->where('warehouse_id',$id_warehouse)
-                                ->join('bahan_dasars','purchases.bahan_dasar_id','=','bahan_dasars.id')
-                                ->select('purchases.*','bahan_dasars.nama_bahan')
-                                ->where('purchases.kategori_bahan_id',14)
-                                ->get();
+        // return $bahan_tambahans = DB::table('purchases')->where('warehouse_id',$id_warehouse)
+        //                         ->join('bahan_dasars','purchases.bahan_dasar_id','=','bahan_dasars.id')
+        //                         ->select('purchases.*','bahan_dasars.nama_bahan')
+        //                         ->where('purchases.kategori_bahan_id',14)
+        //                         ->get();
+
+        $bahan_tambahans = DB::table('warehouse_stock')
+                                                ->join('bahan_dasars','warehouse_stock.bahan_dasar_id','=','bahan_dasars.id')
+                                                ->where('warehouse_id',$id_warehouse)
+                                                ->select('warehouse_stock.*','bahan_dasars.nama_bahan')
+                                                ->get();
+        
         $html = view('bahan_tambahan_produksi.option-bahan-tambahan-produksi',compact('bahan_tambahans'))->render();
 
         return $html;
@@ -120,12 +127,19 @@ class BahanDasarController extends Controller
 
     public function hargaBahanTambahan($id_warehouse, $id_bahan_dasar)
     {
-        return $bahan_tambahans = DB::table('purchases')->where('warehouse_id',$id_warehouse)
-                        ->join('bahan_dasars','purchases.bahan_dasar_id','=','bahan_dasars.id')
-                        ->select('purchases.*','bahan_dasars.nama_bahan')
-                        ->where('purchases.kategori_bahan_id',14)
-                        ->where('purchases.bahan_dasar_id',$id_bahan_dasar)
-                        ->get()->first();
+        // return $bahan_tambahans = DB::table('purchases')->where('warehouse_id',$id_warehouse)
+        //                 ->join('bahan_dasars','purchases.bahan_dasar_id','=','bahan_dasars.id')
+        //                 ->select('purchases.*','bahan_dasars.nama_bahan')
+        //                 ->where('purchases.kategori_bahan_id',14)
+        //                 ->where('purchases.bahan_dasar_id',$id_bahan_dasar)
+        //                 ->get()->first();
+
+        return $bahan_tambahans = DB::table('warehouse_stock')
+                                    ->join('bahan_dasars','warehouse_stock.bahan_dasar_id','=','bahan_dasars.id')
+                                    ->where('warehouse_id',$id_warehouse)
+                                    ->where('warehouse_stock.bahan_dasar_id',$id_bahan_dasar)
+                                    ->select('warehouse_stock.*','bahan_dasars.nama_bahan','warehouse_stock.harga_satuan')
+                                    ->get()->first();
     }
 
     
