@@ -284,6 +284,7 @@ Route::get('/proses_produksi/edit/{id}',[ProsesProduksiController::class,'edit']
 Route::post('/proses_produksi/update/{id}',[ProsesProduksiController::class,'update'])->name('proses.produksi.update');
 Route::get('/proses_produksi/rincian_resep/{id}/{qty}',[ProsesProduksiController::class,'rincianResep'])->name('proses.produksi.rincian.resep');
 Route::get('/proses_produksi/stock_purchase/{id}/{qty}/{warehouse_id}',[ProsesProduksiController::class,'stockPurchase'])->name('proses.produksi.stock.purchase.warehouse');
+Route::get('/proses_produksi/output_masakan/{i}',[ProsesProduksiController::class,'outputMasakan'])->name('proses.produksi.output.masakan');
 
 
 

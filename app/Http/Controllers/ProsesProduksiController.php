@@ -230,4 +230,13 @@ class ProsesProduksiController extends Controller
 
         return response()->json($html);
     }
+
+
+    public function outputMasakan($i)
+    {
+        // return $i;
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('proses_produksi.table-output-masakan',compact('bahan_dasars','i'))->render();
+    }
+    
 }

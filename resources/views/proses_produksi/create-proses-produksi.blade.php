@@ -1,5 +1,11 @@
 @extends('backend.layout.main')
 @section('content')
+<style>
+    /* Add this style to reduce or remove the bottom border of table rows */
+    #table-output-masakan tr {
+        border-bottom: 1px solid #dee2e6; /* You can adjust the thickness or remove it */
+    }
+</style>
 <div class="col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header">Tambah Data Proses Produksi</h5>
@@ -73,22 +79,27 @@
                         <h5>output</h4>
 
 
-                        <div class="mb-3">
-                            <label for="bahan_dasar_id" class="form-label">Bahan Dasar</label>
-                            <select id="bahan_dasar_id" name="bahan_dasar_id" class="form-control">
-                              <option value="">Pilih Output Bahan Dasar</option>
-                              @foreach ($bahan_dasars as $bahan)
-                              <option value="{{$bahan->id}}">{{$bahan->nama_bahan}}</option>
-                              @endforeach
-                            </select>
-                            
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="qty_output" class="form-label">Qty Output</label>
-                            <input type="number" name="qty_output" id="qty_output" class="form-control">
-                        </div>
+                        <table class="table table-bordered" id="table-output-masakan">
+                                <tr>
+                                    <th>bahan hasil</th>
+                                    <th>qty</th>
+                                    <th>tombol</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <select id="bahan_dasar_id" name="inputs[0]['bahan_dasar_id']" class="form-control">
+                                        <option value="">Pilih Output Bahan hasil</option>
+                                        @foreach ($bahan_dasars as $bahan)
+                                        <option value="{{$bahan->id}}">{{$bahan->nama_bahan}}</option>
+                                        @endforeach
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="inputs[0]['qty_output']" id="qty_output" class="form-control">
+                                    </td>
+                                    <td><span class="btn btn-success" id="add-more">add more</span></td>
+                                </tr>
+                        </table>
 
 
                       
@@ -109,6 +120,34 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 <script>
+    var i = 0
+    $('#add-more').on('click',function (params) {
+        ++i
+        renderOutputMasakan(i)
+    })
+
+    function renderOutputMasakan(i){
+        var routeUrl = `{{ route('proses.produksi.output.masakan',':i') }}`;
+            routeUrl = routeUrl.replace(':i', i);
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(html) {
+                    $('#table-output-masakan').append(html)
+                    console.log(html);
+
+                    $('#bahan_dasar_id' + i).select2();
+
+                    $('.btn-danger').click(function() {
+                        var rowIndex = $(this).closest('tr').attr('id'); // Mendapatkan id baris
+                        $('#' + rowIndex).remove(); // Menghapus baris
+                    });
+
+                }
+            });
+    }
+
 
     $('#bahan_dasar_id').select2({})
 
