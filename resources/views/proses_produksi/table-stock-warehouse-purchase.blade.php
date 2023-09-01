@@ -23,9 +23,10 @@
                                   <td>{{$food->total_qty_used}}</td>
                                   <td>{{$food->sisa_stock}}</td>
                                   <th>{{$food->harga_satuan}}</th>
-                                  <th>{{$food->harga_satuan * $qty}}</th>
+                                  <th>{{$food->harga_satuan * $food->total_qty_used}}</th>
 
                                 </tr>
+                               
                                 
                                 @if ($food->sisa_stock < 0)
                                 <script>
@@ -37,13 +38,18 @@
                                
                                 @endforeach
 
+                                <tr>
+                                  <td colspan="6">total biaya produksi</td>
+                                  <td>{{$food_stock_warehouses->sum('harga_satuan') * $food->total_qty_used * $qty}}</td>
+                                </tr>
+
                             </tbody>
                             </table>
 
                             <input type="text" value="{{$lengkap}}" id="kelengkapanBahan">
                             <input type="text" value="{{$cukup}}" id="kecukupanBahan">
 
-                            <input type="number" value="{{$food_stock_warehouses->sum('harga_satuan') * $qty}}" name="jumlah_cost">
+                            <input type="number" value="{{$food_stock_warehouses->sum('harga_satuan') * $food->total_qty_used * $qty}}" name="jumlah_cost">
 
                             <script>
                               let lengkap = `{{ $lengkap }}`

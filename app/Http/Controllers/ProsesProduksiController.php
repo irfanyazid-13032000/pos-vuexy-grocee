@@ -89,20 +89,14 @@ class ProsesProduksiController extends Controller
 
         // $harga_satuan_output = $request->jumlah_cost / 
 
-        if ($request->outputs) {
             $total_output = 0;
             foreach ($request->outputs as $output) {
                 $total_output += $output['qty_output'];
             }
     
             $harga_satuan_output = $request->jumlah_cost / $total_output;
-        }else{
-            $harga_satuan_output = $request->jumlah_cost;
-        }
-
-
-
-        if ($request->outputs) {
+       
+            
             foreach ($request->outputs as $output) {
                 DB::table('warehouse_stock')->updateOrInsert(
                     [
@@ -116,7 +110,6 @@ class ProsesProduksiController extends Controller
                 );
             }
 
-        }
 
         
 
