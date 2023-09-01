@@ -50,7 +50,8 @@ class ProsesProduksiController extends Controller
         $menu_masakan_id = $request->menu_masakan_id;
 
         $masakans = DB::table('food_process')->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
-                                    ->select('food_process.*','bahan_dasars.nama_bahan','bahan_dasars.harga_satuan')
+                                    ->join('warehouse_stock','food_process.bahan_dasar_id','=','warehouse_stock.bahan_dasar_id')
+                                    ->select('food_process.*','bahan_dasars.nama_bahan','warehouse_stock.harga_satuan')
                                     ->where('menu_masakan_id',$menu_masakan_id)->get();
 
         
@@ -88,12 +89,16 @@ class ProsesProduksiController extends Controller
 
         // $harga_satuan_output = $request->jumlah_cost / 
 
-        $total_output = 0;
-        foreach ($request->outputs as $output) {
-            $total_output += $output['qty_output'];
+        if ($request->outputs) {
+            $total_output = 0;
+            foreach ($request->outputs as $output) {
+                $total_output += $output['qty_output'];
+            }
+    
+            $harga_satuan_output = $request->jumlah_cost / $total_output;
+        }else{
+            $harga_satuan_output = $request->jumlah_cost;
         }
-
-        $harga_satuan_output = $request->jumlah_cost / $total_output;
 
 
 
