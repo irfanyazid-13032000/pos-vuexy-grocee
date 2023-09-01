@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -158,5 +159,25 @@ class ProductController extends Controller
 
         return redirect()->route('product.index');
 
+    }
+
+    public function addStock($id)
+    {
+        $product = Product::find($id);
+        $warehouses = DB::table('warehouses')->get();
+        // return $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('product.add-stock-product',compact('product','warehouses'));
+    }
+
+    public function bahanPenyusun($i)
+    {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('product.table-bahan-penyusun',compact('i','bahan_dasars'));
+    }
+
+    public function awalBahanPenyusun($i)
+    {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('product.table-awal-bahan-penyusun',compact('bahan_dasars','i'));
     }
 }

@@ -49,7 +49,6 @@
                   <a href="{{route('product.index')}}" class="menu-link">
                     <div>Product List</div>
                   </a>
-                </li>
                 <li class="menu-item {{ Route::is('item.*') ? 'active' : '' }}">
                   <a href="{{route('item.index')}}" class="menu-link">
                     <div>Item</div>

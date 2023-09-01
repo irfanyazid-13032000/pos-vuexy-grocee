@@ -8,6 +8,7 @@ use App\Http\Controllers\CookController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
@@ -68,6 +69,9 @@ Route::post('/product/store',[ProductController::class,'store'])->name('product.
 Route::get('/produk/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
 Route::post('/produk/{id}/update',[ProductController::class,'update'])->name('product.update');
 Route::get('/produk/{id}/delete',[ProductController::class,'destroy'])->name('product.delete');
+Route::get('/produk/{id}/add-stock',[ProductController::class,'addStock'])->name('product.add.stock');
+Route::get('produk/bahan-penyusun/{i}',[ProductController::class,'bahanPenyusun'])->name('product.bahan.penyusun');
+Route::get('produk/table-awal-bahan-penyusun/{i}',[ProductController::class,'awalBahanPenyusun'])->name('product.awal.bahan.penyusun');
 
 // warehouse
 Route::get('/warehouse',[WarehouseController::class,'index'])->name('warehouse.index');
@@ -294,3 +298,8 @@ Route::get('/record_bahan',[RecordBahanController::class,'index'])->name('record
 Route::get('/record_bahan/delete/{id}',[RecordBahanController::class,'destroy'])->name('record.bahan.delete');
 Route::post('/record_bahan/data',[RecordBahanController::class,'data'])->name('record.bahan.data');
 Route::get('/record_bahan/table',[RecordBahanController::class,'table'])->name('record.bahan.table');
+
+
+
+
+Route::get('/produks',[ProdukController::class,'index'])->name('produk.index');
