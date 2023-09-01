@@ -53,7 +53,6 @@
     })
 
     $('#warehouse_id').on('change',function (params) {
-      alert('lih berubah nih')
       renderTableAwalBahanPenyusun()
     })
 
@@ -83,8 +82,9 @@
 
 
     function renderTableAwalBahanPenyusun() {
-      var routeUrl = `{{ route('product.awal.bahan.penyusun',':i') }}`;
+      var routeUrl = `{{ route('product.awal.bahan.penyusun',[':i',':warehouse_id']) }}`;
             routeUrl = routeUrl.replace(':i', 0);
+            routeUrl = routeUrl.replace(':warehouse_id', $('#warehouse_id').val());
 
             $.ajax({
                 url: routeUrl,

@@ -175,9 +175,13 @@ class ProductController extends Controller
         return view('product.table-bahan-penyusun',compact('i','bahan_dasars'));
     }
 
-    public function awalBahanPenyusun($i)
+    public function awalBahanPenyusun($i, $warehouse_id)
     {
-        $bahan_dasars = DB::table('bahan_dasars')->get();
+        $bahan_dasars = DB::table('warehouse_stock')->join('bahan_dasars','warehouse_stock.bahan_dasar_id','=','bahan_dasars.id')
+                                                    ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                                                    ->where('warehouse_id',$warehouse_id)
+                                                    ->select('bahan_dasars.nama_bahan','bahan_dasars.id','warehouse_stock.harga_satuan','satuan.nama_satuan')
+                                                    ->get();
         return view('product.table-awal-bahan-penyusun',compact('bahan_dasars','i'));
     }
 }

@@ -8,7 +8,9 @@
                                     <td>
                                     <select id="bahan_dasar_id" name="outputs[0][bahan_dasar_id]" class="form-control">
                                         <option value="">Pilih Output Bahan hasil</option>
-                                        <option value="iyt">hgjf</option>
+                                        @foreach ($bahan_dasars as $bahan)
+                                        <option value="{{$bahan->id}}">{{$bahan->nama_bahan}}</option>
+                                        @endforeach
                                     </select>
                                     </td>
                                     <td>
