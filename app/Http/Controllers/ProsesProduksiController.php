@@ -224,8 +224,13 @@ class ProsesProduksiController extends Controller
         $food_stock_warehouses->map(function ($item) use ($qty) {
             $item->total_qty_used = $item->qty * $qty;
             $item->sisa_stock = $item->stock - $item->total_qty_used;
+            $item->harga_used = $item->harga_satuan * $item->total_qty_used;
+            // $item->total_biaya_produksi = $item->harga_satuan;
             return $item;
         });
+
+        $total_harga_produksi = $food_stock_warehouses->sum('harga_used');
+
 
         $cukup = 'cukup';
         foreach ($food_stock_warehouses as $value) {
@@ -240,7 +245,7 @@ class ProsesProduksiController extends Controller
         $lengkap = (count($food_stock_warehouses) == count($foods_process) ? 'lengkap' : 'kurang');
     
 
-         $html = view('proses_produksi.table-stock-warehouse-purchase',compact('food_stock_warehouses','qty','lengkap','cukup'))->render();
+         $html = view('proses_produksi.table-stock-warehouse-purchase',compact('food_stock_warehouses','qty','lengkap','cukup','total_harga_produksi'))->render();
 
         return response()->json($html);
     }
