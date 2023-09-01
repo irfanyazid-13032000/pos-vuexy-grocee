@@ -73,6 +73,7 @@ Route::get('/produk/{id}/add-stock',[ProductController::class,'addStock'])->name
 Route::get('produk/bahan-penyusun/{i}',[ProductController::class,'bahanPenyusun'])->name('product.bahan.penyusun');
 Route::get('produk/table-awal-bahan-penyusun/{i}/{warehouse_id}',[ProductController::class,'awalBahanPenyusun'])->name('product.awal.bahan.penyusun');
 Route::get('produk/price-bahan-penyusun/{bahan_dasar_id}/{warehouse_id}',[ProductController::class,'priceBahanPenyusun'])->name('product.price.bahan.penyusun');
+Route::post('/produk/add-stock-product-reducing-warehouse-stock',[ProductController::class,'addStockProduct'])->name('add.stock.product.reducing.warehouse.stock');
 
 // warehouse
 Route::get('/warehouse',[WarehouseController::class,'index'])->name('warehouse.index');

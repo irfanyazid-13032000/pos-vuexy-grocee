@@ -24,16 +24,23 @@
                 </tbody>
             </table>
 
-            <select id="warehouse_id" name="warehouse_id" class="form-control mb-3 mt-3">
-                <option value="">Pilih Warehouse</option>
-                @foreach ($warehouses as $warehouse)
-                <option value="{{$warehouse->id}}">{{$warehouse->name_warehouse}}</option>
-                @endforeach
-            </select>
+            <form action="{{route('add.stock.product.reducing.warehouse.stock')}}" method="post">
+              @csrf
+              <select id="warehouse_id" name="warehouse_id" class="form-control mb-3 mt-3">
+                  <option value="">Pilih Warehouse</option>
+                  @foreach ($warehouses as $warehouse)
+                  <option value="{{$warehouse->id}}">{{$warehouse->name_warehouse}}</option>
+                  @endforeach
+              </select>
+    
+    
+              <div id="table-bahan-penyusun"></div>
 
 
-            <div id="table-bahan-penyusun"></div>
-            
+              <button type="submit" class="btn btn-success">submit</button>
+              
+          </form>
+
             
            
         </div>

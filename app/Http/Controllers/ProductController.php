@@ -195,4 +195,9 @@ class ProductController extends Controller
                                                 ->where('bahan_dasar_id',$bahan_dasar_id)
                                                 ->get()->first();
     }
+
+    public function addStockProduct(Request $request)
+    {
+        return $request;
+    }
 }
