@@ -44,6 +44,9 @@ class ProsesProduksiController extends Controller
     public function store(Request $request)
     {
 
+       
+      
+
         $menu_masakan_id = $request->menu_masakan_id;
 
         $masakans = DB::table('food_process')->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
@@ -83,18 +86,31 @@ class ProsesProduksiController extends Controller
             'created_at' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
         ]);
 
+        // $harga_satuan_output = $request->jumlah_cost / 
 
-        if ($request->bahan_dasar_id) {
-            DB::table('warehouse_stock')->updateOrInsert(
-                [
-                    'warehouse_id' => $request->warehouse_id,
-                    'bahan_dasar_id' => $request->bahan_dasar_id,
-                ],
-                [
-                    'stock' => DB::raw("stock + $request->qty_output"), // Increment the stock by the given qty
-                    'harga_satuan' => DB::raw("CASE WHEN harga_satuan < $request->jumlah_cost THEN $request->jumlah_cost ELSE harga_satuan END"),
-                ]
-            );
+        $total_output = 0;
+        foreach ($request->outputs as $output) {
+            $total_output += $output['qty_output'];
+        }
+
+        $harga_satuan_output = $request->jumlah_cost / $total_output;
+
+
+
+        if ($request->outputs) {
+            foreach ($request->outputs as $output) {
+                DB::table('warehouse_stock')->updateOrInsert(
+                    [
+                        'warehouse_id' => $request->warehouse_id,
+                        'bahan_dasar_id' => $output['bahan_dasar_id'],
+                    ],
+                    [
+                        'stock' => DB::raw("stock + {$output['qty_output']}"), // Increment the stock by the given qty
+                        'harga_satuan' => DB::raw("CASE WHEN harga_satuan < $harga_satuan_output THEN $harga_satuan_output ELSE harga_satuan END"),
+                    ]
+                );
+            }
+
         }
 
         
