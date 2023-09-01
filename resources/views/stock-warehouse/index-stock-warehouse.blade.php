@@ -10,6 +10,7 @@
                         <th>Bahan Dasar</th>
                         <th>Stok</th>
                         <th>satuan</th>
+                        <th>harga satuan</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
@@ -19,6 +20,7 @@
                      <td>{{$stock->nama_bahan}}</td>
                      <td>{{$stock->stock}}</td>
                      <td>{{$stock->nama_satuan}}</td>
+                     <td>Rp. {{number_format($stock->harga_satuan)}}</td>
                   </tr>
                   @endforeach
                 </tbody>
