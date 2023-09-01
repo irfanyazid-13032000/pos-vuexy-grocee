@@ -72,6 +72,7 @@ Route::get('/produk/{id}/delete',[ProductController::class,'destroy'])->name('pr
 Route::get('/produk/{id}/add-stock',[ProductController::class,'addStock'])->name('product.add.stock');
 Route::get('produk/bahan-penyusun/{i}',[ProductController::class,'bahanPenyusun'])->name('product.bahan.penyusun');
 Route::get('produk/table-awal-bahan-penyusun/{i}/{warehouse_id}',[ProductController::class,'awalBahanPenyusun'])->name('product.awal.bahan.penyusun');
+Route::get('produk/price-bahan-penyusun/{bahan_dasar_id}/{warehouse_id}',[ProductController::class,'priceBahanPenyusun'])->name('product.price.bahan.penyusun');
 
 // warehouse
 Route::get('/warehouse',[WarehouseController::class,'index'])->name('warehouse.index');

@@ -184,4 +184,12 @@ class ProductController extends Controller
                                                     ->get();
         return view('product.table-awal-bahan-penyusun',compact('bahan_dasars','i'));
     }
+
+    public function priceBahanPenyusun($bahan_dasar_id,$warehouse_id)
+    {
+        return $bahan_dasar_id = DB::table('warehouse_stock')
+                                                ->where('warehouse_id',$warehouse_id)
+                                                ->where('bahan_dasar_id',$bahan_dasar_id)
+                                                ->get()->first();
+    }
 }

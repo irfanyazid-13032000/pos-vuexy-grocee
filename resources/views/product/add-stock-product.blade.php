@@ -53,7 +53,7 @@
     })
 
     $('#warehouse_id').on('change',function (params) {
-      renderTableAwalBahanPenyusun()
+      renderTableAwalBahanPenyusun(i)
     })
 
     function renderBahanPenyusun(i) {
@@ -95,6 +95,8 @@
 
                     $('#bahan_dasar_id' + i).select2();
 
+                    isiPriceBahanPenyusun(i)
+
                     $('.btn-danger').click(function() {
                         var rowIndex = $(this).closest('tr').attr('id'); // Mendapatkan id baris
                         $('#' + rowIndex).remove(); // Menghapus baris
@@ -104,6 +106,44 @@
                 }
             });
     }
+
+
+    function isiPriceBahanPenyusun(i,bahan_dasar_id){
+      $('#bahan_dasar_id' + i).on('change',function (params) {
+        let bahan_dasar_id = $('#bahan_dasar_id' + i).val()
+        let warehouse_id = $('#warehouse_id').val()
+        // $('#qty_bahan_penyusun' + i).val(1)
+        
+
+        var routeUrl = `{{ route('product.price.bahan.penyusun',[':bahan_dasar_id',':warehouse_id']) }}`;
+            routeUrl = routeUrl.replace(':bahan_dasar_id', bahan_dasar_id);
+            routeUrl = routeUrl.replace(':warehouse_id', warehouse_id);
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                    console.log(res)
+                    $('#price' + i).val(res.harga_satuan)
+                    qtyBahanPenyusun(res)
+
+                }
+            });
+
+        
+        
+    });
+  }
+
+
+
+  function qtyBahanPenyusun(res){
+    $('#qty_bahan_penyusun' + i).val(1)
+    $('#qty_bahan_penyusun' + i).on('keyup',function () {
+      $('#price' + i).val(res.harga_satuan * $('#qty_bahan_penyusun' + i).val())
+    })
+   
+  }
     
 </script>
 @endpush
