@@ -75,6 +75,7 @@ class BahanDasarController extends Controller
         DB::table('bahan_dasars')->where('id',$id)->update([
             'nama_bahan' => $request->nama_bahan,
             'harga_satuan' => $request->harga_satuan,
+            'satuan_id' => $request->satuan_id,
         ]);
 
         return redirect()->route('bahan.dasar.index');
