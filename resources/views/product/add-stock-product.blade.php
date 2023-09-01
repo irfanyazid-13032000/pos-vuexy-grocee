@@ -54,6 +54,7 @@
 
     $('#warehouse_id').on('change',function (params) {
       renderTableAwalBahanPenyusun(i)
+     
     })
 
     function renderBahanPenyusun(i) {
@@ -65,14 +66,18 @@
                 method: 'GET',
                 success: function(html) {
                     $('#table-output-masakan').append(html)
-                    console.log(html);
+                    // console.log(html);
 
                     $('#bahan_dasar_id' + i).select2();
+
+                    isiPriceBahanPenyusun(i)
+
+                    
 
                     $('.btn-danger').click(function() {
                         var rowIndex = $(this).closest('tr').attr('id'); // Mendapatkan id baris
                         $('#' + rowIndex).remove(); // Menghapus baris
-                        alert('hapus nih')
+                        // alert('hapus nih')
                     });
 
                 }
@@ -81,7 +86,8 @@
 
 
 
-    function renderTableAwalBahanPenyusun() {
+    function renderTableAwalBahanPenyusun(i) {
+     
       var routeUrl = `{{ route('product.awal.bahan.penyusun',[':i',':warehouse_id']) }}`;
             routeUrl = routeUrl.replace(':i', 0);
             routeUrl = routeUrl.replace(':warehouse_id', $('#warehouse_id').val());
@@ -91,24 +97,26 @@
                 method: 'GET',
                 success: function(html) {
                     $('#table-bahan-penyusun').html(html)
+
                     
 
                     $('#bahan_dasar_id' + i).select2();
 
-                    isiPriceBahanPenyusun(i)
+                    $('#add-more').on('click',function (params) {
+                      //  alert('loh bisa')
+                      ++i
+                       renderBahanPenyusun(i)
+                    })
+                    
 
-                    $('.btn-danger').click(function() {
-                        var rowIndex = $(this).closest('tr').attr('id'); // Mendapatkan id baris
-                        $('#' + rowIndex).remove(); // Menghapus baris
-                        alert('hapus nih')
-                    });
+                    isiPriceBahanPenyusun(i)
 
                 }
             });
     }
 
 
-    function isiPriceBahanPenyusun(i,bahan_dasar_id){
+    function isiPriceBahanPenyusun(i){
       $('#bahan_dasar_id' + i).on('change',function (params) {
         let bahan_dasar_id = $('#bahan_dasar_id' + i).val()
         let warehouse_id = $('#warehouse_id').val()
@@ -125,7 +133,11 @@
                 success: function(res) {
                     console.log(res)
                     $('#price' + i).val(res.harga_satuan)
-                    qtyBahanPenyusun(res)
+                    $('#satuan' + i).val(res.nama_satuan)
+                    $('#qty_bahan_penyusun' + i).val(1)
+                    qtyBahanPenyusun(res,i)
+                   
+                    
 
                 }
             });
@@ -137,13 +149,16 @@
 
 
 
-  function qtyBahanPenyusun(res){
+  function qtyBahanPenyusun(res,i){
     $('#qty_bahan_penyusun' + i).val(1)
     $('#qty_bahan_penyusun' + i).on('keyup',function () {
+      // alert('bisa gak tuh')
       $('#price' + i).val(res.harga_satuan * $('#qty_bahan_penyusun' + i).val())
     })
    
   }
+
+
     
 </script>
 @endpush

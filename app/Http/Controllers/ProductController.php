@@ -188,6 +188,9 @@ class ProductController extends Controller
     public function priceBahanPenyusun($bahan_dasar_id,$warehouse_id)
     {
         return $bahan_dasar_id = DB::table('warehouse_stock')
+                                                ->join('bahan_dasars','warehouse_stock.bahan_dasar_id','=','bahan_dasars.id')
+                                                ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                                                ->select('warehouse_stock.*','bahan_dasars.nama_bahan','bahan_dasars.harga_satuan','warehouse_stock.stock','warehouse_stock.harga_satuan','satuan.nama_satuan')
                                                 ->where('warehouse_id',$warehouse_id)
                                                 ->where('bahan_dasar_id',$bahan_dasar_id)
                                                 ->get()->first();

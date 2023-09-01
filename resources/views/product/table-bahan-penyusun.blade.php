@@ -7,6 +7,8 @@
                     @endforeach
                 </select>
             </td>
-            <td><input type="number" name="outputs[{{$i}}][qty_output]" id="qty_output" class="form-control"></td>
+            <td><input type="number" name="outputs[{{$i}}][qty_bahan_penyusun]" id="qty_bahan_penyusun{{$i}}" class="form-control"></td>
+            <td><input type="number" name="outputs[{{$i}}][price]" id="price{{$i}}" class="form-control" readonly></td>
+            <td> <input type="text" name="outputs[{{$i}}][satuan]" id="satuan{{$i}}" class="form-control" readonly></td>
             <td><span class="btn btn-danger">delete</span></td>
         </tr>
