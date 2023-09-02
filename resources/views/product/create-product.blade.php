@@ -117,7 +117,7 @@
                 success: function (data) {
                     // console.log(data)
                     // return
-                    generateTable(selectedCode, data.ingredients,data.total_price);
+                    // generateTable(selectedCode, data.ingredients,data.total_price);
                     document.getElementById("name_product").value = data.item.name_item;
                     validasiUang(data.total_price)
                     

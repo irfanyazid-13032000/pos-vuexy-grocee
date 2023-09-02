@@ -198,6 +198,10 @@ class ProductController extends Controller
 
     public function addStockProduct(Request $request)
     {
-        return $request;
+        $product = Product::find($request->product_id);
+        $product->update([
+            'stock_product' => $request->update_stock + $product->stock_product
+        ]);
+        return redirect()->route('product.index');
     }
 }

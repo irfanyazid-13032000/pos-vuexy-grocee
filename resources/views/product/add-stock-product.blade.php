@@ -34,10 +34,14 @@
               </select>
     
     
-              <div id="table-bahan-penyusun"></div>
+              <div id="table-bahan-penyusun" class="mb-3"></div>
+
+              <input type="number" name="update_stock" id="update_stock" class="form-control" placeholder="add stock in this product">
+
+              <input type="number" value="{{$product->id}}" name="product_id">
 
 
-              <button type="submit" class="btn btn-success">submit</button>
+              <button type="submit" class="btn btn-success mt-3">submit</button>
               
           </form>
 

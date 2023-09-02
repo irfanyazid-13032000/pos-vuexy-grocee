@@ -303,5 +303,3 @@ Route::get('/record_bahan/table',[RecordBahanController::class,'table'])->name('
 
 
 
-
-Route::get('/produks',[ProdukController::class,'index'])->name('produk.index');
