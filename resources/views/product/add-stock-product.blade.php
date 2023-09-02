@@ -36,6 +36,14 @@
     
               <div id="table-bahan-penyusun" class="mb-3"></div>
 
+              <table class="table table-bordered">
+              <tr>
+                <td colspan="2">total price</td>
+                <td><input type="number" name="total_biaya_produksi" id="total_biaya_produksi" class="form-control" readonly></td>
+                <td>tombol nih</td>
+              </tr>
+              </table>
+
               <input type="number" name="update_stock" id="update_stock" class="form-control" placeholder="add stock in this product">
 
               <input type="number" value="{{$product->id}}" name="product_id">
@@ -147,6 +155,7 @@
                     $('#satuan' + i).val(res.nama_satuan)
                     $('#qty_bahan_penyusun' + i).val(1)
                     qtyBahanPenyusun(res,i)
+                    cariTotalBiayaProduksi()
                    
                     
 
@@ -165,10 +174,31 @@
     $('#qty_bahan_penyusun' + i).on('keyup',function () {
       // alert('bisa gak tuh')
       $('#price' + i).val(res.harga_satuan * $('#qty_bahan_penyusun' + i).val())
+      cariTotalBiayaProduksi()
     })
    
   }
 
+
+  // Get all input elements whose IDs match the pattern "priceX"
+
+  function cariTotalBiayaProduksi() {
+    
+    var inputFields = document.querySelectorAll('input[id^="price"]');
+    
+    var totalSum = 0;
+    
+    // Iterate through the matched input fields
+    for (var i = 0; i < inputFields.length; i++) {
+    var inputValue = parseFloat(inputFields[i].value) || 0; // Use 0 if input is not a valid number
+    totalSum += inputValue;
+    }
+
+
+    console.log("Total Sum:", totalSum);
+
+    $("#total_biaya_produksi").val(totalSum)
+  }
 
     
 </script>
