@@ -46,7 +46,7 @@
 
               <input type="number" name="update_stock" id="update_stock" class="form-control" placeholder="add stock in this product">
 
-              <input type="number" value="{{$product->id}}" name="product_id">
+              <input type="hidden" value="{{$product->id}}" name="product_id">
 
 
               <button type="submit" class="btn btn-success mt-3">submit</button>

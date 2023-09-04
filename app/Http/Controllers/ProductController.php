@@ -198,6 +198,22 @@ class ProductController extends Controller
 
     public function addStockProduct(Request $request)
     {
+        // return $request;
+
+        foreach ($request->penyusun as $penyusun) {
+            $bahanDasarId = $penyusun['bahan_dasar_id'];
+            $qtyBahanPenyusun = $penyusun['qty_bahan_penyusun'];
+
+            $stock_in_warehouse =  DB::table('warehouse_stock')->where('bahan_dasar_id',$bahanDasarId)
+                                                               ->where('warehouse_id',$request->warehouse_id)
+                                                               ->first();
+
+            DB::table('warehouse_stock')->where('bahan_dasar_id',$bahanDasarId)->where('warehouse_id',$request->warehouse_id)->update([
+                'stock' => $stock_in_warehouse->stock - $qtyBahanPenyusun
+            ]);
+            
+        }
+        
         $product = Product::find($request->product_id);
         $product->update([
             'stock_product' => $request->update_stock + $product->stock_product
