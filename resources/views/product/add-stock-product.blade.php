@@ -153,9 +153,9 @@
                 success: function(res) {
                     console.log(res)
                     $('#price' + i).val(res.harga_satuan)
-                    $('#stock' + i).val(res.stock)
                     $('#satuan' + i).val(res.nama_satuan)
                     $('#qty_bahan_penyusun' + i).val(1)
+                    $('#stock' + i).val(res.stock - $('#qty_bahan_penyusun' + i).val())
                     qtyBahanPenyusun(res,i)
                     cariTotalBiayaProduksi()
                    
