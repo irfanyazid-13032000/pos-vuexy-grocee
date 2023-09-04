@@ -4,6 +4,7 @@
                                     <th>qty</th>
                                     <th>price</th>
                                     <th>satuan</th>
+                                    <th>stock</th>
                                     <th>tombol</th>
                                 </tr>
                                 <tr>
@@ -23,6 +24,9 @@
                                     </td>
                                     <td>
                                     <input type="text" name="penyusun[{{$i}}][satuan]" id="satuan{{$i}}" class="form-control" readonly>
+                                    </td>
+                                    <td>
+                                    <input type="text" name="penyusun[{{$i}}][stock]" id="stock{{$i}}" class="form-control" readonly>
                                     </td>
                                     <td><span class="btn btn-success" id="add-more">add more</span></td>
                                 </tr>

@@ -24,7 +24,7 @@
                 </tbody>
             </table>
 
-            <form action="{{route('add.stock.product.reducing.warehouse.stock')}}" method="post">
+            <form action="{{route('add.stock.product.reducing.warehouse.stock')}}" method="post" id="add-stock-product-form">
               @csrf
               <select id="warehouse_id" name="warehouse_id" class="form-control mb-3 mt-3">
                   <option value="">Pilih Warehouse</option>
@@ -152,6 +152,7 @@
                 success: function(res) {
                     console.log(res)
                     $('#price' + i).val(res.harga_satuan)
+                    $('#stock' + i).val(res.stock)
                     $('#satuan' + i).val(res.nama_satuan)
                     $('#qty_bahan_penyusun' + i).val(1)
                     qtyBahanPenyusun(res,i)
@@ -173,8 +174,10 @@
     $('#qty_bahan_penyusun' + i).val(1)
     $('#qty_bahan_penyusun' + i).on('keyup',function () {
       // alert('bisa gak tuh')
+      $('#stock' + i).val(res.stock - $('#qty_bahan_penyusun' + i).val())
       $('#price' + i).val(res.harga_satuan * $('#qty_bahan_penyusun' + i).val())
       cariTotalBiayaProduksi()
+      validasiStockWarehouse()
     })
    
   }
@@ -186,6 +189,7 @@
     
     var inputFields = document.querySelectorAll('input[id^="price"]');
     
+    
     var totalSum = 0;
     
     // Iterate through the matched input fields
@@ -194,10 +198,25 @@
     totalSum += inputValue;
     }
 
-
-    console.log("Total Sum:", totalSum);
+      console.log("Total Sum:", totalSum);
 
     $("#total_biaya_produksi").val(totalSum)
+  }
+
+
+  function validasiStockWarehouse(){
+    $('#add-stock-product-form').submit(function(event){
+      var stockNumber = document.querySelectorAll('input[id^="stock"]');
+
+      for (let j = 0; j < stockNumber.length; j++) {
+        if (parseFloat(stockNumber[j].value) < 0) {
+          alert('stock pada warehouse tidak cukup')
+          event.preventDefault();
+          break;
+        }
+      }
+      
+    })
   }
 
     
