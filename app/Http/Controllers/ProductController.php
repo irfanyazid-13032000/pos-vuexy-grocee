@@ -216,7 +216,8 @@ class ProductController extends Controller
         
         $product = Product::find($request->product_id);
         $product->update([
-            'stock_product' => $request->update_stock + $product->stock_product
+            'stock_product' => $request->update_stock + $product->stock_product,
+            'price' => $request->update_price
         ]);
         return redirect()->route('product.index');
     }
