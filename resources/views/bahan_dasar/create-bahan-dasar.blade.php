@@ -23,6 +23,12 @@
                             
                         </div>
 
+
+                        <div class="mb-3" id="harga_acuan">
+                            <label for="harga_acuan" class="form-label">Harga Acuan</label>
+                            <input type="number" name="harga_acuan" class="form-control">
+                        </div>
+
                       
 
 

@@ -21,7 +21,7 @@
                      <td>{{$bahan->nama_bahan}}</td>
                      <td>{{$bahan->nama_satuan}}</td>
                      <td>{{$bahan->nama_kategori_bahan}}</td>
-                     <td>{{$bahan->harga_satuan}}</td>
+                     <td>{{$bahan->harga_acuan}}</td>
                      <td>
                       <a href="{{route('bahan.dasar.edit',['id'=>$bahan->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('bahan.dasar.delete',['id'=>$bahan->id])}}" onclick="return confirm('apakah anda yakin menghapus data ini?')" class="btn btn-danger">delete</a>
