@@ -9,7 +9,7 @@
                         <th>Code</th>
                         <th>Nama Produk</th>
                         <th>Harga</th>
-                        <th>Stock</th>
+                        <th>Stock Display</th>
                         <th>Gambar</th>
                     </tr>
                 </thead>
@@ -44,8 +44,8 @@
               </tr>
               </table>
 
-              <input type="number" name="update_stock" id="update_stock" class="form-control mt-3 mb-3" placeholder="add stock in this product">
-              <input type="number" name="update_price" id="update_price" class="form-control" placeholder="update price in this product">
+              <input type="number" name="update_stock" id="update_stock" class="form-control mt-3 mb-3" placeholder="add stock in display">
+              <input type="number" name="update_price" id="update_price" class="form-control" placeholder="update price in display">
 
               <input type="hidden" value="{{$product->id}}" name="product_id">
 

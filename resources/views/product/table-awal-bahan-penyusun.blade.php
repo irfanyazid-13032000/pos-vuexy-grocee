@@ -4,7 +4,7 @@
                                     <th>qty</th>
                                     <th>price</th>
                                     <th>satuan</th>
-                                    <th>stock</th>
+                                    <th>stock warehouse</th>
                                     <th>tombol</th>
                                 </tr>
                                 <tr>
