@@ -108,7 +108,7 @@ class FoodController extends Controller
                         ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
                         ->join('satuan','food_process.satuan_id','=','satuan.id')
                         ->where('food_process.menu_masakan_id',$id)
-                        ->select('food_process.*','bahan_dasars.nama_bahan','bahan_dasars.harga_satuan as harga_satuan_bahan_dasar','satuan.nama_satuan')
+                        ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                         ->get();
 
         $totalPrice = $foods_process->map(function ($item) {
@@ -145,7 +145,7 @@ class FoodController extends Controller
         $satuans = DB::table('satuan')->get();
         $food_process = DB::table('food_process')->where('food_process.id',$id_food_process)
                                         ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
-                                        ->select('food_process.*','bahan_dasars.harga_satuan')
+                                        ->select('food_process.*')
                                         ->get()->first();
         return view('food.food_process.edit-food-process',compact('bahan_dasars','satuans','food_process','id_food_process'));
     }
