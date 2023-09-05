@@ -31,7 +31,8 @@ class KategoriProsesProduksiController extends Controller
     public function store(Request $request)
     {
         DB::table('kategori_proses_produksi')->insert([
-            'nama_kategori' => $request->nama_kategori
+            'nama_kategori' => $request->nama_kategori,
+            'deskripsi' => $request->deskripsi
         ]);
         return redirect()->route('kategori.proses.produksi.index');
     }
@@ -60,7 +61,8 @@ class KategoriProsesProduksiController extends Controller
     public function update(Request $request, string $id)
     {
         DB::table('kategori_proses_produksi')->where('id',$id)->update([
-            'nama_kategori' => $request->nama_kategori
+            'nama_kategori' => $request->nama_kategori,
+            'deskripsi' => $request->deskripsi,
         ]);
 
         return redirect()->route('kategori.proses.produksi.index');

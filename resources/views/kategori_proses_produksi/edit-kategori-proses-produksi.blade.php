@@ -15,6 +15,15 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="deskripsi" class="form-label">nama kategori</label>
+                            <input type="text" class="form-control" id="deskripsi" name="deskripsi"
+                                value="{{$kategori_proses_produksi->deskripsi}}" required>
+                            @error('deskripsi')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
                         
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Simpan</button>

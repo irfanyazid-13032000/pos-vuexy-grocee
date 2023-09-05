@@ -8,6 +8,7 @@
                     <tr class="text-center" style="text-align:center">
                         <th>No</th>
                         <th>nama kategori proses produksi</th>
+                        <th>deskripsi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -16,6 +17,7 @@
                   <tr class="text-center">
                      <td>{{$loop->iteration}}</td>
                      <td>{{$produksi->nama_kategori}}</td>
+                     <td>{{$produksi->deskripsi}}</td>
                      <td>
                       <a href="{{route('kategori.proses.produksi.edit',['id'=>$produksi->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('kategori.proses.produksi.delete',['id'=>$produksi->id])}}" class="btn btn-danger">delete</a>
