@@ -257,5 +257,11 @@ class ProsesProduksiController extends Controller
         $bahan_dasars = DB::table('bahan_dasars')->get();
         return view('proses_produksi.table-output-masakan',compact('bahan_dasars','i'))->render();
     }
+
+
+    public function deskripsiKategoriProsesProduksi($id)
+    {
+        return DB::table('kategori_proses_produksi')->where('id',$id)->first();
+    }
     
 }
