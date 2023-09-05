@@ -90,6 +90,16 @@
 
 
                         <div class="mb-3">
+                            <label for="harga_acuan" class="form-label">harga_acuan</label>
+                            <input type="number" class="form-control" id="harga_acuan" name="harga_acuan"
+                                value="{{ old('harga_acuan') }}" readonly>
+                            @error('harga_acuan')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
                             <label for="jumlah_harga" class="form-label">jumlah_harga</label>
                             <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
                                 value="{{ old('jumlah_harga') }}" readonly>
@@ -145,6 +155,7 @@
                 success: function(res) {
                     $('#nama_kategori_bahan').val(res.nama_kategori_bahan)
                     $('#nama_satuan').val(res.nama_satuan)
+                    $('#harga_acuan').val(res.harga_acuan)
                     $('#kategori_bahan_id').val(res.kategori_bahan_id)
                     $('#satuan_id').val(res.satuan_id)
                     hitungJumlahHarga()
