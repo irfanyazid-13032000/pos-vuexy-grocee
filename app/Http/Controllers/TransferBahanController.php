@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DateTimeZone;
+use Carbon\Carbon;
 use App\Models\Outlet;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
@@ -19,6 +21,7 @@ class TransferBahanController extends Controller
                                                 ->join('warehouses','record_transfer_bahan.warehouse_id','=','warehouses.id')
                                                 ->join('outlets','record_transfer_bahan.outlet_id','=','outlets.id')
                                                 ->select('record_transfer_bahan.*','bahan_dasars.nama_bahan','warehouses.name_warehouse','outlets.name_outlet')
+                                                ->orderBy('record_transfer_bahan.date', 'desc')
                                                 ->get();
         return view('transfer_bahan.index-transfer-bahan',compact('records_transfer_bahan'));
     }
@@ -37,10 +40,47 @@ class TransferBahanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-        return $request;
+        DB::beginTransaction(); // Memulai transaksi database
+    
+        try {
+            // insert or update ke dalam outlet_stock
+            DB::table('outlet_stock')->updateOrInsert(
+                [
+                    'outlet_id' => $request->outlet_id,
+                    'bahan_dasar_id' => $request->bahan_dasar_id,
+                ],
+                [
+                    'stock' => DB::raw("stock + {$request->qty}")
+                ]
+            );
+    
+            // insert ke record_transfer_bahan
+            DB::table('record_transfer_bahan')->insert([
+                'warehouse_id' => $request->warehouse_id,
+                'outlet_id' => $request->outlet_id,
+                'bahan_dasar_id' => $request->bahan_dasar_id,
+                'qty' => $request->qty,
+                'date' => Carbon::now(new DateTimeZone('Asia/Jakarta')),
+            ]);
+    
+            // update stock di warehouse_stock menjadi $request->stock
+            DB::table('warehouse_stock')->where('bahan_dasar_id', $request->bahan_dasar_id)->update([
+                'stock' => $request->stock
+            ]);
+    
+            DB::commit(); // Menyelesaikan transaksi database
+    
+            return redirect()->route('transfer.bahan.index');
+        } catch (\Exception $e) {
+            DB::rollback(); // Membatalkan transaksi jika terjadi kesalahan
+            // Handle kesalahan, misalnya menampilkan pesan kesalahan atau melakukan tindakan lain yang sesuai.
+            return back()->withError('Terjadi kesalahan: ' . $e->getMessage())->withInput();
+        }
     }
+    
 
     /**
      * Display the specified resource.

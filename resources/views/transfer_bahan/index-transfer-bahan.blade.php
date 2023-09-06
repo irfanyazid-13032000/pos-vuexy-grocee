@@ -11,6 +11,7 @@
                         <th>ke outlet</th>
                         <th>Bahan Dasar</th>
                         <th>Stok</th>
+                        <th>date</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
@@ -21,6 +22,7 @@
                      <td>{{$record->name_outlet}}</td>
                      <td>{{$record->nama_bahan}}</td>
                      <td>{{$record->qty}}</td>
+                     <td>{{$record->date}}</td>
                   </tr>
                   @endforeach
                 </tbody>
