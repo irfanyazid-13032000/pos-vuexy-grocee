@@ -6,12 +6,6 @@
                 <div class="card-body">
                     <form action="{{route('bahan.dasar.update',['id'=>$bahan_dasar->id])}}" method="POST" >
                         @csrf
-
-
-                     
-
-
-                        
                         
                         <div class="mb-3" id="bahan_dasar">
                             <label for="kategori_bahan_id" class="form-label">Nama kategori bahan</label>

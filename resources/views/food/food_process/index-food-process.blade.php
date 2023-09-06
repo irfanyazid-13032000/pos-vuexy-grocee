@@ -26,30 +26,7 @@
                     </td>
                  </tr>
                     @endforeach
-                  <!-- <tr>
-                    <th colspan="8"></th>
-                  </tr>
-                  <tr>
-                    <th colspan="5"></th>
-                    <th style="text-align:center;">All Total Price</th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <th colspan="5"></th>
-                    <th style="text-align:center;">Rp. {{number_format($totalPrice)}}</th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <th colspan="5"></th>
-                    <th style="text-align:center;">Porsi : {{$food->porsi}}</th>
-                    <th></th>
-                  </tr>
-                  <tr>
-
-                    <th colspan="5"></th>
-                    <th style="text-align:center;">Harga per Porsi : Rp. {{number_format($totalPrice/$food->porsi)}}</th>
-                    <th></th>
-                  </tr> -->
+                 
                   
                 
                 

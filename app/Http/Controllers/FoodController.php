@@ -111,11 +111,11 @@ class FoodController extends Controller
                         ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                         ->get();
 
-        $totalPrice = $foods_process->map(function ($item) {
-            return $item->harga_satuan_bahan_dasar * $item->qty;
-        })->sum();
+        // $totalPrice = $foods_process->map(function ($item) {
+        //     return $item->harga_satuan_bahan_dasar * $item->qty;
+        // })->sum();
         // return $foods_process;
-        return view('food.food_process.index-food-process',compact('foods_process','food','id','totalPrice'));
+        return view('food.food_process.index-food-process',compact('foods_process','food','id'));
     }
 
     public function foodProcessCreate($id)

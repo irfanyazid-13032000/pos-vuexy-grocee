@@ -17,7 +17,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="deskripsi" class="form-label">nama kategori</label>
+                            <label for="deskripsi" class="form-label">deskripsi kategori</label>
                             <input type="text" class="form-control" id="deskripsi" name="deskripsi"
                                 value="{{$kategori_proses_produksi->deskripsi}}" required>
                             @error('deskripsi')
