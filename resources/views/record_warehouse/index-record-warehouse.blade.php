@@ -36,5 +36,9 @@
 <script src="{{ url('https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js') }}"></script>
 
+<script>
+  $('#table').dataTable({})
+</script>
+
 
 @endpush
