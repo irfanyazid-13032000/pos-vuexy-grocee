@@ -54,6 +54,7 @@ class PurchaseController extends Controller
             'qty' => $request->qty,
             'harga_satuan' => $request->harga_satuan,
             'jumlah_harga' => $request->jumlah_harga,
+            'selisih_harga' => $request->selisih_harga,
             'vendor_id' => $request->vendor_id,
         ]);
 

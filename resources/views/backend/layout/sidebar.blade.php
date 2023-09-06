@@ -243,13 +243,6 @@
                     <div>Food Process</div>
                   </a>
                 </li>
-
-
-                <li class="menu-item">
-                  <a href="{{route('food.process.daily')}}" class="menu-link">
-                    <div>Food Process Daily</div>
-                  </a>
-                </li>
                 
               </ul>
             </li>

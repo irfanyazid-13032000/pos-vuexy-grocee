@@ -100,7 +100,17 @@
 
 
                         <div class="mb-3">
-                            <label for="jumlah_harga" class="form-label">jumlah_harga</label>
+                            <label for="selisih_harga" class="form-label">selisih_harga (harga acuan - harga satuan)</label>
+                            <input type="number" class="form-control" id="selisih_harga" name="selisih_harga"
+                                value="{{ old('selisih_harga') }}" readonly>
+                            @error('selisih_harga')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="jumlah_harga" class="form-label">jumlah_harga (qty x harga satuan)</label>
                             <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
                                 value="{{ old('jumlah_harga') }}" readonly>
                             @error('jumlah_harga')
@@ -169,10 +179,15 @@
 
   $('#harga_satuan').on('keyup',function (params) {
     hitungJumlahHarga()
+    hitungSelisihHarga()
   })
 
   function hitungJumlahHarga(){
     $('#jumlah_harga').val($('#qty').val() * $('#harga_satuan').val())
+  }
+
+  function hitungSelisihHarga() {
+    $('#selisih_harga').val($('#harga_acuan').val() - $('#harga_satuan').val())
   }
 
 </script>
