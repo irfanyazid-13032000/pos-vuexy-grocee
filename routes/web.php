@@ -20,6 +20,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\BahanDasarController;
 use App\Http\Controllers\FoodProcessController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\OutletStockController;
 use App\Http\Controllers\RecordBahanController;
 use App\Http\Controllers\KategoriBahanController;
 use App\Http\Controllers\ProsesProduksiController;
@@ -185,6 +186,14 @@ Route::post('/outlet/store',[OutletController::class,'store'])->name('outlet.sto
 Route::get('/outlet/edit/{id}',[OutletController::class,'edit'])->name('outlet.edit');
 Route::post('/outlet/update/{id}',[OutletController::class,'update'])->name('outlet.update');
 Route::get('/outlet/delete/{id}',[OutletController::class,'destroy'])->name('outlet.delete');
+
+
+
+
+Route::get('/outlet-stock/{outlet_id}',[OutletStockController::class,'index'])->name('outlet.stock.index');
+
+
+
 
 
 Route::get('/fendor',[VendorController::class,'index'])->name('vendor.index');
