@@ -4,7 +4,7 @@
             <div class="card mb-4">
                 <h5 class="card-header">Tambah Data Transfer Bahan</h5>
                 <div class="card-body">
-                    <form action="{{route('transfer.bahan.store')}}" method="POST" enctype="multipart/form-data" >
+                    <form action="{{route('transfer.bahan.store')}}" method="POST" enctype="multipart/form-data" id="form_transfer_bahan" >
                         @csrf
 
                         <div class="mb-3">
@@ -41,7 +41,7 @@
                         <div class="mb-3">
                             <label for="stock" class="form-label">stock warehouse</label>
                             <input type="text" class="form-control" id="stock" name="stock"
-                                value="{{ old('stock') }}" required>
+                                value="{{ old('stock') }}" readonly>
                             @error('stock')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
@@ -50,8 +50,18 @@
 
 
                         <div class="mb-3">
+                            <label for="satuan" class="form-label">nama satuan</label>
+                            <input type="text" class="form-control" id="satuan" name="satuan"
+                                value="{{ old('satuan') }}" readonly>
+                            @error('satuan')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
                             <label for="qty" class="form-label">Qty</label>
-                            <input type="text" class="form-control" id="qty" name="qty"
+                            <input type="number" class="form-control" id="qty" name="qty"
                                 value="{{ old('qty') }}" required>
                             @error('qty')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
@@ -107,8 +117,9 @@
                 method: 'GET',
                 success: function(res) {
                     $('#stock').val(res.stock)
-                    console.log(typeof res)
-                    hitungSisaStockWarehouse()
+                    $('#satuan').val(res.nama_satuan)
+                    console.log(res)
+                    hitungSisaStockWarehouse(res.stock)
                 }
             });
   })
@@ -119,9 +130,35 @@
 
   function hitungSisaStockWarehouse(sisaStock) {
     $('#qty').on('keyup',function (params) {
-      alert(sisaStock)
+      $('#stock').val(sisaStock - $('#qty').val())
+
+
+      if ($('#stock').val() < 0) {
+        alert('stock tidak mencukupi!!!')
+        return false;
+      }
+
+     
+
+     
+      
     })
   }
+
+
+    $('#form_transfer_bahan').submit(function (event) {
+      if ($('#stock').val() < 0) {
+        alert('stock tidak mencukupi!!!')
+       event.preventDefault()
+      }
+    })
+  
+
+
+
+
+
+
 
   
   
