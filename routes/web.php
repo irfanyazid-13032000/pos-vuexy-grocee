@@ -23,6 +23,7 @@ use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\OutletStockController;
 use App\Http\Controllers\RecordBahanController;
 use App\Http\Controllers\KategoriBahanController;
+use App\Http\Controllers\TransferBahanController;
 use App\Http\Controllers\ProsesProduksiController;
 use App\Http\Controllers\WarehouseStockController;
 use App\Http\Controllers\WarehouseRecordController;
@@ -313,3 +314,5 @@ Route::get('/record_bahan/table',[RecordBahanController::class,'table'])->name('
 
 
 
+Route::get('/transfer_bahan',[TransferBahanController::class,'index'])->name('transfer.bahan.index');
+Route::get('/transfer_bahan/create',[TransferBahanController::class,'create'])->name('transfer.bahan.create');

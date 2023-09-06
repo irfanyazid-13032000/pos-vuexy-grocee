@@ -285,6 +285,13 @@
                 </li>
 
 
+                <li class="menu-item {{ Route::is('record.bahan.*') ? 'active' : '' }}">
+                  <a href="{{route('transfer.bahan.index')}}" class="menu-link">
+                    <div>record transfer bahan</div>
+                  </a>
+                </li>
+
+
                 <!-- <li class="menu-item {{ Route::is('bahan.tambahan.produksi.*') ? 'active' : '' }}">
                   <a href="{{route('bahan.tambahan.produksi.index')}}" class="menu-link">
                     <div>Pemakaian Bahan Tambahan Produksi</div>
