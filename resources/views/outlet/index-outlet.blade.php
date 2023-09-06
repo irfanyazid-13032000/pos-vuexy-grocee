@@ -27,6 +27,7 @@
                      <td>
                       <a href="{{route('outlet.edit',['id'=>$outlet->id])}}" class="btn btn-primary">edit</a>
                       <a href="{{route('outlet.delete',['id'=>$outlet->id])}}" onclick="return confirm('apakah anda yakin menghapus data ini?')" class="btn btn-danger">delete</a>
+                      <a href="{{route('outlet.stock.index',['outlet_id'=>$outlet->id])}}" class="btn btn-info">stock</a>
                      </td>
                   </tr>
                   @endforeach
