@@ -180,7 +180,8 @@ class ProsesProduksiController extends Controller
                         ->where('food_process.menu_masakan_id',$id)
                         // ->join('warehouse_stock','food_process.bahan_dasar_id','=','warehouse_stock.bahan_dasar_id')
                         ->join('bahan_dasars','food_process.bahan_dasar_id','=','bahan_dasars.id')
-                        ->select('food_process.*','bahan_dasars.nama_bahan')
+                        ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                        ->select('food_process.*','bahan_dasars.nama_bahan','satuan.nama_satuan')
                         // ->orderBy('warehouse_stock.harga_satuan', 'desc')
                         ->get();
 

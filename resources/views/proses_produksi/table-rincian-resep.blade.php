@@ -4,6 +4,7 @@
                                   <th>no</th>
                                   <th>nama bahan</th>
                                   <th>qty</th>
+                                  <th>satuan</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -12,6 +13,7 @@
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$food->nama_bahan}}</td>
                                   <td>{{$food->qty * $qty}}</td>
+                                  <td>{{$food->nama_satuan}}</td>
                                  
                                 </tr>
                               @endforeach
