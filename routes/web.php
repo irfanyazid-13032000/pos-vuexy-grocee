@@ -316,3 +316,6 @@ Route::get('/record_bahan/table',[RecordBahanController::class,'table'])->name('
 
 Route::get('/transfer_bahan',[TransferBahanController::class,'index'])->name('transfer.bahan.index');
 Route::get('/transfer_bahan/create',[TransferBahanController::class,'create'])->name('transfer.bahan.create');
+Route::post('/transfer_bahan/store',[TransferBahanController::class,'store'])->name('transfer.bahan.store');
+Route::get('/transfer_bahan/stock_warehouse_select/{warehouse_id}',[TransferBahanController::class,'stockWarehouseSelect'])->name('transfer.bahan.stock.warehouse.select');
+Route::get('/transfer_bahan/stock_warehouse_data/{warehouse_id}/{bahan_dasar_id}',[TransferBahanController::class,'stockWarehouseData'])->name('transfer.bahan.stock.warehouse.data');
