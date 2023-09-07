@@ -28,27 +28,7 @@
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
-
-
-
-                       
-
-
                     
-                       
-
-
-                        
-                      
-                        
-
-
-
-
-                      
-
-
-                      
 
                         <div class="mb-3">
                           <div id="bahan_dasar_purchase"></div>
