@@ -211,6 +211,9 @@ Route::post('/vurchase/store',[PurchaseController::class,'store'])->name('purcha
 Route::get('/vurchase/edit/{id}',[PurchaseController::class,'edit'])->name('purchase.edit');
 Route::post('/vurchase/update/{id}',[PurchaseController::class,'update'])->name('purchase.update');
 Route::get('/vurchase/delete/{id}',[PurchaseController::class,'destroy'])->name('purchase.delete');
+Route::get('/vurchase/table_awal_bahan/{i}',[PurchaseController::class,'tableAwal'])->name('purchase.table.awal.bahan');
+Route::get('/vurchase/table_tambahan_bahan/{i}',[PurchaseController::class,'tableTambahan'])->name('purchase.table.tambahan.bahan');
+Route::get('/vurchase/data_bahan_dasar/{bahan_dasar_id}',[PurchaseController::class,'dataBahanDasar'])->name('purchase.data.bahan.dasar');
 
 
 Route::get('/food',[FoodController::class,'index'])->name('food.index');

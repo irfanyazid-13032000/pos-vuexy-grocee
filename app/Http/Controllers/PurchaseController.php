@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Purchase;
 use App\Models\Warehouse;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\WarehouseRecord;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +37,9 @@ class PurchaseController extends Controller
         $bahans = DB::table('bahan_dasars')->get();
         $satuans = DB::table('satuan')->get();
         $vendors = DB::table('vendors')->get();
+        $no_invoice = Str::random(20);
         // return $kategori_bahans;
-        return view('purchase.create-purchase',compact('warehouses','kategori_bahans','bahans','satuans','vendors'));
+        return view('purchase.create-purchase',compact('warehouses','kategori_bahans','bahans','satuans','vendors','no_invoice'));
     }
 
     /**
@@ -141,5 +143,28 @@ class PurchaseController extends Controller
         Purchase::find($id)->delete();
 
         return redirect()->route('purchase.index');
+    }
+
+
+    public function tableAwal($i)
+    {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('purchase.table-awal-bahan-purchase',compact('i','bahan_dasars'));
+    }
+
+    public function tableTambahan($i)
+    {
+        $bahan_dasars = DB::table('bahan_dasars')->get();
+        return view('purchase.table-tambahan-bahan-purchase',compact('i','bahan_dasars'));
+    }
+
+    public function dataBahanDasar($bahan_dasar_id)
+    {
+        $bahan_dasar = DB::table('bahan_dasars')
+                            ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
+                            ->join('kategori_bahan','bahan_dasars.kategori_bahan_id','=','kategori_bahan.id')
+                            ->select('bahan_dasars.*','satuan.nama_satuan','kategori_bahan.nama_kategori_bahan')
+                            ->where('bahan_dasars.id',$bahan_dasar_id)->first();
+        return $bahan_dasar;
     }
 }
