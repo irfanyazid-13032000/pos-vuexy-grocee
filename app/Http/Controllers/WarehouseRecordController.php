@@ -17,6 +17,7 @@ class WarehouseRecordController extends Controller
         $warehouse_records = WarehouseRecord::where('warehouse_id',$id_warehouse)
                                             ->join('bahan_dasars','warehouse_record.bahan_dasar_id','=','bahan_dasars.id')
                                             ->select('warehouse_record.*','bahan_dasars.nama_bahan')
+                                            ->orderBy('created_at','desc')
                                             ->get();
         return view('record_warehouse.index-record-warehouse',compact('warehouse_records','warehouse'));
     }

@@ -17,9 +17,9 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::join('warehouses','purchases.warehouse_id','=','warehouses.id')
-                                    ->join('kategori_bahan','purchases.kategori_bahan_id','=','kategori_bahan.id')
                                     ->join('bahan_dasars','purchases.bahan_dasar_id','=','bahan_dasars.id')
-                                    ->join('satuan','purchases.satuan_id','=','satuan.id')
+                                    ->join('kategori_bahan','bahan_dasars.kategori_bahan_id','=','kategori_bahan.id')
+                                    ->join('satuan','bahan_dasars.satuan_id','=','satuan.id')
                                     ->join('vendors','purchases.vendor_id','=','vendors.id')
                                     ->select('purchases.*','warehouses.name_warehouse','kategori_bahan.nama_kategori_bahan','bahan_dasars.nama_bahan','satuan.nama_satuan','vendors.name_vendor')
                                     ->get();
@@ -45,7 +45,59 @@ class PurchaseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+
     public function store(Request $request)
+    {
+        foreach ($request->bahan_purchase as $bahan) {
+            Purchase::create([
+                'warehouse_id' => $request->warehouse_id,
+                'no_invoice' => $request->no_invoice,
+                'vendor_id' => $request->vendor_id,
+                'bahan_dasar_id' => $bahan['bahan_dasar_id'],
+                'qty' => $bahan['qty'],
+                'harga_satuan' => $bahan['harga_satuan'],
+                'harga_acuan' => $bahan['harga_acuan'],
+                'selisih_harga' => $bahan['selisih_harga'],
+                'jumlah_harga' => $bahan['jumlah_harga'],
+            ]);
+
+            $qty = $bahan['qty'];
+            $hargaSatuan = $bahan['harga_satuan'];
+
+
+            DB::table('warehouse_stock')->updateOrInsert(
+                [
+                    'warehouse_id' => $request->warehouse_id,
+                    'bahan_dasar_id' => $bahan['bahan_dasar_id'],
+                ],
+                [
+                    'stock' => DB::raw("stock + $qty"), // Increment the stock by the given qty
+                    'harga_satuan' => DB::raw("CASE WHEN harga_satuan < $hargaSatuan THEN $hargaSatuan ELSE harga_satuan END"),
+                ]
+            );
+
+
+
+            WarehouseRecord::create([
+                'warehouse_id' => $request->warehouse_id,
+                'stock' => $qty,
+                'bahan_dasar_id' => $bahan['bahan_dasar_id'],
+                'harga_satuan' => $bahan['harga_satuan'],
+            ]);
+            
+            
+            
+        }
+
+
+        
+        return redirect()->route('purchase.index');
+    }
+     
+    
+    
+    public function storebackup(Request $request)
     {
         Purchase::create([
             'warehouse_id' => $request->warehouse_id,
