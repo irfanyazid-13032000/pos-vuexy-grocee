@@ -48,7 +48,7 @@ class RecordBahanController extends Controller
 
     $kategori_proses_produksis = DB::table('kategori_proses_produksi')->get();
 
-    return view('record_bahan.record-bahan-pagination-sendiri', compact('record_bahans', 'cari', 'date_to', 'date_from', 'kategori_proses_produksis'));
+    return view('record_bahan.record-bahan-pagination-sendiri', compact('record_bahans', 'cari', 'date_to', 'date_from', 'kategori_proses_produksis','proses_produksi_id'));
 }
 
 

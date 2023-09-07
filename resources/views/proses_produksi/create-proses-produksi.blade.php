@@ -65,7 +65,7 @@
 
 
                         <div class="mb-3">
-                            <label for="qty" class="form-label">Qty</label>
+                            <label for="qty" class="form-label">Set Menu</label>
                             <input type="number" class="form-control" id="qty" name="qty"
                                 value="1" required>
                             @error('qty')
