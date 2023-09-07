@@ -78,8 +78,9 @@
     })
 
     function renderBahanPenyusun(i) {
-      var routeUrl = `{{ route('product.bahan.penyusun',':i') }}`;
+      var routeUrl = `{{ route('product.bahan.penyusun',[':i',':warehouse_id']) }}`;
             routeUrl = routeUrl.replace(':i', i);
+            routeUrl = routeUrl.replace(':warehouse_id', $('#warehouse_id').val());
 
             $.ajax({
                 url: routeUrl,

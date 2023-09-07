@@ -256,7 +256,7 @@
 
 
             <!--Bahan -->
-            <li class="menu-item {{ Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('satuan.*') || Route::is('bahan.tambahan.produksi.*') || Route::is('record.bahan.*')? 'active open' : '' }}">
+            <li class="menu-item {{ Route::is('kategori.bahan.*') || Route::is('bahan.dasar.*') || Route::is('satuan.*') || Route::is('bahan.tambahan.produksi.*') || Route::is('record.bahan.*') || Route::is('transfer.bahan.*') ? 'active open' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div>Bahan</div>
@@ -292,7 +292,7 @@
                 </li>
 
 
-                <li class="menu-item {{ Route::is('record.bahan.*') ? 'active' : '' }}">
+                <li class="menu-item {{ Route::is('transfer.bahan.*') ? 'active' : '' }}">
                   <a href="{{route('transfer.bahan.index')}}" class="menu-link">
                     <div>record transfer bahan</div>
                   </a>
@@ -325,6 +325,7 @@
 
 
                 <li class="menu-item">
+                <li class="menu-item {{ Route::is('proses.produksi.*') ? 'active' : '' }}">
                   <a href="{{route('proses.produksi.index')}}" class="menu-link">
                     <div>Proses Produksi</div>
                   </a>
