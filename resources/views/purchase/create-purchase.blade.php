@@ -35,69 +35,20 @@
 
 
                     
-                        <input type="hidden" name="kategori_bahan_id" id="kategori_bahan_id">
+                       
 
 
-                        <div class="mb-3">
-                            <label for="nama_satuan" class="form-label">nama satuan</label>
-                            <input type="text" class="form-control" id="nama_satuan" readonly>
-                            @error('nama_satuan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <input type="hidden" name="satuan_id" id="satuan_id">
+                        
+                      
+                        
 
 
 
-                        <div class="mb-3">
-                            <label for="qty" class="form-label">Qty</label>
-                            <input type="number" class="form-control" id="qty" name="qty"
-                                value="{{ old('qty') }}" required>
-                            @error('qty')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
+
+                      
 
 
-                        <div class="mb-3">
-                            <label for="harga_satuan" class="form-label">harga_satuan</label>
-                            <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
-                                value="{{ old('harga_satuan') }}" required>
-                            @error('harga_satuan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="harga_acuan" class="form-label">harga_acuan</label>
-                            <input type="number" class="form-control" id="harga_acuan" name="harga_acuan"
-                                value="{{ old('harga_acuan') }}" readonly>
-                            @error('harga_acuan')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="selisih_harga" class="form-label">selisih_harga (harga acuan - harga satuan)</label>
-                            <input type="number" class="form-control" id="selisih_harga" name="selisih_harga"
-                                value="{{ old('selisih_harga') }}" readonly>
-                            @error('selisih_harga')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="jumlah_harga" class="form-label">jumlah_harga (qty x harga satuan)</label>
-                            <input type="number" class="form-control" id="jumlah_harga" name="jumlah_harga"
-                                value="{{ old('jumlah_harga') }}" readonly>
-                            @error('jumlah_harga')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
+                      
 
                         <div class="mb-3">
                           <div id="bahan_dasar_purchase"></div>
