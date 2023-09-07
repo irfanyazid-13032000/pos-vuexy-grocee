@@ -110,6 +110,13 @@
                     <div>Pemakaian Bahan Tambahan Produksi</div>
                   </a>
                 </li>
+
+
+                <li class="menu-item {{ Route::is('customer.*') ? 'active' : '' }}">
+                  <a href="{{route('customer.index')}}" class="menu-link">
+                    <div>Customer</div>
+                  </a>
+                </li>
               
                   
                 

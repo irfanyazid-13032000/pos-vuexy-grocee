@@ -14,6 +14,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\WarehouseController;
@@ -322,3 +323,15 @@ Route::get('/transfer_bahan/create',[TransferBahanController::class,'create'])->
 Route::post('/transfer_bahan/store',[TransferBahanController::class,'store'])->name('transfer.bahan.store');
 Route::get('/transfer_bahan/stock_warehouse_select/{warehouse_id}',[TransferBahanController::class,'stockWarehouseSelect'])->name('transfer.bahan.stock.warehouse.select');
 Route::get('/transfer_bahan/stock_warehouse_data/{warehouse_id}/{bahan_dasar_id}',[TransferBahanController::class,'stockWarehouseData'])->name('transfer.bahan.stock.warehouse.data');
+
+
+
+
+
+
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
+Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
+Route::get('/customer/destroy/{id}',[CustomerController::class,'destroy'])->name('customer.destroy');
+Route::get('/customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
+Route::post('/customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
+Route::post('/customer/store',[CustomerController::class,'store'])->name('customer.store');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -11,7 +12,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return view('customer.index-customer',compact('customers'));
     }
 
     /**
@@ -19,7 +21,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create-customer');
     }
 
     /**
@@ -27,7 +29,13 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Customer::create([
+            'name_customer' => $request->name_customer,
+            'no_telp' => $request->no_telp,
+        ]);
+
+
+        return redirect()->route('customer.index');
     }
 
     /**
@@ -43,7 +51,9 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $customer = Customer::find($id);
+
+        return view('customer.edit-customer',compact('customer'));
     }
 
     /**
@@ -51,7 +61,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Customer::find($id)->update([
+            'name_customer' => $request->name_customer,
+            'no_telp' => $request->no_telp,
+        ]);
+
+        return redirect()->route('customer.index');
     }
 
     /**
@@ -59,6 +74,8 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Customer::find($id)->delete();
+
+        return redirect()->route('customer.index');
     }
 }
