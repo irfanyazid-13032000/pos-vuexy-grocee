@@ -206,7 +206,7 @@ Route::post('/fendor/update/{id}',[VendorController::class,'update'])->name('ven
 Route::get('/fendor/delete/{id}',[VendorController::class,'destroy'])->name('vendor.destroy');
 
 
-Route::get('/vurchase',[PurchaseController::class,'index'])->name('purchase.index');
+Route::get('/vurchase/index',[PurchaseController::class,'index'])->name('purchase.index');
 Route::get('/vurchase/create',[PurchaseController::class,'create'])->name('purchase.create');
 Route::post('/vurchase/store',[PurchaseController::class,'store'])->name('purchase.store');
 Route::get('/vurchase/edit/{id}',[PurchaseController::class,'edit'])->name('purchase.edit');

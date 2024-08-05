@@ -23,6 +23,7 @@ class PurchaseController extends Controller
                                     ->join('vendors','purchases.vendor_id','=','vendors.id')
                                     ->select('purchases.*','warehouses.name_warehouse','kategori_bahan.nama_kategori_bahan','bahan_dasars.nama_bahan','satuan.nama_satuan','vendors.name_vendor')
                                     ->get();
+        // $purchases = Purchase::all();
         // return $purchases;
         return view('purchase.index-purchase',compact('purchases'));
     }

@@ -15,8 +15,6 @@
                         <th>Satuan</th>
                         <th>Qty</th>
                         <th>harga satuan</th>
-                        <th>jumlah harga</th>
-                        <th>selisih harga</th>
                         <th>nama vendor</th>
                         <th>Action</th>
                     </tr>
@@ -33,8 +31,6 @@
                      <td>{{$purchase->nama_satuan}}</td>
                      <td>{{$purchase->qty}}</td>
                      <td>Rp. {{number_format($purchase->harga_satuan)}}</td>
-                     <td>Rp. {{number_format($purchase->jumlah_harga)}}</td>
-                     <td>Rp. {{number_format($purchase->selisih_harga)}}</td>
                      <td>{{$purchase->name_vendor}}</td>
                      <td>
                      <a href="{{route('purchase.edit',['id'=>$purchase->id])}}" class="btn btn-primary">edit</a>
